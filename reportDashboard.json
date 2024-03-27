@@ -1,0 +1,391 @@
+[ {
+  "uuid" : "88f4930f-30ec-4082-9f76-d311f474f901",
+  "id" : 131,
+  "name" : "Offline dashboards",
+  "description" : "",
+  "sections" : [ {
+    "uuid" : "440acc8c-ac68-4207-9cec-fd333181012e",
+    "id" : 384,
+    "name" : "CBAC",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 5.0,
+    "dashboardUUID" : "88f4930f-30ec-4082-9f76-d311f474f901",
+    "cards" : [ {
+      "uuid" : "fe3f45aa-0ee1-4584-83a2-e672f22263d9",
+      "id" : 1377,
+      "name" : "CBAC completed",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\n    \n    const individualsCompletedCBAC = (params, imports) => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime != null)).length\n    };\n    \n    const lineListFunction = () => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime != null))\n    };\n    \n    \n    return {\n    primaryValue: individualsCompletedCBAC(params, imports),\n    lineListFunction\n    }\n};",
+      "description" : "",
+      "color" : "#20b14b",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "61eeb14a-bf4e-40ce-80f3-e4c26cb4d124",
+      "id" : 1378,
+      "name" : "CBAC not completed",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\n    \n    const individualsCompletedCBAC = (params, imports) => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime == null)).length\n    };\n    \n    const lineListFunction = () => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime == null))\n    };\n    \n    \n    return {\n    primaryValue: individualsCompletedCBAC(params, imports),\n    lineListFunction\n    }\n};",
+      "description" : "",
+      "color" : "#47e55a",
+      "displayOrder" : 2.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "96ffe1a1-5917-4e6a-81ec-535500900356",
+      "dashboardSectionUUID" : "440acc8c-ac68-4207-9cec-fd333181012e",
+      "reportCardUUID" : "fe3f45aa-0ee1-4584-83a2-e672f22263d9",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "f21fef0c-d979-4681-ab7e-73efd8dd507b",
+      "dashboardSectionUUID" : "440acc8c-ac68-4207-9cec-fd333181012e",
+      "reportCardUUID" : "61eeb14a-bf4e-40ce-80f3-e4c26cb4d124",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  }, {
+    "uuid" : "d2e2f4bf-161b-45ac-8916-056af28d83b8",
+    "id" : 200,
+    "name" : "Pregnancy",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 2.0,
+    "dashboardUUID" : "88f4930f-30ec-4082-9f76-d311f474f901",
+    "cards" : [ {
+      "uuid" : "b3b4b9a3-ce70-42a4-bcdd-650dce6f525a",
+      "id" : 528,
+      "name" : "HRP",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\nconst isHighRiskPregnancy = (individual) => {\n const pregnancyProgram = _.find(individual.enrolments, enrolment => enrolment.program.name === 'Pregnancy' && enrolment.programExitDateTime === null);\n if(_.isNil(pregnancyProgram)) { return false; }\n const whetherHRPconfirmed = pregnancyProgram.findLatestObservationInEntireEnrolment(\"Whether HRP confirmed\");\n if(_.isNil(whetherHRPconfirmed)) { return false; }\n return whetherHRPconfirmed.getReadableValue() === 'Yes';\n}\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.isFemale() &&  isHighRiskPregnancy(individual))\n     \n};",
+      "description" : "High Risk Pregnancy",
+      "color" : "#f21313",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "c60020a9-201b-4b46-918a-8e173265b874",
+      "dashboardSectionUUID" : "d2e2f4bf-161b-45ac-8916-056af28d83b8",
+      "reportCardUUID" : "b3b4b9a3-ce70-42a4-bcdd-650dce6f525a",
+      "displayOrder" : 1.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  }, {
+    "uuid" : "01b8caba-d614-42a9-9874-10b0e5f5b5eb",
+    "id" : 198,
+    "name" : "Visits",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 1.0,
+    "dashboardUUID" : "88f4930f-30ec-4082-9f76-d311f474f901",
+    "cards" : [ {
+      "uuid" : "fdd338be-64cf-411e-9088-b3574c336035",
+      "id" : 524,
+      "name" : "Due",
+      "description" : "To show total due visits for the catchment on the date",
+      "color" : "#fd0061",
+      "displayOrder" : 1.0,
+      "standardReportCardTypeId" : 4,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "5a70885b-91a8-4487-abc2-12c00c34cbba",
+      "id" : 525,
+      "name" : "Overdue",
+      "description" : "To show total visits which are overdue on that date.",
+      "color" : "#ff0000",
+      "displayOrder" : 2.0,
+      "standardReportCardTypeId" : 5,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "9997c7ad-b013-442a-b6e7-00e1e0982656",
+      "dashboardSectionUUID" : "01b8caba-d614-42a9-9874-10b0e5f5b5eb",
+      "reportCardUUID" : "fdd338be-64cf-411e-9088-b3574c336035",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "bb3d4f51-8c4d-4017-80d6-faa69d274807",
+      "dashboardSectionUUID" : "01b8caba-d614-42a9-9874-10b0e5f5b5eb",
+      "reportCardUUID" : "5a70885b-91a8-4487-abc2-12c00c34cbba",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  }, {
+    "uuid" : "5220175a-292d-4cbd-b0c3-ad4c33f83671",
+    "id" : 197,
+    "name" : "Registrations",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 4.0,
+    "dashboardUUID" : "88f4930f-30ec-4082-9f76-d311f474f901",
+    "cards" : [ {
+      "uuid" : "bdf972a1-c797-4c7a-a1ef-c65623cbb8ea",
+      "id" : 523,
+      "name" : "Households",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Household');\n};",
+      "description" : "",
+      "color" : "#5a5cec",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/de6d1990-e72b-45fa-b9eb-db4a23e7a465.png",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "eb56ccce-2a2d-4b26-a303-3ce4bcaded77",
+      "id" : 522,
+      "name" : "Beneficiaries",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Individual');\n};",
+      "description" : "",
+      "color" : "#3e50b4",
+      "displayOrder" : 2.0,
+      "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/7b178cee-0abd-405f-8872-fa39c156db83.png",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "a0794432-a4b4-4c02-bf4e-b483b7fcdfb0",
+      "dashboardSectionUUID" : "5220175a-292d-4cbd-b0c3-ad4c33f83671",
+      "reportCardUUID" : "bdf972a1-c797-4c7a-a1ef-c65623cbb8ea",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "631033ad-82d8-401a-8ef3-b02464c8fd7e",
+      "dashboardSectionUUID" : "5220175a-292d-4cbd-b0c3-ad4c33f83671",
+      "reportCardUUID" : "eb56ccce-2a2d-4b26-a303-3ce4bcaded77",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  }, {
+    "uuid" : "88eb68bf-a83b-45e5-9508-0b4cea7abcbd",
+    "id" : 199,
+    "name" : "Eligible couple",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 3.0,
+    "dashboardUUID" : "88f4930f-30ec-4082-9f76-d311f474f901",
+    "cards" : [ {
+      "uuid" : "1a52bc6e-f0c9-4190-8eb7-93bdb53d5cb5",
+      "id" : 526,
+      "name" : "Eligible Couple - Male",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.voided === false && individual.isMale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+      "description" : "To show total men between age 18 to 49 from registered beneficiaries and for whom sterilisation done is No",
+      "color" : "#70dbdb",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "cd969e96-7774-4726-aae5-de3228707167",
+      "id" : 527,
+      "name" : "Eligible Couple - Female",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.isFemale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+      "description" : "To show total women between age 18 and 49 from registered beneficiaries for whom sterilisation done is No.",
+      "color" : "#ef3ae1",
+      "displayOrder" : 2.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "cefbadee-0e10-4a29-9b39-8b2008776941",
+      "dashboardSectionUUID" : "88eb68bf-a83b-45e5-9508-0b4cea7abcbd",
+      "reportCardUUID" : "1a52bc6e-f0c9-4190-8eb7-93bdb53d5cb5",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "2733d172-33e7-43a6-bce4-92ba95f14e84",
+      "dashboardSectionUUID" : "88eb68bf-a83b-45e5-9508-0b4cea7abcbd",
+      "reportCardUUID" : "cd969e96-7774-4726-aae5-de3228707167",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  } ],
+  "filters" : [ ],
+  "voided" : false
+}, {
+  "uuid" : "cebb2c36-edcb-4cbb-ab15-503d0024fc17",
+  "id" : 130,
+  "name" : "Visits",
+  "description" : "",
+  "sections" : [ {
+    "uuid" : "8726cb30-9b52-4bfe-a2c8-494051bd06dd",
+    "id" : 196,
+    "name" : "Visits",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 1.0,
+    "dashboardUUID" : "cebb2c36-edcb-4cbb-ab15-503d0024fc17",
+    "cards" : [ {
+      "uuid" : "fdd338be-64cf-411e-9088-b3574c336035",
+      "id" : 524,
+      "name" : "Due",
+      "description" : "To show total due visits for the catchment on the date",
+      "color" : "#fd0061",
+      "displayOrder" : 1.0,
+      "standardReportCardTypeId" : 4,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "5a70885b-91a8-4487-abc2-12c00c34cbba",
+      "id" : 525,
+      "name" : "Overdue",
+      "description" : "To show total visits which are overdue on that date.",
+      "color" : "#ff0000",
+      "displayOrder" : 2.0,
+      "standardReportCardTypeId" : 5,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "18af39a5-ad05-4111-967c-3e264fdf5231",
+      "dashboardSectionUUID" : "8726cb30-9b52-4bfe-a2c8-494051bd06dd",
+      "reportCardUUID" : "fdd338be-64cf-411e-9088-b3574c336035",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "7a2c0027-d830-413f-8bb3-5b341c29adbd",
+      "dashboardSectionUUID" : "8726cb30-9b52-4bfe-a2c8-494051bd06dd",
+      "reportCardUUID" : "5a70885b-91a8-4487-abc2-12c00c34cbba",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  } ],
+  "filters" : [ ],
+  "voided" : true
+}, {
+  "uuid" : "f601d1c1-5fa2-4ecd-83c6-073c78a2c925",
+  "id" : 129,
+  "name" : "Eligible couples",
+  "description" : "",
+  "sections" : [ {
+    "uuid" : "eb3dc6f6-9350-492d-9bc7-97b6daadf7f2",
+    "id" : 195,
+    "name" : "Eligible couple",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 1.0,
+    "dashboardUUID" : "f601d1c1-5fa2-4ecd-83c6-073c78a2c925",
+    "cards" : [ {
+      "uuid" : "1a52bc6e-f0c9-4190-8eb7-93bdb53d5cb5",
+      "id" : 526,
+      "name" : "Eligible Couple - Male",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.voided === false && individual.isMale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+      "description" : "To show total men between age 18 to 49 from registered beneficiaries and for whom sterilisation done is No",
+      "color" : "#70dbdb",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "cd969e96-7774-4726-aae5-de3228707167",
+      "id" : 527,
+      "name" : "Eligible Couple - Female",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.isFemale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+      "description" : "To show total women between age 18 and 49 from registered beneficiaries for whom sterilisation done is No.",
+      "color" : "#ef3ae1",
+      "displayOrder" : 2.0,
+      "iconFileS3Key" : "",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "b3f932f0-6adc-4849-9a01-3c5ee7d36d1d",
+      "dashboardSectionUUID" : "eb3dc6f6-9350-492d-9bc7-97b6daadf7f2",
+      "reportCardUUID" : "1a52bc6e-f0c9-4190-8eb7-93bdb53d5cb5",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "a8c0d162-52b6-413d-9ae5-bb09c88292b3",
+      "dashboardSectionUUID" : "eb3dc6f6-9350-492d-9bc7-97b6daadf7f2",
+      "reportCardUUID" : "cd969e96-7774-4726-aae5-de3228707167",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  } ],
+  "filters" : [ ],
+  "voided" : true
+}, {
+  "uuid" : "38d4a03c-0f81-4f04-8426-783caf418d75",
+  "id" : 128,
+  "name" : "Registrations",
+  "description" : "Number of individuals and households registered.",
+  "sections" : [ {
+    "uuid" : "7fb67913-da21-4b82-81d6-3fef1e3c056d",
+    "id" : 194,
+    "name" : "Registrations",
+    "description" : "",
+    "viewType" : "Tile",
+    "displayOrder" : 1.0,
+    "dashboardUUID" : "38d4a03c-0f81-4f04-8426-783caf418d75",
+    "cards" : [ {
+      "uuid" : "eb56ccce-2a2d-4b26-a303-3ce4bcaded77",
+      "id" : 522,
+      "name" : "Beneficiaries",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Individual');\n};",
+      "description" : "",
+      "color" : "#3e50b4",
+      "displayOrder" : 1.0,
+      "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/7b178cee-0abd-405f-8872-fa39c156db83.png",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    }, {
+      "uuid" : "bdf972a1-c797-4c7a-a1ef-c65623cbb8ea",
+      "id" : 523,
+      "name" : "Households",
+      "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Household');\n};",
+      "description" : "",
+      "color" : "#5a5cec",
+      "displayOrder" : 2.0,
+      "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/de6d1990-e72b-45fa-b9eb-db4a23e7a465.png",
+      "nested" : false,
+      "count" : 1,
+      "voided" : false
+    } ],
+    "dashboardSectionCardMappings" : [ {
+      "uuid" : "90ac631a-629b-4578-a602-ea81cc94c34f",
+      "dashboardSectionUUID" : "7fb67913-da21-4b82-81d6-3fef1e3c056d",
+      "reportCardUUID" : "eb56ccce-2a2d-4b26-a303-3ce4bcaded77",
+      "displayOrder" : 1.0,
+      "voided" : false
+    }, {
+      "uuid" : "a8251591-132f-4ebd-aa75-1b377e6a935e",
+      "dashboardSectionUUID" : "7fb67913-da21-4b82-81d6-3fef1e3c056d",
+      "reportCardUUID" : "bdf972a1-c797-4c7a-a1ef-c65623cbb8ea",
+      "displayOrder" : 2.0,
+      "voided" : false
+    } ],
+    "voided" : false
+  } ],
+  "filters" : [ ],
+  "voided" : true
+} ]

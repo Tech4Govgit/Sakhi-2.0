@@ -1,0 +1,1502 @@
+{
+  "name" : "PNC Encounter",
+  "uuid" : "6043c2ba-3cc8-4606-ae19-f4ddba341c76",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "781898a9-541c-4600-af37-e3d17c5fbbd7",
+    "name" : "Basic Details",
+    "displayOrder" : 1.0,
+    "display" : "Basic Details",
+    "formElements" : [ {
+      "name" : "Mother's name",
+      "uuid" : "c7911cd9-e560-4fff-b7da-2f1e8fc6340f",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Mother's name",
+        "uuid" : "b0302d28-c087-4aae-8261-07e5771afd4e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const nameOfWomen = programEncounter.individual.firstName + ' ' + programEncounter.individual.lastName;\n  value = nameOfWomen;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Husband name",
+      "uuid" : "ce0929c7-bdaf-40d6-859b-4fd8c77f8d58",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Husband name",
+        "uuid" : "91440c2f-9e7b-4ddb-a4b0-86f8ef085eaa",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const husbandsName = programEncounter.individual.getObservationValue(\"41fd3998-1d16-4081-8b14-04e24c10c1fa\");\n  \n  if (husbandsName) {\n  \n  visibility = true;\n  value = husbandsName;\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Mobile number",
+      "uuid" : "5c47e311-7ba1-47e8-b0cc-40d0752fbd28",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Mobile number",
+        "uuid" : "2c282384-a13c-4f42-9f20-db5b77e1005e",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const phoneNumber = programEncounter.individual.getObservationValue(\"ec7d9993-9084-4bde-a211-3ff78f840d21\");\n  value = phoneNumber;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Age",
+      "uuid" : "ed7daa80-d03c-438a-9516-bdffe8736432",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Age",
+        "uuid" : "61281ca2-29be-4e6e-bfda-6ce70821e790",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  value = programEncounter.individual.getAgeInYears();\n \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "RCH Id",
+      "uuid" : "36eaffd8-92d6-4dd8-950c-29fab0a97a67",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "RCH Id",
+        "uuid" : "55539716-e838-47b7-935c-a4644e6165a1",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const rchId = programEncounter.programEnrolment.getObservationValue(\"a3b41dea-8196-448c-96ab-3a2413544361\");\n  \n  if (rchId) {\n  \n  visibility = true;\n  value = rchId;\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Date and time of delivery",
+      "uuid" : "5c3ad0dc-366d-4fcf-80b8-6579b858edae",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Date and time of delivery",
+        "uuid" : "17bd4b61-2749-4ce8-82ff-f12df01b9a43",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const dateOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"bb232ad5-714b-4dcd-8946-80fea2838673\");\n  const timeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"6e5397c3-c7ed-4852-96ce-e05c8e64c8f6\");\n  \n  if (dateOfDelivery) {\n  \n  visibility = true;\n  value = moment(dateOfDelivery.getReadableValue()).format('DD-MM-YYYY') + '  ' + timeOfDelivery.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Place of delivery",
+      "uuid" : "c855f6dd-f347-46a5-afca-464bd85cc653",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Place of delivery",
+        "uuid" : "0d706a98-4a0f-45fd-bedf-b78b154c033b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Sub-centre",
+          "uuid" : "f1353d92-8a5e-4d76-a28a-e4fdfe5fa1f0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Accredited private hospital",
+          "uuid" : "6900e5b1-e438-4f6c-b556-6d142842f038",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other public facilities",
+          "uuid" : "c587846a-348f-496b-b7b4-920ef8855e16",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const placeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"0d706a98-4a0f-45fd-bedf-b78b154c033b\");\n\n  if (placeOfDelivery) {\n  \n  visibility = true;\n  value = placeOfDelivery.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Delivery type",
+      "uuid" : "f28da1ae-c11c-492d-88cb-1b302ba01471",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Delivery type",
+        "uuid" : "8914b099-117f-4eb9-90a4-274eb70258d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Normal",
+          "uuid" : "69009c81-77ba-4127-bc42-d10611a23dd1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "C-section",
+          "uuid" : "d070ec22-e0f5-44bc-a93b-b8d9dea257e8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "C section",
+          "uuid" : "347391de-cf5b-4c9c-b30e-1427220e3aa1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Assisted",
+          "uuid" : "c74dc59d-fc6e-4d47-a666-f6ecc662b1a0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const deliveryType = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"d7047743-1079-475a-ba5d-5fba86035634\");\n\n  if (deliveryType) {\n  \n  visibility = true;\n  value = deliveryType.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "ab1ed456-9d72-4641-9335-4bc0342fb577",
+    "name" : "Mother PNC detail",
+    "displayOrder" : 2.0,
+    "display" : "Mother PNC detail",
+    "formElements" : [ {
+      "name" : "Mother's condition post delivery",
+      "uuid" : "0d82b909-d17f-4275-b85e-acd3f0d90d6e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mothers condition",
+        "uuid" : "83ce64af-544f-4e9c-814b-118f209e52d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Dead",
+          "uuid" : "c35d9184-7310-425f-bb1e-954a85d0ef3c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "a5e4b377-1b56-422f-a008-515f57dc1a61",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"ee91d2b0-c93c-4d31-8c48-58738df229ff\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day')).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Place of death",
+      "uuid" : "1a357f3a-46f5-4a2f-b27e-04a759173500",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of death",
+        "uuid" : "d89190f6-3ee8-4308-b626-26763714dcac",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Hospital",
+          "uuid" : "6dea27c7-20d5-416d-a5f2-d3d2e6b52fea",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Mother's condition",
+                "conceptUuid" : "83ce64af-544f-4e9c-814b-118f209e52d5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Probable cause of Death",
+      "uuid" : "314194d3-8552-435d-8d8a-394de07ca9fd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Probable cause of Death",
+        "uuid" : "229ac219-598d-4af1-a99f-b9f6a608bca3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Anaemia",
+          "uuid" : "be03c87b-3d27-4f68-8106-548eedbb1f99",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "High fever",
+          "uuid" : "9e7cb366-717c-418f-aaed-31891ef46ed7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Haemorrhage",
+          "uuid" : "e74ae14d-aa9d-425b-81e3-f4468fcaba8f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Eclampsia",
+          "uuid" : "eaa60d6f-7508-4b1d-a5d3-816ecfe18737",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Mother's condition",
+                "conceptUuid" : "83ce64af-544f-4e9c-814b-118f209e52d5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Other cause of death",
+      "uuid" : "057a12be-fe48-4676-9594-db5867447ff4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other cause of death",
+        "uuid" : "b6a969c2-b76c-4739-b1cc-2bfc6f3c96ec",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"229ac219-598d-4af1-a99f-b9f6a608bca3\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Probable cause of Death",
+                "conceptUuid" : "229ac219-598d-4af1-a99f-b9f6a608bca3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "1e5df5f4-0cd5-4d67-b245-ad9ea88687c3",
+    "name" : "Mother PNC Detail",
+    "displayOrder" : 3.0,
+    "display" : "Mother PNC Detail",
+    "formElements" : [ {
+      "name" : "Mother's condition post delivery",
+      "uuid" : "c6037f2a-fdb6-47cd-b678-2cec89c991a2",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Mothers condition",
+        "uuid" : "83ce64af-544f-4e9c-814b-118f209e52d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Dead",
+          "uuid" : "c35d9184-7310-425f-bb1e-954a85d0ef3c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const mothersCondition = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"83ce64af-544f-4e9c-814b-118f209e52d5\");\n\n  if (mothersCondition) {\n  \n  visibility = true;\n  value = mothersCondition.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "2640c2ca-d1d0-43ff-8522-b72c3c30723b",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const dateOfDeath = programEncounter.programEnrolment.getObservationValue(\"ee91d2b0-c93c-4d31-8c48-58738df229ff\");\n  \n  if (dateOfDeath) {\n  \n  visibility = true;\n  value = moment(dateOfDeath).format('DD-MM-YYYY');\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Place of death",
+      "uuid" : "62ec02e4-95c7-478d-8f06-e9beb01f0f3e",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Place of death",
+        "uuid" : "d89190f6-3ee8-4308-b626-26763714dcac",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Hospital",
+          "uuid" : "6dea27c7-20d5-416d-a5f2-d3d2e6b52fea",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const placeOfDeath = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"d89190f6-3ee8-4308-b626-26763714dcac\");\n  \n  if (placeOfDeath) {\n  \n  visibility = true;\n  value = placeOfDeath.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    } ],
+    "timed" : false,
+    "voided" : true
+  }, {
+    "uuid" : "8702de10-8334-493f-8461-2ea77052d168",
+    "name" : "Mother PNC Detail",
+    "displayOrder" : 4.0,
+    "display" : "Mother PNC Detail",
+    "formElements" : [ {
+      "name" : "IFA tabs given to mother",
+      "uuid" : "45186d63-a96e-4acf-b442-742910ea425c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "IFA rabs given to mother",
+        "uuid" : "1e876ff3-a9d7-4639-9cc6-a855d7d0f1a0",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Is any method of family planning being used",
+      "uuid" : "906a3d01-e9a7-41b5-9429-9ce9a1c7084b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is any method of family planning being used",
+        "uuid" : "1f16446b-e158-49c8-ae41-8cd08a30ac0c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const familyPlanning = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"1f16446b-e158-49c8-ae41-8cd08a30ac0c\");\n\n  if ( familyPlanning && familyPlanning.getReadableValue() == 'No' ) {\n  \n  visibility = true;\n  value = familyPlanning.getReadableValue();\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Type of method",
+      "uuid" : "0f22483c-9361-430e-8854-95d881c7c5bc",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of method",
+        "uuid" : "beea3e7d-41f7-407e-9d2c-446ab2d18ebf",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "IUCD",
+          "uuid" : "d34f6f7d-e63f-4a6d-96bf-0e5514cb4229",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Sterilisation",
+          "uuid" : "39961dcb-4758-4d78-9cfd-d710d72a0bdb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "//SAMPLE RULE EXAMPLE \n'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const familyPlanning = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment(\"1f16446b-e158-49c8-ae41-8cd08a30ac0c\");\n\n  if (familyPlanning && familyPlanning.getReadableValue() == 'Yes' ) {\n  \n  visibility = true;\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "2c17027f-e9ca-41e4-a370-996ce0e8bb32",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of method",
+        "uuid" : "7873ff57-1b93-4776-b0b2-b17dc9fb3f72",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"beea3e7d-41f7-407e-9d2c-446ab2d18ebf\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Type of method",
+                "conceptUuid" : "beea3e7d-41f7-407e-9d2c-446ab2d18ebf",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Indicate danger sign, if any",
+      "uuid" : "3f4ba40a-69a2-4e58-bece-70548148f930",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Indicate danger sign, if any",
+        "uuid" : "cc26ce57-c828-4c55-acbc-2cd145453a6a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Severe Abdominal Pain",
+          "uuid" : "26a32173-408b-47f5-9724-4662f1f3157c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Blurred vision",
+          "uuid" : "872cbaab-b0b6-4a3b-b77a-b369b42def70",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "PPH",
+          "uuid" : "d32d0026-9af2-4380-8db8-6b7226441a65",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Difficult breathing",
+          "uuid" : "28c1d590-5a4d-4734-9ab8-5925e2d568d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Fever",
+          "uuid" : "e5b1e053-4855-44d0-bf09-e07f4e889854",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Any other",
+          "uuid" : "953834fc-8d69-4610-9d43-53b470dff0fd",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Severe headache",
+          "uuid" : "433e9f84-25ea-41f8-b2c2-45920e9fb077",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Sepsis",
+          "uuid" : "928532a9-34f4-4fdd-bab7-1fa72b0ea63a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "unique" : true,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "25cbf733-83e1-48fd-ba57-6c750e3071b3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other danger sign",
+        "uuid" : "7eb17859-0b25-4aae-a91d-ca5e0c847772",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"cc26ce57-c828-4c55-acbc-2cd145453a6a\").containsAnswerConceptName(\"953834fc-8d69-4610-9d43-53b470dff0fd\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Indicate danger sign, if any",
+                "conceptUuid" : "cc26ce57-c828-4c55-acbc-2cd145453a6a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Any other" ],
+                "answerConceptUuids" : [ "953834fc-8d69-4610-9d43-53b470dff0fd" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Name of referred location",
+      "uuid" : "0ea5a37b-0ecf-4ebd-be24-6bcab9844ada",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Name of referred location",
+        "uuid" : "614176f6-68ee-41e1-979e-0636899d1bc2",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "7be093fb-4f44-4491-a0b2-e9d51a628d4c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other referred location",
+        "uuid" : "d79ff462-224c-4f5d-8a9e-d6e0bf24d93a",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"614176f6-68ee-41e1-979e-0636899d1bc2\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Name of referred location",
+                "conceptUuid" : "614176f6-68ee-41e1-979e-0636899d1bc2",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Remarks",
+      "uuid" : "2243a5eb-15c6-4f50-8bc1-2277362d7f6a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Remarks",
+        "uuid" : "5cf8f049-bc13-4e82-a7ee-b30074377a79",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "4a4bed6d-38e3-42e9-8c28-41671b9a18cd",
+    "name" : "Child PNC detail",
+    "displayOrder" : 5.0,
+    "display" : "Child PNC detail",
+    "formElements" : [ {
+      "name" : "First child RCH ID",
+      "uuid" : "d10eed06-edf6-4262-8449-540b78238cc8",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "First child RCH ID",
+        "uuid" : "5b9c1cc8-e6e3-4c17-abfe-413a07a3e475",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a');\n\n  if (outcomeOfDelivery.getValue() <= 3) {\n  \n  visibility = true;\n  \n  };\n  \n  const firstChildRchIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"5b9c1cc8-e6e3-4c17-abfe-413a07a3e475\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && firstChildRchIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('5b9c1cc8-e6e3-4c17-abfe-413a07a3e475').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "First child identification number",
+      "uuid" : "1e95af8e-4793-47c5-9a1e-65250ec7fa84",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "First child identification number",
+        "uuid" : "1979d3fa-78d6-4c11-a137-9df0a83b5c2c",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() <= 3) {\n  \n  visibility = true;\n  \n  }\n  \n  const firstChildIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"1979d3fa-78d6-4c11-a137-9df0a83b5c2c\").defined.matches();\n  \n    if (programEncounter.name != 'PNC 1' && firstChildIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('1979d3fa-78d6-4c11-a137-9df0a83b5c2c').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "First child Gender",
+      "uuid" : "18ad316c-8bfd-4aab-abb4-10abeb66df1f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "First child Gender",
+        "uuid" : "678e5c5f-a23f-4d5c-a9d0-f6df14d8a6ca",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Male",
+          "uuid" : "c2c5ed1d-7671-44a2-917a-66df204a533b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Female",
+          "uuid" : "11129bb0-958a-4d95-bf36-81c7fd049633",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() <= 3) {\n  \n  visibility = true;\n  \n  }\n  \n  const firstChildGenderPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"678e5c5f-a23f-4d5c-a9d0-f6df14d8a6ca\").defined.matches();\n \n    if (programEncounter.name != 'PNC 1') {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('678e5c5f-a23f-4d5c-a9d0-f6df14d8a6ca').getReadableValue()\n  \n  } \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Second child RCH ID",
+      "uuid" : "92dbc3c8-fb2c-4a68-8dbc-47d3abfaac37",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Second child RCH ID",
+        "uuid" : "29dd4c99-dad1-4a1b-8bf1-58577f16ef59",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3 || outcomeOfDelivery.getValue() == 2) {\n  \n  visibility = true;\n  \n  }\n  \n  const secondChildRchIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"29dd4c99-dad1-4a1b-8bf1-58577f16ef59\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && secondChildRchIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('29dd4c99-dad1-4a1b-8bf1-58577f16ef59').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Second child identification number",
+      "uuid" : "cf896208-131d-4e06-90eb-e4de7184b5f4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Second child identification number",
+        "uuid" : "bfefaf5c-f515-4ba7-9fd2-eaf9c87f4d13",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3 || outcomeOfDelivery.getValue() == 2) {\n  \n  visibility = true;\n  \n  }\n  \n  const secondChildIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"bfefaf5c-f515-4ba7-9fd2-eaf9c87f4d13\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && secondChildIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('bfefaf5c-f515-4ba7-9fd2-eaf9c87f4d13').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Second child gender",
+      "uuid" : "c1431a69-3b2f-463f-bc60-05e94979c2ac",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Second child gender",
+        "uuid" : "f7b6462a-a7c1-4573-bddc-7c4473a08098",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Female",
+          "uuid" : "11129bb0-958a-4d95-bf36-81c7fd049633",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Male",
+          "uuid" : "c2c5ed1d-7671-44a2-917a-66df204a533b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3 || outcomeOfDelivery.getValue() == 2) {\n  \n  visibility = true;\n  \n  }\n  \n  const secondChildGenderPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"f7b6462a-a7c1-4573-bddc-7c4473a08098\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && secondChildGenderPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('f7b6462a-a7c1-4573-bddc-7c4473a08098').getReadableValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Third child RCH ID",
+      "uuid" : "2e3a5db5-1d8f-4b85-a8b3-7a0b1da77218",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Third child RCH ID",
+        "uuid" : "771ba5b8-bbb7-420e-8ceb-387f6aaf91f6",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3) {\n  \n  visibility = true;\n  \n  };\n  \n  const thirdChildRchIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"771ba5b8-bbb7-420e-8ceb-387f6aaf91f6\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && thirdChildRchIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('771ba5b8-bbb7-420e-8ceb-387f6aaf91f6').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Third child identification number",
+      "uuid" : "2c3b03e1-5903-4890-84fc-d9e8cd877366",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Third child identification number",
+        "uuid" : "2bb1c8aa-4894-4936-a164-905a5263713a",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3) {\n  \n  visibility = true;\n  \n  }\n  \n  const thirdChildIdPresent = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"2bb1c8aa-4894-4936-a164-905a5263713a\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && thirdChildIdPresent) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('2bb1c8aa-4894-4936-a164-905a5263713a').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Third child gender",
+      "uuid" : "ee4acf88-5380-4fd8-bcff-f4fdf6bcde10",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Third child gender",
+        "uuid" : "7040c606-e20d-4897-aee1-7c70128d8175",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Female",
+          "uuid" : "11129bb0-958a-4d95-bf36-81c7fd049633",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Male",
+          "uuid" : "c2c5ed1d-7671-44a2-917a-66df204a533b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a'); \n\n  if (outcomeOfDelivery.getValue() == 3) {\n  \n  visibility = true;\n  \n  };\n  \n  const thirdChildGender = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInPreviousEncounters(\"7040c606-e20d-4897-aee1-7c70128d8175\").defined.matches();\n  \n  if (programEncounter.name != 'PNC 1' && thirdChildGender) {\n  \n  value = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('7040c606-e20d-4897-aee1-7c70128d8175').getValue()\n  \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "a1339382-8d7f-4177-a1ac-16191c9466bc",
+    "name" : "Infant details",
+    "displayOrder" : 6.0,
+    "display" : "Infant details",
+    "formElements" : [ {
+      "name" : "Child condition post delivery",
+      "uuid" : "55077476-00cc-4a45-9f13-0e97f60d5c2d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Child condition post delivery",
+        "uuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Weight of first child",
+      "uuid" : "09a2e1a7-53ae-4ebe-a869-e40412c3e8c4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Weight of first child",
+        "uuid" : "77939430-b87c-4f3c-b75b-fd6dea17fb34",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const alive = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"3fa49dce-d290-436b-9498-e7428c1b13d7\").matches();\n\n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a');\n\n  if (outcomeOfDelivery.getValue() <= 3 && alive) {\n  \n  visibility = true;\n  \n  };\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Weight of second child",
+      "uuid" : "5c3be997-df1c-4ea0-bde1-9bd7de8c5677",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Weight of second child",
+        "uuid" : "124f7681-473b-4a75-92c0-650de5e621af",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const alive = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"3fa49dce-d290-436b-9498-e7428c1b13d7\").matches();\n\n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a');\n\n  if (outcomeOfDelivery.getValue() == 3 && outcomeOfDelivery.getValue() == 2 && alive) {\n  \n  visibility = true;\n  \n  };\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Weight of third child",
+      "uuid" : "7eac1a0f-cdca-483a-b952-0d7ef31e09d1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Weight of third child",
+        "uuid" : "2c4418d9-02c3-4c70-8275-857437277518",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const alive = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"3fa49dce-d290-436b-9498-e7428c1b13d7\").matches();\n\n  let outcomeOfDelivery = programEncounter.programEnrolment.findLatestObservationInEntireEnrolment('046b7b50-d715-473b-9afa-fc200720b84a');\n\n  if (outcomeOfDelivery.getValue() == 3 && alive) {\n  \n  visibility = true;\n  \n  };\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Indicate Danger Sign, If Any",
+      "uuid" : "f71882c7-611b-4b44-b92c-56e63156986c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Indicate Danger Sign, If Any for child",
+        "uuid" : "6fca88f1-2c64-4f49-ae2a-587f7f87c887",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "unique" : true,
+          "active" : true
+        }, {
+          "name" : "Hypothermia",
+          "uuid" : "f6e9cce6-8e7d-42c8-b6f7-046e97e4b249",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Diarrohea",
+          "uuid" : "16d026d7-d11e-4ebd-b9a0-a4780b881013",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Any other",
+          "uuid" : "953834fc-8d69-4610-9d43-53b470dff0fd",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Jaundice",
+          "uuid" : "d656f1a8-6051-4cb1-9474-ad6c026a5d33",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Vomiting",
+          "uuid" : "3c0f88c0-1150-49e2-b48d-7b7a307f4cd5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Unable to suck",
+          "uuid" : "a498bea2-8884-4849-8e8b-3b2f9f7285d1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Fever",
+          "uuid" : "e5b1e053-4855-44d0-bf09-e07f4e889854",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Convulsions",
+          "uuid" : "d6d868bd-9544-4af7-b933-c62c01311ae0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Decreased movement",
+          "uuid" : "edce1348-41cb-4d88-847c-3a8890cdebb9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "Difficulties in breathing",
+          "uuid" : "3b86eced-9486-4c0b-9175-b6b0d2b337b1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Chest in-drawing",
+          "uuid" : "ecfc5312-2185-423b-a63d-3ae43d4971c5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "MultiSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"3fa49dce-d290-436b-9498-e7428c1b13d7\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Live" ],
+                "answerConceptUuids" : [ "3fa49dce-d290-436b-9498-e7428c1b13d7" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "189ca48b-9611-46e2-aa5b-95a31c6a2b51",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other danger sign for child",
+        "uuid" : "cbfed300-a703-4037-a237-36e07dddab13",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6fca88f1-2c64-4f49-ae2a-587f7f87c887\").containsAnswerConceptName(\"953834fc-8d69-4610-9d43-53b470dff0fd\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Indicate Danger Sign, If Any for child",
+                "conceptUuid" : "6fca88f1-2c64-4f49-ae2a-587f7f87c887",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Any other" ],
+                "answerConceptUuids" : [ "953834fc-8d69-4610-9d43-53b470dff0fd" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Name of referred location",
+      "uuid" : "ad462fd3-7c90-463b-ad05-4d9087732c97",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Name of referred location for child",
+        "uuid" : "50ae4d59-6035-4bd3-8be3-a1ba30ec06b4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Primary health center",
+          "uuid" : "edee7572-fc20-4a9d-8160-501563ac8e04",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Community health center",
+          "uuid" : "1d142038-a5e4-4efc-94d2-445a0571f906",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"3fa49dce-d290-436b-9498-e7428c1b13d7\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Live" ],
+                "answerConceptUuids" : [ "3fa49dce-d290-436b-9498-e7428c1b13d7" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "9c933bd6-cddd-4580-9a58-4e2fd2019286",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other referred location for child",
+        "uuid" : "303323c8-d3de-4620-aa2f-a287bf30c2e3",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"50ae4d59-6035-4bd3-8be3-a1ba30ec06b4\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Name of referred location for child",
+                "conceptUuid" : "50ae4d59-6035-4bd3-8be3-a1ba30ec06b4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Remarks",
+      "uuid" : "786410d0-ca29-4654-b496-2cf0f5a71a4a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Remarks for child",
+        "uuid" : "0b810d0e-07f4-4487-b95f-c48405a17a38",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "//SAMPLE RULE EXAMPLE\n\"use strict\";\n({ params, imports }) => {\n  const programEncounter = params.entity;\n  const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({\n    programEncounter\n  });\n  const _ = imports.lodash;\n  const moment = imports.moment;\n\n  const encounterScheduler = [\n        {\"name\": \"PNC 2\", \"earliest\": 3, \"max\": 5},\n        {\"name\": \"PNC 3\", \"earliest\": 7, \"max\": 9},\n        {\"name\": \"PNC 4\", \"earliest\": 14, \"max\": 16},\n        {\"name\": \"PNC 5\", \"earliest\": 21, \"max\": 23},\n        {\"name\": \"PNC 6\", \"earliest\": 28, \"max\": 30},\n        {\"name\": \"PNC 7\", \"earliest\": 42, \"max\": 44}\n    ];\n  \n  const dateOfDel = programEncounter.programEnrolment.getObservationReadableValueInEntireEnrolment(\"bb232ad5-714b-4dcd-8946-80fea2838673\");\n\n  const visitDate = programEncounter.encounterDateTime;\n  \n  let schedule = _.chain(encounterScheduler).filter(e => moment(visitDate).isSameOrBefore(moment(dateOfDel).add(e.earliest, 'days'), 'date') === true )\n                  .filter(e => (programEncounter.programEnrolment.hasEncounter('PNC', e.name)) === false)\n                  .first()\n                  .value();\n  \n  \n\nconst getEnc = programEncounter.programEnrolment.getEncounters(true);\n   const getAllCompletedEncounters = _.chain(getEnc)\n   .filter(e => e.encounterDateTime != null)\n  .map(e => e.name)\n  .value();\n  \nconst comparisonFunction = () => {\n  let eligible = true;\n      for ( let i=0; i<getAllCompletedEncounters.length; i++) {\n          if ( getAllCompletedEncounters[i] === programEncounter.name ) return eligible = false;\n      };\n      return eligible;\n  };\n  \n  const dateOfDeath = programEncounter.getObservationValue('ee91d2b0-c93c-4d31-8c48-58738df229ff');\n  \n   if (!_.isEmpty(schedule) && comparisonFunction() && !dateOfDeath ) {\n\n   scheduleBuilder\n            .add({\n                name: schedule.name,\n                encounterType: \"PNC\",\n                earliestDate:  moment(dateOfDel).add(schedule.earliest, 'days').toDate() ,\n                maxDate: moment(dateOfDel).add(schedule.max, 'days').toDate()\n            });\n\n   }\n\n\n\n  return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

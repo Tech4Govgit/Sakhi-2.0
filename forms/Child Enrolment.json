@@ -1,0 +1,439 @@
+{
+  "name" : "Child Enrolment",
+  "uuid" : "6f9a7e87-9147-41b3-a00c-7ea0982cfc39",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "b7a4096d-663b-4263-be30-ef5362b708ee",
+    "name" : "Birth Information",
+    "displayOrder" : 1.0,
+    "display" : "Birth Information",
+    "formElements" : [ {
+      "name" : "Birth order of the child",
+      "uuid" : "364d1e75-bf1c-4581-92b4-589f78d2c7e4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Birth order of the child",
+        "uuid" : "4054178b-b04a-49a1-90fa-81bd1282b91f",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 1.0,
+        "highAbsolute" : 12.0,
+        "highNormal" : 2.0,
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Birth weight of the baby in kgs",
+      "uuid" : "1d410703-2482-4f52-964b-ba853a2b0383",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Birth weight of the baby in kgs",
+        "uuid" : "3ba27f54-64ce-4062-90b2-abcd88abf1e7",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 1.0,
+        "highAbsolute" : 9.0,
+        "lowNormal" : 2.5,
+        "highNormal" : 5.0,
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Colostrum given to the child",
+      "uuid" : "16e8c1ad-3d39-4d87-9ae8-2a350fb981a3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Colostrum given to the child",
+        "uuid" : "e8d0d11b-2083-452c-9747-974c12f4796f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Not responded",
+          "uuid" : "93e1494a-bb51-4816-9d92-6a23b15fff12",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Child identification number",
+      "uuid" : "5cea1de2-1f62-4a02-b978-88e4f0c85c57",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Child identification number",
+        "uuid" : "6812d1a2-fdfd-4390-8a86-5a0ec76c6964",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    }, {
+      "name" : "Birth certificate number",
+      "uuid" : "f730adfd-1e5f-4d2c-a881-c1396d60943c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Birth certificate number",
+        "uuid" : "951f9fea-0e71-4753-b183-1f9fd7c310fc",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "validFormat" : {
+        "regex" : "^[0-9]{11}$",
+        "descriptionKey" : "Enter a valid 11 digit number"
+      },
+      "mandatory" : false
+    }, {
+      "name" : "Child RCH Id",
+      "uuid" : "beadbebc-330b-49d0-b126-ed0d0fd6af7c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Child RCH Id",
+        "uuid" : "eeacc3e9-7700-402f-adc2-f9df39111fd5",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "validFormat" : {
+        "regex" : "^[0-9]{12}$",
+        "descriptionKey" : "Enter a valid 12 digit number"
+      },
+      "mandatory" : false
+    }, {
+      "name" : "Status of Child",
+      "uuid" : "86667955-2ab6-48ee-996d-fdf232376b62",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Status of Child",
+        "uuid" : "9bd2f3d5-3642-4e22-87f7-30329d3290e5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Active",
+          "uuid" : "f2700d5a-5dc0-4679-8b2b-432ec085c922",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Migrated Out",
+          "uuid" : "d564337b-1160-405b-b95e-2f37c6e784e0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other - Status of Child",
+      "uuid" : "185ef988-660b-4d69-8cf1-0d24b8c29b63",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Specify other - Status of Child",
+        "uuid" : "2edeae25-870a-4239-b995-873fbe356fc0",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"9bd2f3d5-3642-4e22-87f7-30329d3290e5\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Status of Child",
+                "conceptUuid" : "9bd2f3d5-3642-4e22-87f7-30329d3290e5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Place of delivery",
+      "uuid" : "73fbe096-6446-45d4-bb91-a8630543cadb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of delivery",
+        "uuid" : "0d706a98-4a0f-45fd-bedf-b78b154c033b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Sub-centre",
+          "uuid" : "f1353d92-8a5e-4d76-a28a-e4fdfe5fa1f0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Accredited private hospital",
+          "uuid" : "6900e5b1-e438-4f6c-b556-6d142842f038",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other public facilities",
+          "uuid" : "c587846a-348f-496b-b7b4-920ef8855e16",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    }, {
+      "name" : "Delivery type",
+      "uuid" : "4a25573f-5c27-4198-9abf-26649f4c5778",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Delivery type",
+        "uuid" : "8914b099-117f-4eb9-90a4-274eb70258d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Normal",
+          "uuid" : "69009c81-77ba-4127-bc42-d10611a23dd1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "C-section",
+          "uuid" : "d070ec22-e0f5-44bc-a93b-b8d9dea257e8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "C section",
+          "uuid" : "347391de-cf5b-4c9c-b30e-1427220e3aa1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Assisted",
+          "uuid" : "c74dc59d-fc6e-4d47-a666-f6ecc662b1a0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    }, {
+      "name" : "Is baby full period / premature / after time",
+      "uuid" : "02e1a1f6-7452-4bcd-b879-ffa39fc92777",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is baby full period / premature / after time",
+        "uuid" : "63dd78c8-6201-46c3-a723-9547ede15043",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "After time",
+          "uuid" : "defd928f-4929-4d58-9ed8-a6984b2b1fbb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Full period",
+          "uuid" : "c9c4000e-d202-439f-8a81-db77792cdb6c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Premature",
+          "uuid" : "a69da3ae-e61d-43c8-84ea-7d92892f181e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "c196544e-6353-4d6e-8ece-d66e25fd0a58",
+    "name" : "Current Status",
+    "displayOrder" : 2.0,
+    "display" : "Current Status",
+    "formElements" : [ {
+      "name" : "Present height of the child in cm",
+      "uuid" : "6eacf998-41ca-48e5-b75a-db248ee53b39",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Present height of the child in cm",
+        "uuid" : "781515d2-b06f-4618-ac0d-42c4f8ae4638",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 30.0,
+        "highAbsolute" : 150.0,
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Present weight of the child in kgs",
+      "uuid" : "c9887d82-bf5e-4482-a595-b88aff838ec5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Present weight of the child in kgs",
+        "uuid" : "736a69c5-1d4b-4174-a22e-f89ff1b9bca5",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 1.0,
+        "highAbsolute" : 50.0,
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Nutritional Status",
+      "uuid" : "cb9e6e15-8f28-4f58-a45a-8e40ca1bd584",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Nutritional Status",
+        "uuid" : "135fd8fc-c739-496b-b858-3d55b2c2ae3e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "\n\"use strict\";\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const formElement = params.formElement;\n\n    let height = programEnrolment.findLatestObservationInEntireEnrolment(\"Present height of the child in cm\", programEnrolment);\n    let weight = programEnrolment.findObservation(\"Present weight of the child in kgs\");\n    const individual = programEnrolment.individual;\n    const asOnDate = programEnrolment.enrolmentDateTime;\n    height = height && height.getValue();\n    weight = weight && weight.getValue();\n    console.log('height------',height);\n    console.log('weight------',weight);    \n    let value = '';\n    value = ruleServiceLibraryInterfaceForSharingModules.common.getZScore(individual, asOnDate, weight, height);\n\n    const getGradeforZscore = (zScore) => {\n        let grade;\n        if (zScore <= -3) {\n            grade = 3;\n        } else if (zScore > -3 && zScore < -2) {\n            grade = 2;\n        } else if (zScore >= -2) {\n            grade = 1;\n        }\n        return grade;\n    };\n    const zScoreGradeStatusMappingWeightForAge = {\n        '1': 'Normal',\n        '2': 'Moderately Underweight',\n        '3': 'Severely Underweight'\n    };\n\n    const wfaGrade = getGradeforZscore(value.wfa);\n    const wfaStatus = zScoreGradeStatusMappingWeightForAge[wfaGrade];\n\n    console.log('wfaGrade------',wfaGrade);    \n    console.log('wfaStatus------',wfaStatus);    \n    \n    \n    return new imports.rulesConfig.FormElementStatus(formElement.uuid, true, wfaStatus);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "BCG dose",
+      "uuid" : "efbd1a66-7792-4a52-9839-6f3d6c1e976b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "BCG dose (voided~142394)",
+        "uuid" : "9dc2fffc-2cd9-466b-9136-e90371680bad",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "//SAMPLE RULE EXAMPLE\n\"use strict\";\n({ params, imports }) => {\n//  const programEncounter = params.entity;\n  const programEnrolment = params.entity;\n  const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({\n    programEnrolment\n  });\n  const _ = imports.lodash;\n  const moment = imports.moment;\n\n  const encounterScheduler = [\n        {\"name\": \"HBNC 1\",\"encName\":'HBNC', \"earliest\": 1, \"max\": 3},\n        {\"name\": \"HBNC 2\",\"encName\":'HBNC', \"earliest\": 3, \"max\": 5},\n        {\"name\": \"HBNC 3\",\"encName\":'HBNC', \"earliest\": 7, \"max\": 9},\n        {\"name\": \"HBNC 4\",\"encName\":'HBNC', \"earliest\": 14, \"max\": 16},\n        {\"name\": \"HBNC 5\",\"encName\":'HBNC', \"earliest\": 21, \"max\": 23},\n        {\"name\": \"HBNC 6\",\"encName\":'HBNC', \"earliest\": 28, \"max\": 30},\n        {\"name\": \"HBNC 7\",\"encName\":'HBNC', \"earliest\": 42, \"max\": 44},\n        {\"name\": \"HBYC 1\",\"encName\":'HBYC', \"earliest\": 90, \"max\": 92},\n        {\"name\": \"HBYC 2\",\"encName\":'HBYC', \"earliest\": 180, \"max\": 182},\n        {\"name\": \"HBYC 3\",\"encName\":'HBYC', \"earliest\": 270, \"max\": 272},\n        {\"name\": \"HBYC 4\",\"encName\":'HBYC', \"earliest\": 360, \"max\": 362},\n        {\"name\": \"HBYC 5\",\"encName\":'HBYC', \"earliest\": 450, \"max\": 452}\n    ];\n\n  const dateOfBirth = programEnrolment.individual.dateOfBirth;\n  const visitDate = programEnrolment.enrolmentDateTime;\n\n  let schedule = _.chain(encounterScheduler).filter(e => moment(visitDate).isSameOrBefore(moment(dateOfBirth).add(e.earliest, 'days'), 'date') === true )\n                  .filter(e => (programEnrolment.hasEncounter('PNC', e.name)) === false)\n                  .first()\n                  .value();\n\n   if (!_.isEmpty(schedule)) {\n\n   scheduleBuilder\n            .add({\n                name: schedule.name,\n                encounterType: schedule.encName,\n                earliestDate:  moment(dateOfBirth).add(schedule.earliest, 'days').toDate() ,\n                maxDate: moment(dateOfBirth).add(schedule.max, 'days').toDate()\n            });\n\n   }\n\n\n\n  return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "'use strict';\n({params, imports}) => {\n  let vaccination = params.checklistDetails.find(cd => cd.name === 'Vaccination');\n  if (vaccination === undefined) return [];\n  const vaccinationList = {\n    baseDate: params.entity.individual.dateOfBirth,\n    detail: {uuid: vaccination.uuid},\n    items: vaccination.items.map(vi => ({\n      detail: {uuid: vi.uuid}\n    }))\n  };\n  return [vaccinationList];\n};",
+  "decisionConcepts" : [ ]
+}

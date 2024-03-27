@@ -1,0 +1,111 @@
+{
+  "name" : "Child death review form",
+  "uuid" : "8a5858db-5186-44b1-b2d0-2679dc1e0239",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "145a4af8-1781-4ad3-b960-0690e2abb0c2",
+    "name" : "Details",
+    "displayOrder" : 1.0,
+    "display" : "Details",
+    "formElements" : [ {
+      "name" : "Date of death",
+      "uuid" : "b7a920b7-64d0-4c7b-a701-ded6dee78601",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Date and time of death",
+      "uuid" : "5d3fa961-72f6-4623-818d-a26e821730ed",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date and time of death",
+        "uuid" : "26a7b6a3-b83e-4488-b95a-98fafab30e48",
+        "dataType" : "DateTime",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  let encounterDateTime = programEncounter.encounterDateTime;\n  \n//  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"26a7b6a3-b83e-4488-b95a-98fafab30e48\").greaterThanOrEqualTo(encounterDateTime, 'ms').matches();\n  const dateAndTime = programEncounter.getObservationValue('26a7b6a3-b83e-4488-b95a-98fafab30e48');\n\n  if (dateAndTime >= encounterDateTime) validationErrors.push(\"Date / Time cannot be in the future\")\n//  console.log('====>',moment(dateAndTime).format(\"DD-MM-YYYY LT\"));\n  \n//  if(condition11 ){\n//    validationErrors.push(\"Date of death cannot be in future\");  \n//}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Place of death",
+      "uuid" : "31adc87a-1541-49e0-9871-cccb32c867f0",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of death",
+        "uuid" : "d89190f6-3ee8-4308-b626-26763714dcac",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Hospital",
+          "uuid" : "6dea27c7-20d5-416d-a5f2-d3d2e6b52fea",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Name of first informant",
+      "uuid" : "537beb56-8672-4067-a401-3b91ec9cd715",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Name of first informant",
+        "uuid" : "3282d40a-397b-4d84-bc7e-a44357f613be",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    }, {
+      "name" : "Date of notification",
+      "uuid" : "ee5c711b-3810-4626-b5f0-76ab0038fa8c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of notification",
+        "uuid" : "32440c90-a46a-4412-8b42-5aee6f66c77b",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "\"use strict\";\n({params, imports}) => {\n    const programEncounter = params.entity;\n    const moment = imports.moment;\n    const decisions = params.decisions;\n    \n  const dateAndTimeOfDeath = programEncounter.getObservationReadableValue('26a7b6a3-b83e-4488-b95a-98fafab30e48');\n  console.log('---------',dateAndTimeOfDeath);\n  \n  if (dateAndTimeOfDeath) {\n     decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Dead\"});\n      decisions.registrationDecisions.push({name : \"Date of death\", value: dateAndTimeOfDeath });\n}\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

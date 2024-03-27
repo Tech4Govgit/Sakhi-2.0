@@ -1,0 +1,208 @@
+{
+  "name" : "Kala Azar enrolment",
+  "uuid" : "536d9f17-6074-49a0-8dc6-7636a6e5d37b",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "9548eddd-7b3c-4170-9935-f63802242864",
+    "name" : "Enrolment details",
+    "displayOrder" : 1.0,
+    "display" : "Enrolment details",
+    "formElements" : [ {
+      "name" : "Kala azar case status",
+      "uuid" : "77da83a5-3da4-4493-9f6b-e9896c6de37c",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Recurrence of symptoms", "Other", "Not confirmed", "Treatment started", "Cured", "Confirmed", "Death", "Recovering" ]
+      } ],
+      "concept" : {
+        "name" : "Kala azar case status",
+        "uuid" : "e21479fc-9360-4dd1-8e93-5d6a97a49502",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Referred to",
+      "uuid" : "9867d8d0-7ca4-4e6c-bdda-b60f0a92c43e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Referred to",
+        "uuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "d6a55608-ee78-45b8-8f16-214c635f0804",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other referred to",
+        "uuid" : "2615d42a-af2f-4b0e-95e4-875bec39ca98",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"772e7054-d688-4484-9092-afa9538b5b02\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Referred to",
+                "conceptUuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Kala azar case status date",
+      "uuid" : "e8c78d74-7f1e-479f-8a9f-138c7ec14166",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Kala azar case status date",
+        "uuid" : "b9feb38e-068d-4313-8893-e42de3a02b48",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b9feb38e-068d-4313-8893-e42de3a02b48\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  if(condition11 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

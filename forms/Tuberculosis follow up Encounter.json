@@ -1,0 +1,387 @@
+{
+  "name" : "Tuberculosis follow up Encounter",
+  "uuid" : "2096921c-c55a-451a-9598-a5d46bdff9f2",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "2b8c0aa2-360a-400e-9358-bb065eb79089",
+    "name" : "Follow up details",
+    "displayOrder" : 1.0,
+    "display" : "Follow up details",
+    "formElements" : [ {
+      "name" : "Follow up date",
+      "uuid" : "08376f00-81d9-431d-93c2-0bb03655b66d",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Follow up date",
+        "uuid" : "a05f6b5f-214c-4033-9148-82105b0fffca",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n    value = moment().startOf('day').toDate();  \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "TB case status",
+      "uuid" : "61a8e6c7-9022-496a-befb-d4ec7faa0cdf",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Suspected" ]
+      } ],
+      "concept" : {
+        "name" : "TB case status",
+        "uuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Treatment completed",
+          "uuid" : "ff6e41d0-08db-40d7-909d-8df74232bbd7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Regularly taking medicine",
+          "uuid" : "7e9bbce2-df44-4483-bb9b-8ef6c95804e4",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "active" : true
+        }, {
+          "name" : "Not regularly taking medicine",
+          "uuid" : "f82ff4b3-6f1e-4179-a5cc-8a46bd4c8a4c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "Expired",
+          "uuid" : "b7c5575c-96df-4c86-a8e2-d4750d2c7707",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "TB case status date",
+      "uuid" : "f78deb2e-25b8-4358-89e4-c27f7c9d0b3d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "TB case status date",
+        "uuid" : "82ca7dc7-f503-4bb9-acce-1b3be0fbacf8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "677597c6-478f-40b2-aba9-7ccb50331bf3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other TB case status",
+        "uuid" : "74dd677b-6360-4d0e-87c3-0a20c72c44f3",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Type of TB",
+      "uuid" : "12d9dcea-a193-43c7-9c1d-d8a936ccec42",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of TB",
+        "uuid" : "d311eaba-662c-4a32-a75e-65ced2049afe",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Drug sensitive",
+          "uuid" : "4dc1ed19-a4e6-40ff-ba7b-a0f94a3045cf",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Drug resistant",
+          "uuid" : "c18f10f1-bd54-49be-a3d3-7111ace8c2be",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnyAnswerConceptName(\"c174a25f-feff-4969-90f5-7867cee74c80\",\"48eee55b-c71e-43d6-b6fe-c5f61c62d23a\",\"ff6e41d0-08db-40d7-909d-8df74232bbd7\",\"7e9bbce2-df44-4483-bb9b-8ef6c95804e4\",\"27eec495-6e02-4fc6-b755-1f8e730fcee9\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Confirmed", "Treatment started", "Treatment completed", "Regularly taking medicine", "Recovering" ],
+                "answerConceptUuids" : [ "c174a25f-feff-4969-90f5-7867cee74c80", "48eee55b-c71e-43d6-b6fe-c5f61c62d23a", "ff6e41d0-08db-40d7-909d-8df74232bbd7", "7e9bbce2-df44-4483-bb9b-8ef6c95804e4", "27eec495-6e02-4fc6-b755-1f8e730fcee9" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Advice the patient to take medicine regularly for recovery",
+      "uuid" : "6cb2dba9-e2ac-4199-a051-5de748917e7a",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Advice the patient to take medicine regularly for recovery",
+        "uuid" : "672674f9-fee2-44b8-b75b-e61418c09c51",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"f82ff4b3-6f1e-4179-a5cc-8a46bd4c8a4c\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Not regularly taking medicine" ],
+                "answerConceptUuids" : [ "f82ff4b3-6f1e-4179-a5cc-8a46bd4c8a4c" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Patient status",
+      "uuid" : "a0e6f1c0-e915-4817-ad2f-97f461082bb5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Patient status",
+        "uuid" : "882489ba-5059-471a-b4b2-52bf95ee57b2",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Recovered",
+          "uuid" : "a75f8167-bd94-4991-bc04-2862f8c68b1b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Not recovered",
+          "uuid" : "9b2686d0-b617-4478-8bc6-dc6e35b05f3e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"ff6e41d0-08db-40d7-909d-8df74232bbd7\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Treatment completed" ],
+                "answerConceptUuids" : [ "ff6e41d0-08db-40d7-909d-8df74232bbd7" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Treatment completion date",
+      "uuid" : "5f85effa-afd6-4789-b533-ba7c01e9d010",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Treatment completion date",
+        "uuid" : "e5f1dd22-789f-41d6-b391-d3b484f1abdc",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"ff6e41d0-08db-40d7-909d-8df74232bbd7\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Treatment completed" ],
+                "answerConceptUuids" : [ "ff6e41d0-08db-40d7-909d-8df74232bbd7" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

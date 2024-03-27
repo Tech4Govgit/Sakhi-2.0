@@ -1,0 +1,2404 @@
+{
+  "name" : "Individual Registration",
+  "uuid" : "a2af26e0-fd08-477d-9ad6-8c402261824b",
+  "formType" : "IndividualProfile",
+  "formElementGroups" : [ {
+    "uuid" : "701f6a2c-0b85-4a7e-8b87-ab3f1498fd71",
+    "name" : "Individual Details",
+    "displayOrder" : 1.0,
+    "display" : "Individual Details",
+    "formElements" : [ {
+      "name" : "Staying with parents or guardian?",
+      "uuid" : "e9a82152-84ee-4095-bd29-781aec4387ee",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Staying with parent or guardian",
+        "uuid" : "550ad9ed-a9d2-46c9-a750-6c4a05106b9a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Parents",
+          "uuid" : "a5f3bf0c-bfa0-40ac-a4ea-f4494fdff624",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Guardian",
+          "uuid" : "a5f5911e-20bb-4270-a3c5-ceb40c27c8f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.lessThan(18).matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "lessThan"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Type of beneficiary",
+      "uuid" : "eeb174e5-b7cd-41d8-b790-4abaa0589785",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of beneficiary",
+        "uuid" : "179e9912-e56e-4b1e-b131-41d68186bd1c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Guest",
+          "uuid" : "845c5d4b-ff25-4a43-8d6e-84b0a48bf014",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Head of family",
+          "uuid" : "f9ff08bb-645d-47f4-b400-b21dc5b0ad5b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Family member",
+          "uuid" : "512037fb-992c-4d98-8419-1db621250e60",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Father's name",
+      "uuid" : "7f270762-2217-4c46-b1b4-ae9e23a27248",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Father's name",
+        "uuid" : "8dba7e34-2a61-4365-8f9a-a33dd45cefe1",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.lessThan(18).and.when.valueInRegistration(\"550ad9ed-a9d2-46c9-a750-6c4a05106b9a\").containsAnswerConceptName(\"a5f5911e-20bb-4270-a3c5-ceb40c27c8f3\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "lessThan"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Staying with parent or guardian",
+                "conceptUuid" : "550ad9ed-a9d2-46c9-a750-6c4a05106b9a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Guardian" ],
+                "answerConceptUuids" : [ "a5f5911e-20bb-4270-a3c5-ceb40c27c8f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[^0-9]+$",
+        "descriptionKey" : "Name cannot have numeric values"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Mother's name",
+      "uuid" : "1bed34fa-fdb0-4fc4-a973-387b08c65211",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mother's name",
+        "uuid" : "b0302d28-c087-4aae-8261-07e5771afd4e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.lessThan(18).and.when.valueInRegistration(\"550ad9ed-a9d2-46c9-a750-6c4a05106b9a\").containsAnswerConceptName(\"a5f5911e-20bb-4270-a3c5-ceb40c27c8f3\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "lessThan"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Staying with parent or guardian",
+                "conceptUuid" : "550ad9ed-a9d2-46c9-a750-6c4a05106b9a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Guardian" ],
+                "answerConceptUuids" : [ "a5f5911e-20bb-4270-a3c5-ceb40c27c8f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[^0-9]+$",
+        "descriptionKey" : "Name cannot have numeric values"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Guardian name",
+      "uuid" : "5ed1558e-c9d0-4010-807e-e3c33a0e6d9a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Guardian name",
+        "uuid" : "5a882a98-3cf5-46ba-a26d-f897899fc5a0",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"550ad9ed-a9d2-46c9-a750-6c4a05106b9a\").defined.and.when.valueInRegistration(\"550ad9ed-a9d2-46c9-a750-6c4a05106b9a\").containsAnswerConceptName(\"a5f5911e-20bb-4270-a3c5-ceb40c27c8f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Staying with parent or guardian",
+                "conceptUuid" : "550ad9ed-a9d2-46c9-a750-6c4a05106b9a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Staying with parent or guardian",
+                "conceptUuid" : "550ad9ed-a9d2-46c9-a750-6c4a05106b9a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Guardian" ],
+                "answerConceptUuids" : [ "a5f5911e-20bb-4270-a3c5-ceb40c27c8f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Caste",
+      "uuid" : "f5022bd5-ce5f-41ad-b2a0-4d2a2f2022ca",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Caste",
+        "uuid" : "895c4a82-d0b0-4c2b-8164-08084f220051",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "SC",
+          "uuid" : "ee9a6bf1-a29a-4fad-87e4-766a8af3ca38",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not given",
+          "uuid" : "30da32f9-befa-4e07-83c4-04b591e80c65",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "ST",
+          "uuid" : "f27669da-4098-480c-b114-e8928bfd0cd8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "EBC",
+          "uuid" : "3aaf2700-1dae-4fcc-b07a-bf88f9c19e14",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "OBC",
+          "uuid" : "5548e290-1284-4884-b454-439513068dba",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "General",
+          "uuid" : "384fd68e-e8e2-49f9-b289-d03e5366fbd0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const groupSubject = params.entityContext.group;\n  if(groupSubject !== undefined){\n  if(groupSubject.groupSubjects.length > 0) {\n     const ind = params.entityContext.group.groupSubjects[0].memberSubject;\n     const caste = ind.getObservationReadableValue('Caste');\n     value = caste; \n   }\n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Religion",
+      "uuid" : "57850b29-d7fe-4801-a242-87e0c3bc2c0b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Religion",
+        "uuid" : "fc82dd46-9ee9-4030-a92f-97c637ebbaa7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Parsi",
+          "uuid" : "29753768-c28b-465a-b6a7-95792c025257",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Muslim",
+          "uuid" : "51076e9a-0b47-4b93-aa56-8c1c361208f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Christian",
+          "uuid" : "144d6c57-0a1a-42a6-935f-e4fe523b2956",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Hindu",
+          "uuid" : "8c45fa90-093d-4fb5-b1c0-eea4ffa1c8e0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Jainism",
+          "uuid" : "d147487a-b05e-4e90-a507-6e7cd05e5ade",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Not disclosed",
+          "uuid" : "5b311a5f-56f3-494f-8bdb-b5e8008cd3a6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Buddhism",
+          "uuid" : "091cf180-3644-4e27-9bfa-eef3c306d00c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Sikh",
+          "uuid" : "46574d9c-2a08-42fc-85af-4594ecef1bf3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const groupSubject = params.entityContext.group;\n  if(groupSubject !== undefined){\n  if(groupSubject.groupSubjects.length > 0) {\n     const ind = params.entityContext.group.groupSubjects[0].memberSubject;\n     const religion = ind.getObservationReadableValue('Religion');\n     value = religion; \n  }\n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Educational qualification",
+      "uuid" : "94c6c6ae-e0fe-42d8-b8db-e4193c8b965f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Educational qualification",
+        "uuid" : "19ea0e20-3e3d-4cc3-97c1-16ff70c65d46",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Graduate",
+          "uuid" : "1ca7a393-b7b7-42bc-b7f0-ce0ac45a9247",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Illiterate",
+          "uuid" : "cf8ce8bf-546e-471f-bf72-205cd4976255",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Matric",
+          "uuid" : "46ce248e-91d4-4101-99ab-12cab3f16f75",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Post graduate",
+          "uuid" : "6f3b7993-f4f4-42e1-8d05-37b55d1b27a7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Non-matric",
+          "uuid" : "2a0656ff-16a3-4fb5-8f9e-e41aeddddaaa",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Inter",
+          "uuid" : "ef1ec17a-7413-44a9-8a20-ea4240b3c7dc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(14).matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 14
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Occupation",
+      "uuid" : "86cc16ce-8f20-4305-abca-008213a2291e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Occupation",
+        "uuid" : "30886ab1-7bb1-40f0-baf5-789c142b6846",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Government",
+          "uuid" : "343eaa44-86e8-42c7-b5e4-bcf3a93ca96d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Self employed",
+          "uuid" : "7562028b-ddd2-4578-9faf-5745e00020c0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Private",
+          "uuid" : "26868790-8b49-4600-9ee2-167ae8f6509c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Unemployed",
+          "uuid" : "cac73115-3d1e-49dd-8744-6256fce6f956",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(14).matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 14
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Marital status",
+      "uuid" : "b93d281b-0854-4dfd-962c-8ed6cf84c6a1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Marital status",
+        "uuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Separated",
+          "uuid" : "d4c42593-e984-40c8-b09b-b79fea45476c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Widow",
+          "uuid" : "154a7d8e-b6b5-4291-8971-69283918a063",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Divorced",
+          "uuid" : "1ff6f03a-e14e-4dcf-b013-3d908ede1179",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Widower",
+          "uuid" : "37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Unmarried",
+          "uuid" : "69e84a25-3cf1-46fd-9dc3-372a6d827749",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Married",
+          "uuid" : "9b939448-cf35-411c-8142-fe8c1a613971",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.lessThanOrEqualTo(15).matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.gender.equals(\"Male\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.gender.equals(\"Female\").matches();\n  \n  visibility = !(condition11 );\n    if(condition12 ) {\n    _.forEach([\"154a7d8e-b6b5-4291-8971-69283918a063\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition13 ) {\n    _.forEach([\"37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 15
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Widow" ],
+            "answerUuidsToSkip" : [ "154a7d8e-b6b5-4291-8971-69283918a063" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Widower" ],
+            "answerUuidsToSkip" : [ "37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of marriage",
+      "uuid" : "2f10faac-7971-48e4-a9bf-71c9140dcf3f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of marriage",
+        "uuid" : "ad4f62a5-092d-4472-9530-c72e1c616b38",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const dateOfMarriage = individual.getObservationValue('ad4f62a5-092d-4472-9530-c72e1c616b38');\n  const ageInYears = individual.getAgeInYears();\n  \n  const ageAtMarriage = moment(dateOfMarriage).diff(moment(individual.dateOfBirth),'years', true);\n  \n  const dateInFuture = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"ad4f62a5-092d-4472-9530-c72e1c616b38\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnyAnswerConceptName(\"9b939448-cf35-411c-8142-fe8c1a613971\",\"1ff6f03a-e14e-4dcf-b013-3d908ede1179\",\"d4c42593-e984-40c8-b09b-b79fea45476c\",\"154a7d8e-b6b5-4291-8971-69283918a063\",\"37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3\").matches();\n  \n    if(dateInFuture ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n    visibility = condition11 ;\n    \n  if ( dateOfMarriage && ageAtMarriage < 15 ) {\n      validationErrors.push(\"Age at the time of marriage cannot be less than 15 years\");\n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Age at marriage",
+      "uuid" : "570ab6bb-0c3b-41f6-9c95-c36f1e31f730",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Age at marriage",
+        "uuid" : "d5826b0b-a91b-43b9-8201-9ca4c69cbf40",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"ad4f62a5-092d-4472-9530-c72e1c616b38\").defined.matches();\n  \n  visibility = condition11 ;\n  const dateOfMarriage = individual.getObservationReadableValue(\"ad4f62a5-092d-4472-9530-c72e1c616b38\");\n  \n  value = imports.moment(dateOfMarriage).diff(imports.moment(individual.dateOfBirth), 'year');\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Spouse name",
+      "uuid" : "a4b76b22-9973-42cb-a605-0e667db61c69",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Spouse name",
+        "uuid" : "41fd3998-1d16-4081-8b14-04e24c10c1fa",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnyAnswerConceptName(\"9b939448-cf35-411c-8142-fe8c1a613971\",\"d4c42593-e984-40c8-b09b-b79fea45476c\",\"154a7d8e-b6b5-4291-8971-69283918a063\",\"37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Married", "Separated", "Widow", "Widower" ],
+                "answerConceptUuids" : [ "9b939448-cf35-411c-8142-fe8c1a613971", "d4c42593-e984-40c8-b09b-b79fea45476c", "154a7d8e-b6b5-4291-8971-69283918a063", "37ff77c7-0a7d-4f78-a4df-3e6d82c5eed3" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Count of male children",
+      "uuid" : "6f405564-d0c8-4e5f-b656-ec2759ca4f27",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Count of male children",
+        "uuid" : "4c156456-fcfc-4763-8979-963ef83ea0ad",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 0.0,
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(18).matches();\n  \n  visibility = condition11 && condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Count of female children",
+      "uuid" : "3e6654ff-4004-432a-8718-ebafbcb6f4a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Count of female children",
+        "uuid" : "6bd9679d-368b-4bd1-9365-49f64c661e25",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 0.0,
+        "active" : true
+      },
+      "displayOrder" : 15.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(18).matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 && condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Count of other children",
+      "uuid" : "993fb03b-c522-4dfe-b775-fcc223280d01",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Count of other children",
+        "uuid" : "def32608-9855-48b3-bbb1-ee8bce1fa13c",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 0.0,
+        "active" : true
+      },
+      "displayOrder" : 16.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(18).matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 && condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 18
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Total number of children",
+      "uuid" : "a5e4ae47-5007-40cb-a167-66ae0d7edce7",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Total no of children",
+        "uuid" : "767d126d-8768-4aa3-8b50-0d8f51a3a509",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 17.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(18).and.when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 ;\n  \n  if(visibility){\n    let nums1 = individual.getObservationReadableValue(\"4c156456-fcfc-4763-8979-963ef83ea0ad\");\n    let nums2 = individual.getObservationReadableValue(\"6bd9679d-368b-4bd1-9365-49f64c661e25\");\n    let nums3 = individual.getObservationReadableValue(\"def32608-9855-48b3-bbb1-ee8bce1fa13c\");\n    \n    value = ((typeof nums1 === 'number')?nums1:0) + ((typeof nums2 === 'number')?nums2:0) + ((typeof nums3 === 'number')?nums3:0)   \n     \n  }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Mobile Number",
+      "uuid" : "032f8057-d628-461e-918a-17100968027c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Contact no",
+        "uuid" : "08d3c090-b64e-4035-89ae-e8d1809d98bf",
+        "dataType" : "PhoneNumber",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ {
+          "key" : "verifyPhoneNumber",
+          "value" : true
+        } ]
+      },
+      "displayOrder" : 18.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Mobile number",
+      "uuid" : "e070e698-f8a1-40e0-9962-b89119a727a7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Contact number",
+        "uuid" : "ec7d9993-9084-4bde-a211-3ff78f840d21",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 19.0,
+      "type" : "SingleSelect",
+      "validFormat" : {
+        "regex" : "^[0-9]{10}$",
+        "descriptionKey" : "Enter a valid 10 digit number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Mobile number belongs to",
+      "uuid" : "d1d6ed94-f9cd-4a7f-b91a-15b8173e5edd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mobile number belongs to",
+        "uuid" : "71c8433f-5e04-476c-b45b-122d74d3879f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Self employed",
+          "uuid" : "7562028b-ddd2-4578-9faf-5745e00020c0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Family member",
+          "uuid" : "512037fb-992c-4d98-8419-1db621250e60",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Family head",
+          "uuid" : "77a8c36a-dc48-4b30-9702-cfb8e0932be7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Head of family",
+          "uuid" : "f9ff08bb-645d-47f4-b400-b21dc5b0ad5b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Father",
+          "uuid" : "975dcf0b-c768-4361-96a1-66549f15025d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Husband",
+          "uuid" : "4b35505a-14ed-4c70-b8bc-56b0956b788c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Mother",
+          "uuid" : "534e6d81-0be7-4051-8623-bacea4ad304e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Self",
+          "uuid" : "c29e855d-3a5b-4dd3-8315-de417f27928c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 20.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Alternate mobile number",
+      "uuid" : "3d8e80ea-8b81-41d1-b7e8-4d5b8711b4fb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Alternate mobile number",
+        "uuid" : "abf1ab91-a978-423d-b43c-87faab975708",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 21.0,
+      "type" : "SingleSelect",
+      "validFormat" : {
+        "regex" : "^[0-9]{10}$",
+        "descriptionKey" : "Enter a 10 digit number"
+      },
+      "mandatory" : false
+    }, {
+      "name" : "Have you adopted permanent birth control method?",
+      "uuid" : "ba8e1eb9-48ed-429e-86de-7b4a2853987f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Have you adopted permanent birth control method?",
+        "uuid" : "4bc133a4-0545-4e8c-9aba-0ee72c28f3f8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 22.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThan(14).and.when.ageInYears.lessThanOrEqualTo(49).and.when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 14
+              },
+              "operator" : "greaterThan"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 49
+              },
+              "operator" : "lessThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Are you in a menopause stage?",
+      "uuid" : "55bc8705-574c-430e-b143-f6d4797e3d1d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you in a menopause stage",
+        "uuid" : "05a74f44-27e6-4584-a620-280e1c6f4173",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.gender.equals(\"Female\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.ageInYears.greaterThanOrEqualTo(30).and.when.ageInYears.lessThanOrEqualTo(55).matches();\n  \n  visibility = condition11 && condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 30
+              },
+              "operator" : "greaterThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 55
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Are you using any family planning method?",
+      "uuid" : "698237fb-e493-4378-af8e-6968c32fcdf4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you using any family planning method",
+        "uuid" : "2006f731-a7c8-469e-9a2c-689ed4529a3b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 24.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptName(\"9b939448-cf35-411c-8142-fe8c1a613971\").and.when.valueInRegistration(\"4bc133a4-0545-4e8c-9aba-0ee72c28f3f8\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Married" ],
+                "answerConceptUuids" : [ "9b939448-cf35-411c-8142-fe8c1a613971" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Have you adopted permanent birth control method?",
+                "conceptUuid" : "4bc133a4-0545-4e8c-9aba-0ee72c28f3f8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Type of Family planning method",
+      "uuid" : "e076df75-f7c1-4299-b58d-d0d2ef1c1399",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of Family planning method",
+        "uuid" : "a1a03aad-f0ec-4367-a09a-31a29626bba3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Nirodh",
+          "uuid" : "b8158b63-8d2b-4e76-80b0-55bfc5fb9b7a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Copper T",
+          "uuid" : "681e41b1-6073-4bd5-b871-27ac936f096c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Mala-N/Chaya",
+          "uuid" : "25ef8eff-09b8-404d-a6dc-79d974f2ebd5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Negative",
+          "uuid" : "a8b44d5e-39fa-4dc3-abd5-b90f3f642aec",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "ANTRA injection",
+          "uuid" : "99fec29d-97b5-4b48-a064-0e8545eeae75",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 25.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"2006f731-a7c8-469e-9a2c-689ed4529a3b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Are you using any family planning method",
+                "conceptUuid" : "2006f731-a7c8-469e-9a2c-689ed4529a3b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of ANTRA",
+      "uuid" : "51c9dc80-cb29-49ae-b136-00811c2ca842",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of ANTRA injection",
+        "uuid" : "44fd7e3f-af84-41f7-a8e9-25b9b0d9fa17",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 26.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"a1a03aad-f0ec-4367-a09a-31a29626bba3\").containsAnswerConceptName(\"99fec29d-97b5-4b48-a064-0e8545eeae75\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Type of Family planning method",
+                "conceptUuid" : "a1a03aad-f0ec-4367-a09a-31a29626bba3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "ANTRA injection" ],
+                "answerConceptUuids" : [ "99fec29d-97b5-4b48-a064-0e8545eeae75" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of Sterilization",
+      "uuid" : "0b79e5b0-2e2f-4841-8067-1ed920db771a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of Sterilization",
+        "uuid" : "f1c4ab77-2011-4f63-bb3a-d06651f79d0b",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 27.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"4bc133a4-0545-4e8c-9aba-0ee72c28f3f8\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Have you adopted permanent birth control method?",
+                "conceptUuid" : "4bc133a4-0545-4e8c-9aba-0ee72c28f3f8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Mobile number",
+      "uuid" : "54c2883f-0789-48d7-a0f7-cafa6ec7d92d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Phone number (voided~142484)",
+        "uuid" : "8265cb52-db26-4ae7-be7a-2b810dd51ae9",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 28.0,
+      "type" : "SingleSelect",
+      "validFormat" : {
+        "regex" : "^\\d{10}$",
+        "descriptionKey" : "Add a valid 10 digit Mobile number"
+      },
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Mobile Number",
+      "uuid" : "1559dbb4-f29e-467d-864c-196f43d58784",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mobile Number",
+        "uuid" : "6afdd0a7-1e97-4856-a0e6-79ed1b2b08f6",
+        "dataType" : "PhoneNumber",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ {
+          "key" : "verifyPhoneNumber",
+          "value" : true
+        } ]
+      },
+      "displayOrder" : 29.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Husband name",
+      "uuid" : "a876f3cc-e223-45d1-bfe2-704b66f6818c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Husband name (voided~116733)",
+        "uuid" : "c782c5d5-8b8f-423a-b1b2-7afb7451729e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 30.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").and.when.gender.equals(\"Female\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            }, {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Wife name",
+      "uuid" : "d5416d1e-999b-4ee6-9bb6-9ac129c33e40",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Wife name",
+        "uuid" : "c710353a-b724-46d8-b923-c98314c97317",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 31.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.gender.equals(\"Male\").and.when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Age at marriage",
+      "uuid" : "be10a6a8-720f-4022-9052-77fcfdd8edc7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Age at marriage",
+        "uuid" : "d5826b0b-a91b-43b9-8201-9ca4c69cbf40",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 32.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e00f2603-8808-4767-be57-a97f440cf897\").containsAnswerConceptNameOtherThan(\"69e84a25-3cf1-46fd-9dc3-372a6d827749\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Marital status",
+                "conceptUuid" : "e00f2603-8808-4767-be57-a97f440cf897",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Unmarried" ],
+                "answerConceptUuids" : [ "69e84a25-3cf1-46fd-9dc3-372a6d827749" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Mobile number",
+      "uuid" : "33a48d4d-8c6c-4146-9397-195bb4b405f8",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mobile number (voided~116707)",
+        "uuid" : "d0b7971e-2ed2-48fb-afbe-fd26540cdc4c",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 33.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Mobile number",
+      "uuid" : "bca04c9c-676b-4dda-a586-761d4243ec8a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mobile number (voided~125458)",
+        "uuid" : "0506a8d3-1934-4490-8e20-2ce23f37f212",
+        "dataType" : "PhoneNumber",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ {
+          "key" : "verifyPhoneNumber",
+          "value" : false
+        } ],
+        "voided" : true
+      },
+      "displayOrder" : 34.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Alternate mobile number",
+      "uuid" : "43f248e5-b51f-4b2e-91ed-1da989d48abb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Alternate mobile number (voided~124609)",
+        "uuid" : "b0cdf4d1-d2b8-4662-9060-b68890f19998",
+        "dataType" : "PhoneNumber",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ {
+          "key" : "verifyPhoneNumber",
+          "value" : false
+        } ],
+        "voided" : true
+      },
+      "displayOrder" : 35.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Seasonal In migrant?",
+      "uuid" : "e394dd69-a53f-44f3-b0b1-31d159d29aea",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Seasonal In migrant",
+        "uuid" : "52aebab0-6f49-4c52-b771-a3c755d3f986",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 36.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Relation with mobile number holder",
+      "uuid" : "885bbb08-9c68-4d8b-9a3c-54774cdec570",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Relation with mobile number holder",
+        "uuid" : "12a04c67-78bc-453c-9719-8dbe070e312b",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 37.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"71c8433f-5e04-476c-b45b-122d74d3879f\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Mobile number of",
+                "conceptUuid" : "71c8433f-5e04-476c-b45b-122d74d3879f",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Community",
+      "uuid" : "bf8de6e6-0ac8-4398-945a-bf7f69a2b76d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Community",
+        "uuid" : "bf136795-ec3a-4796-89b0-bb4ab5d82ea1",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "BC",
+          "uuid" : "23c73016-4e27-4457-b614-e349de44559c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "OC",
+          "uuid" : "447d66f8-7a8c-44d4-afaa-34382f99cd5c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "OBC",
+          "uuid" : "5548e290-1284-4884-b454-439513068dba",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "SC",
+          "uuid" : "ee9a6bf1-a29a-4fad-87e4-766a8af3ca38",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not given",
+          "uuid" : "30da32f9-befa-4e07-83c4-04b591e80c65",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "General",
+          "uuid" : "384fd68e-e8e2-49f9-b289-d03e5366fbd0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "ST",
+          "uuid" : "f27669da-4098-480c-b114-e8928bfd0cd8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 38.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Other religion",
+      "uuid" : "c9e7332f-f03f-4ceb-9f70-a0ca20bd286b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other religion",
+        "uuid" : "31d76de4-72f1-49c4-bed9-6aac6e9fed6a",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 39.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"fc82dd46-9ee9-4030-a92f-97c637ebbaa7\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Religion",
+                "conceptUuid" : "fc82dd46-9ee9-4030-a92f-97c637ebbaa7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "630914f8-0b28-4c51-8954-872e51d7b65f",
+    "name" : "ID Details",
+    "displayOrder" : 2.0,
+    "display" : "ID Details",
+    "formElements" : [ {
+      "name" : "Enrol with",
+      "uuid" : "d3926979-388d-491c-9eda-e72c0be62813",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Enrol with",
+        "uuid" : "847df244-e128-4cdb-bd22-b7c9a92f60b7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "ABHA id",
+          "uuid" : "c0f8ed64-dc08-4ac1-a045-0b73d0cfb919",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Aadhar No",
+          "uuid" : "a534e8ac-12a7-4b63-b3b2-b576a6fa6049",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Has aadhar number",
+      "uuid" : "b13425d1-948a-4688-8632-c06fd0aadcf7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Has aadhar number",
+        "uuid" : "def3f7f1-5ec2-4ce5-b74f-b707d01dce99",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Aadhar number",
+      "uuid" : "e671393e-daa7-4648-a5e4-6fb8def084c5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Aadhar number",
+        "uuid" : "db0971eb-d9a1-4e92-9068-ca22c5d7bcd5",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"847df244-e128-4cdb-bd22-b7c9a92f60b7\").containsAnswerConceptName(\"a534e8ac-12a7-4b63-b3b2-b576a6fa6049\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Enrol with",
+                "conceptUuid" : "847df244-e128-4cdb-bd22-b7c9a92f60b7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Aadhar No" ],
+                "answerConceptUuids" : [ "a534e8ac-12a7-4b63-b3b2-b576a6fa6049" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[0-9]{12}$",
+        "descriptionKey" : "Enter a 12 digit aadhar number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "ABHA number",
+      "uuid" : "00edeaf8-0fff-4903-89a9-e18f34c06fca",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "ABHA number",
+        "uuid" : "5d241f96-f5f3-4722-ac80-46c5db8bd5b9",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"847df244-e128-4cdb-bd22-b7c9a92f60b7\").containsAnswerConceptName(\"c0f8ed64-dc08-4ac1-a045-0b73d0cfb919\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Enrol with",
+                "conceptUuid" : "847df244-e128-4cdb-bd22-b7c9a92f60b7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "ABHA id" ],
+                "answerConceptUuids" : [ "c0f8ed64-dc08-4ac1-a045-0b73d0cfb919" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[0-9]{14}$",
+        "descriptionKey" : "Enter a 14 digit number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "RCH ID",
+      "uuid" : "b97aaa2d-bddc-4035-9170-2024ba0f565f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "RCH ID (voided~116738)",
+        "uuid" : "efec384d-26cd-4446-b21b-6ab7b33fa7c3",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "b90d6e69-a464-4c0e-a35b-5d8c62dc5b30",
+    "name" : "Other details",
+    "displayOrder" : 3.0,
+    "display" : "Other details",
+    "formElements" : [ {
+      "name" : "Do you have Bank/Post Office Account No.",
+      "uuid" : "1cf1e0a1-365a-4a7e-b12b-03565f86f531",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you have Bank/Post Office Account No.",
+        "uuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "unique" : true,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Bank account",
+          "uuid" : "16c6f4d0-f6dc-4a72-a431-157281442298",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Post office account",
+          "uuid" : "df89c7e1-4a1a-44b0-9eca-d60f14b69fc2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Post Office Account no",
+      "uuid" : "0a278637-2e09-4882-8d08-e06b3290b74d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Post Office Account no (voided~124620)",
+        "uuid" : "fd437d88-5222-4950-851e-88d957f7f463",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"df89c7e1-4a1a-44b0-9eca-d60f14b69fc2\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Post office account" ],
+                "answerConceptUuids" : [ "df89c7e1-4a1a-44b0-9eca-d60f14b69fc2" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Post Office Account no",
+      "uuid" : "3d5c7b61-45cd-4ba2-9d61-87e2d4660a0a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Post Office Account no",
+        "uuid" : "6ed2810e-4550-45ef-8a82-aae58a87f601",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ ]
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"df89c7e1-4a1a-44b0-9eca-d60f14b69fc2\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Post office account" ],
+                "answerConceptUuids" : [ "df89c7e1-4a1a-44b0-9eca-d60f14b69fc2" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[0-9]{12}$",
+        "descriptionKey" : "Enter a valid 12 digit number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Bank name",
+      "uuid" : "66674614-4bcb-41a1-ba98-7bdf52bed199",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bank name",
+        "uuid" : "2c698e34-514b-4786-8024-f5b31cbe1406",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"16c6f4d0-f6dc-4a72-a431-157281442298\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Bank account" ],
+                "answerConceptUuids" : [ "16c6f4d0-f6dc-4a72-a431-157281442298" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[A-Za-z\\s-]+$",
+        "descriptionKey" : "Enter only text characters"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Bank Account No.",
+      "uuid" : "763e4778-3c78-45b2-a98d-f04b0bba87ba",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bank Account No. (voided~124619)",
+        "uuid" : "053b234a-7bf2-4941-a967-d324d32ca160",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"16c6f4d0-f6dc-4a72-a431-157281442298\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Bank account" ],
+                "answerConceptUuids" : [ "16c6f4d0-f6dc-4a72-a431-157281442298" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Bank account no",
+      "uuid" : "e8548b44-daf8-4824-999e-0e28a5407394",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bank account no",
+        "uuid" : "74c87fcd-bd2a-4733-922a-d37f6b72a4df",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true,
+        "keyValues" : [ ]
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"16c6f4d0-f6dc-4a72-a431-157281442298\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Bank account" ],
+                "answerConceptUuids" : [ "16c6f4d0-f6dc-4a72-a431-157281442298" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[A-Za-z0-9]{0,20}$",
+        "descriptionKey" : "The account number cannot be less than 0 or more than 20 characters. It cannot have special letters"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "IFSC Code",
+      "uuid" : "38eb9201-54ea-4416-ba41-1f215c15566f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "IFSC Code",
+        "uuid" : "87cdf4b3-954e-4809-a2a9-c6762354b36e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"16c6f4d0-f6dc-4a72-a431-157281442298\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Bank account" ],
+                "answerConceptUuids" : [ "16c6f4d0-f6dc-4a72-a431-157281442298" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Is bank account linked with Aadhar",
+      "uuid" : "8f95c3f1-1b53-43d1-b482-52eacef49434",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is bank account linked with Aadhar",
+        "uuid" : "91ee6042-4afe-43a8-be1f-00f927da2c3f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"cb67c4b2-eb49-4e0d-939b-3778f6f92dee\").containsAnswerConceptName(\"16c6f4d0-f6dc-4a72-a431-157281442298\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Do you have Bank/Post Office Account No.",
+                "conceptUuid" : "cb67c4b2-eb49-4e0d-939b-3778f6f92dee",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Bank account" ],
+                "answerConceptUuids" : [ "16c6f4d0-f6dc-4a72-a431-157281442298" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "//SAMPLE RULE EXAMPLE\n  \"use strict\";\n({params, imports}) => {\n    const individual = params.entity;\n    const decisions = params.decisions;\n        \n    decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Alive\"});\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "\"use strict\";\n({ params, imports }) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({individual});\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual}).when.ageInYears.greaterThanOrEqualTo(30).matches();\n  \n  if(condition11 ){\n    const earliestDate = moment(individual.registrationDate).add(0, 'days').toDate();\n    const maxDate = moment(individual.registrationDate).add(3, 'days').toDate();\n    scheduleBuilder.add({name: \"CBAC\", encounterType: \"CBAC\", earliestDate, maxDate});  \n}\n  \n  return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ {
+    "name" : "Date of death",
+    "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+    "dataType" : "Date",
+    "answers" : [ ],
+    "active" : true
+  }, {
+    "name" : "Individuals status",
+    "uuid" : "34b441a2-d19b-415e-a6aa-2ed612af7f0d",
+    "dataType" : "Coded",
+    "answers" : [ {
+      "name" : "Alive",
+      "uuid" : "263704e1-fcd1-4069-a458-96b6fc0b2d2a",
+      "dataType" : "NA",
+      "answers" : [ ],
+      "order" : 1.0,
+      "active" : true
+    }, {
+      "name" : "Dead",
+      "uuid" : "c35d9184-7310-425f-bb1e-954a85d0ef3c",
+      "dataType" : "NA",
+      "answers" : [ ],
+      "order" : 0.0,
+      "active" : true
+    } ],
+    "active" : true,
+    "keyValues" : [ ]
+  } ],
+  "visitScheduleDeclarativeRule" : [ {
+    "actions" : [ {
+      "details" : {
+        "dateField" : "registrationDate",
+        "daysToOverdue" : "3",
+        "encounterName" : "CBAC",
+        "encounterType" : "CBAC",
+        "daysToSchedule" : "0"
+      },
+      "actionType" : "scheduleVisit"
+    } ],
+    "conditions" : [ {
+      "compoundRule" : {
+        "rules" : [ {
+          "lhs" : {
+            "type" : "ageInYears"
+          },
+          "rhs" : {
+            "type" : "value",
+            "value" : 30
+          },
+          "operator" : "greaterThanOrEqualTo"
+        } ]
+      }
+    } ]
+  } ]
+}

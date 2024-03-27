@@ -1,0 +1,4702 @@
+{
+  "name" : "CBAC Encounter",
+  "uuid" : "04448f4f-4265-4d45-a75c-7fcb79364dcc",
+  "formType" : "Encounter",
+  "formElementGroups" : [ {
+    "uuid" : "04378d05-557d-48ca-97ae-f7c7dfc72fde",
+    "name" : "Risk Assessment",
+    "displayOrder" : 1.0,
+    "display" : "Risk Assessment",
+    "formElements" : [ {
+      "name" : "Does this person have any of the following",
+      "uuid" : "974c9454-9b32-483b-8261-9b925c2d2f8e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Does this person have any of the following",
+        "uuid" : "132adfba-fc86-4cdf-bf00-8bf0b8b08c83",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Handicaped",
+          "uuid" : "e26bca3a-b87d-4fe5-b1b3-fa8295048373",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Bed-ridden due to any disease",
+          "uuid" : "864d42bb-56b3-446e-95a9-df3374ef1a44",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Dependent for daily routine work",
+          "uuid" : "c7220e3e-a399-4243-8803-dd578a70c42b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "unique" : true,
+          "active" : true
+        }, {
+          "name" : "Poor vision",
+          "uuid" : "62bc3fa9-273e-4ebe-9644-3ae593a8f8d6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "What is your age age range?",
+      "uuid" : "12e8d1dc-fc67-4372-b760-aadc152c4229",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "What is your age age range",
+        "uuid" : "d436c896-299d-4f8b-8dad-72d91b5e9529",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(30).and.when.ageInYears.lessThanOrEqualTo(39).matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(40).and.when.ageInYears.lessThanOrEqualTo(49).matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(50).and.when.ageInYears.lessThanOrEqualTo(59).matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(60).matches();\n  \n  if(condition11 ){\n    value = \"30-39\";  \n}\n    if(condition12 ){\n    value = \"40-49\";  \n}\n    if(condition13 ){\n    value = \"50-59\";  \n}\n    if(condition14 ){\n    value = \"Age is above 60\";  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "30-39"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 30
+              },
+              "operator" : "greaterThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 39
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "40-49"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 40
+              },
+              "operator" : "greaterThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 49
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "50-59"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 50
+              },
+              "operator" : "greaterThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 59
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "Age is above 60"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 60
+              },
+              "operator" : "greaterThanOrEqualTo"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Score (Age based)",
+      "uuid" : "e1e418c4-9788-46ff-9f08-f2daba51f0cf",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Age based)",
+        "uuid" : "54b230c9-2b2c-40dc-b8f5-0d0ae642d260",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(30).and.when.ageInYears.lessThanOrEqualTo(39).matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(40).and.when.ageInYears.lessThanOrEqualTo(49).matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(50).and.when.ageInYears.lessThanOrEqualTo(59).matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(60).matches();\n  \n  if(condition11 ){\n    value = \"1\";  \n}\n    if(condition12 ){\n    value = \"2\";  \n}\n    if(condition13 ){\n    value = \"3\";  \n}\n    if(condition14 ){\n    value = \"4\";  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+      "uuid" : "c377b22c-8b9d-4963-985e-9867fbc8f7d7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+        "uuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Used to consume in the past",
+          "uuid" : "b9d0e5f5-c20a-482d-b767-c3b29e851549",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Never",
+          "uuid" : "c7e4b2a0-4255-4513-bdb4-f74670232ae1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Daily",
+          "uuid" : "a948e9af-569f-4b0d-8f69-8a4478b1a70e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Sometimes now",
+          "uuid" : "201b494a-5c33-4f18-bf28-ea03958c7e58",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score (Tobacco consumption)",
+      "uuid" : "07848e59-8afe-4572-8287-ad74bdae6642",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Tobacco consumption)",
+        "uuid" : "39b6614f-32a4-440b-9edc-d630dc7a3291",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"67aa5749-ff50-4920-a74f-94c38145dde4\").containsAnswerConceptName(\"c7e4b2a0-4255-4513-bdb4-f74670232ae1\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"67aa5749-ff50-4920-a74f-94c38145dde4\").containsAnswerConceptName(\"b9d0e5f5-c20a-482d-b767-c3b29e851549\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"67aa5749-ff50-4920-a74f-94c38145dde4\").containsAnswerConceptName(\"201b494a-5c33-4f18-bf28-ea03958c7e58\").matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"67aa5749-ff50-4920-a74f-94c38145dde4\").containsAnswerConceptName(\"a948e9af-569f-4b0d-8f69-8a4478b1a70e\").matches();\n    \n  const condition15 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"67aa5749-ff50-4920-a74f-94c38145dde4\").defined.matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    if(condition13 ){\n    value = \"2\";  \n}\n    if(condition14 ){\n    value = \"3\";  \n}\n    visibility = condition15 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+                "conceptUuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Never" ],
+                "answerConceptUuids" : [ "c7e4b2a0-4255-4513-bdb4-f74670232ae1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+                "conceptUuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Used to consume in the past" ],
+                "answerConceptUuids" : [ "b9d0e5f5-c20a-482d-b767-c3b29e851549" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+                "conceptUuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Sometimes now" ],
+                "answerConceptUuids" : [ "201b494a-5c33-4f18-bf28-ea03958c7e58" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "3"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+                "conceptUuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Daily" ],
+                "answerConceptUuids" : [ "a948e9af-569f-4b0d-8f69-8a4478b1a70e" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you smoke or consume smokeless products such as gutka or khaini?",
+                "conceptUuid" : "67aa5749-ff50-4920-a74f-94c38145dde4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Do you consume alcohol daily?",
+      "uuid" : "c50ff054-daa9-4a6c-b16a-2386e6885fab",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you consume alcohol daily?",
+        "uuid" : "8890559c-2ebd-42f6-82a7-154f06c1e9d3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score (Alcohol consumption)",
+      "uuid" : "fc132057-ffcd-4174-94cc-ec543e1fea7c",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Alcohol consumption)",
+        "uuid" : "b9b6f383-5cfb-4e5a-8562-1d6bd6b0c1c6",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"8890559c-2ebd-42f6-82a7-154f06c1e9d3\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"8890559c-2ebd-42f6-82a7-154f06c1e9d3\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"8890559c-2ebd-42f6-82a7-154f06c1e9d3\").defined.matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    visibility = condition13 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you consume alcohol daily?",
+                "conceptUuid" : "8890559c-2ebd-42f6-82a7-154f06c1e9d3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you consume alcohol daily?",
+                "conceptUuid" : "8890559c-2ebd-42f6-82a7-154f06c1e9d3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you consume alcohol daily?",
+                "conceptUuid" : "8890559c-2ebd-42f6-82a7-154f06c1e9d3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Measurement of waist in cm",
+      "uuid" : "cc6b9e43-0d5b-4aea-8951-d762e46a171b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Measurement of waist in cm",
+        "uuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "90 cm or less",
+          "uuid" : "303ddb09-aebc-4b13-9bfd-78fb6e7fee2a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "80 cm or less",
+          "uuid" : "de47e928-c13d-460d-8b55-61d2fcf7272f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "81 - 90 cm",
+          "uuid" : "c41e3c72-2c2d-409c-af0d-d033f5847f0d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "More than 100 cm",
+          "uuid" : "e805e402-5eb2-466f-a167-c20065b55f9b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "More than 90 cm",
+          "uuid" : "472a8cc5-4e1a-4103-a88c-7cd60c08d89a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "91-100 cm",
+          "uuid" : "ed1090de-2f43-4b1d-83ee-dd55b44b985f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Female\").matches();\n  \n  if(condition11 ) {\n    _.forEach([\"303ddb09-aebc-4b13-9bfd-78fb6e7fee2a\",\"c41e3c72-2c2d-409c-af0d-d033f5847f0d\",\"de47e928-c13d-460d-8b55-61d2fcf7272f\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition12 ) {\n    _.forEach([\"472a8cc5-4e1a-4103-a88c-7cd60c08d89a\",\"e805e402-5eb2-466f-a167-c20065b55f9b\",\"ed1090de-2f43-4b1d-83ee-dd55b44b985f\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "90 cm or less", "81 - 90 cm", "80 cm or less" ],
+            "answerUuidsToSkip" : [ "303ddb09-aebc-4b13-9bfd-78fb6e7fee2a", "c41e3c72-2c2d-409c-af0d-d033f5847f0d", "de47e928-c13d-460d-8b55-61d2fcf7272f" ]
+          },
+          "actionType" : "skipAnswers"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "More than 90 cm", "More than 100 cm", "91-100 cm" ],
+            "answerUuidsToSkip" : [ "472a8cc5-4e1a-4103-a88c-7cd60c08d89a", "e805e402-5eb2-466f-a167-c20065b55f9b", "ed1090de-2f43-4b1d-83ee-dd55b44b985f" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Score (Waist based)",
+      "uuid" : "e4c18364-dd0e-4ac6-9254-4441c815d565",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Waist based)",
+        "uuid" : "83e7ee91-abb5-47c8-ae87-06e0bcab20ba",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"de47e928-c13d-460d-8b55-61d2fcf7272f\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"c41e3c72-2c2d-409c-af0d-d033f5847f0d\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"472a8cc5-4e1a-4103-a88c-7cd60c08d89a\").matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"303ddb09-aebc-4b13-9bfd-78fb6e7fee2a\").matches();\n    \n  const condition15 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"ed1090de-2f43-4b1d-83ee-dd55b44b985f\").matches();\n    \n  const condition16 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").containsAnswerConceptName(\"e805e402-5eb2-466f-a167-c20065b55f9b\").matches();\n    \n  const condition17 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"df4e760a-4d9a-4d5a-b0ee-d5891c8196cb\").defined.matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    if(condition13 ){\n    value = \"2\";  \n}\n    if(condition14 ){\n    value = \"0\";  \n}\n    if(condition15 ){\n    value = \"1\";  \n}\n    if(condition16 ){\n    value = \"2\";  \n}\n    visibility = condition17 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "80 cm or less" ],
+                "answerConceptUuids" : [ "de47e928-c13d-460d-8b55-61d2fcf7272f" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "81 - 90 cm" ],
+                "answerConceptUuids" : [ "c41e3c72-2c2d-409c-af0d-d033f5847f0d" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "More than 90 cm" ],
+                "answerConceptUuids" : [ "472a8cc5-4e1a-4103-a88c-7cd60c08d89a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "90 cm or less" ],
+                "answerConceptUuids" : [ "303ddb09-aebc-4b13-9bfd-78fb6e7fee2a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "91-100 cm" ],
+                "answerConceptUuids" : [ "ed1090de-2f43-4b1d-83ee-dd55b44b985f" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "More than 100 cm" ],
+                "answerConceptUuids" : [ "e805e402-5eb2-466f-a167-c20065b55f9b" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Measurement of waist in cm",
+                "conceptUuid" : "df4e760a-4d9a-4d5a-b0ee-d5891c8196cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Do you undertake any physical activities for minimum of 150 minutes in a week?",
+      "uuid" : "4d1d03d9-bb9f-4314-acd5-c2e3c10f42f5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you undertake any physical activities for minimum of 150 minutes in a week?",
+        "uuid" : "7435413b-691c-41f3-b47f-b0deb030b5f0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Less than 150 minutes in a week",
+          "uuid" : "a17264fc-1525-43b5-8591-0a09ab70d7a9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "At least 150 minutes in a week",
+          "uuid" : "4a4d15c6-0c59-43ce-971e-9cde8c8ebc20",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score (Activity based)",
+      "uuid" : "f7f6cb1d-d209-4e13-b4e9-09c819f0ec39",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Activity based)",
+        "uuid" : "f8c333a9-008a-4add-be2a-09c8f78a441c",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"7435413b-691c-41f3-b47f-b0deb030b5f0\").containsAnswerConceptName(\"4a4d15c6-0c59-43ce-971e-9cde8c8ebc20\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"7435413b-691c-41f3-b47f-b0deb030b5f0\").containsAnswerConceptName(\"a17264fc-1525-43b5-8591-0a09ab70d7a9\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"7435413b-691c-41f3-b47f-b0deb030b5f0\").defined.matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    visibility = condition13 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you undertake any physical activities for minimum of 150 minutes in a week?",
+                "conceptUuid" : "7435413b-691c-41f3-b47f-b0deb030b5f0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "At least 150 minutes in a week" ],
+                "answerConceptUuids" : [ "4a4d15c6-0c59-43ce-971e-9cde8c8ebc20" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you undertake any physical activities for minimum of 150 minutes in a week?",
+                "conceptUuid" : "7435413b-691c-41f3-b47f-b0deb030b5f0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Less than 150 minutes in a week" ],
+                "answerConceptUuids" : [ "a17264fc-1525-43b5-8591-0a09ab70d7a9" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you undertake any physical activities for minimum of 150 minutes in a week?",
+                "conceptUuid" : "7435413b-691c-41f3-b47f-b0deb030b5f0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?",
+      "uuid" : "518a8c02-72c2-4fc5-863b-4e20f3fbb300",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?",
+        "uuid" : "809b113f-ebb0-43e7-bf6a-444ef05b18c0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score",
+      "uuid" : "bdb4d839-0d9e-438f-864a-03e18381d132",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score",
+        "uuid" : "23103568-4016-431f-bfff-1f128729231e",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"809b113f-ebb0-43e7-bf6a-444ef05b18c0\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"809b113f-ebb0-43e7-bf6a-444ef05b18c0\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"809b113f-ebb0-43e7-bf6a-444ef05b18c0\").defined.matches();\n  \n  if(condition11 ){\n    value = \"2\";  \n}\n    if(condition12 ){\n    value = \"0\";  \n}\n    visibility = condition13 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?",
+                "conceptUuid" : "809b113f-ebb0-43e7-bf6a-444ef05b18c0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?",
+                "conceptUuid" : "809b113f-ebb0-43e7-bf6a-444ef05b18c0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?",
+                "conceptUuid" : "809b113f-ebb0-43e7-bf6a-444ef05b18c0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Total CBAC Risk Assessment Score",
+      "uuid" : "7d506111-a0bd-4f4f-a758-e28f8480b280",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Total CBAC Risk Assessment Score",
+        "uuid" : "a48c31af-5de5-4549-942b-fa69d6754a00",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "highNormal" : 4.0,
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let scoreAgeBased = encounter.getObservationValue('54b230c9-2b2c-40dc-b8f5-0d0ae642d260');\n  let scoreTobaccoConsumption = encounter.getObservationValue('39b6614f-32a4-440b-9edc-d630dc7a3291');\n  let scoreAlcoholConsumption = encounter.getObservationValue('b9b6f383-5cfb-4e5a-8562-1d6bd6b0c1c6');\n  let scoreWaistBased = encounter.getObservationValue('83e7ee91-abb5-47c8-ae87-06e0bcab20ba');\n  let scoreActivityBased = encounter.getObservationValue('f8c333a9-008a-4add-be2a-09c8f78a441c');\n  let score = encounter.getObservationValue('23103568-4016-431f-bfff-1f128729231e');\n  \n  console.log('scoreAgeBased------>',scoreAgeBased);\n  console.log('scoreTobaccoConsumption------>',scoreTobaccoConsumption);\n  console.log('scoreAlcoholConsumption------>',scoreAlcoholConsumption);\n  console.log('scoreWaistBased------>',scoreWaistBased);\n  console.log('scoreActivityBased------>',scoreActivityBased);\n  console.log('score------>',score);\n  \n  console.log('total---->',_.toNumber(scoreAgeBased) + _.toNumber(scoreTobaccoConsumption) + _.toNumber(scoreAlcoholConsumption) + _.toNumber(scoreWaistBased) + _.toNumber(scoreActivityBased) + _.toNumber(score))\n  \n  if ( scoreAgeBased && scoreTobaccoConsumption && scoreAlcoholConsumption && scoreWaistBased && scoreActivityBased && score ) {\n//  visibility = true;\n  value = _.toNumber(scoreAgeBased) + _.toNumber(scoreTobaccoConsumption) + _.toNumber(scoreAlcoholConsumption) + _.toNumber(scoreWaistBased) + _.toNumber(scoreActivityBased) + _.toNumber(score);\n    }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Sample question",
+      "uuid" : "3f4d0c43-f903-4ffb-aec8-d4dd0ef083f3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Sample question",
+        "uuid" : "3270742d-5c7e-454f-b4f2-dc3ebad488d9",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 12314.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "e2d3a7c0-a745-4606-9540-8cf8a718c347",
+    "name" : "Total CBAC risk assessment score",
+    "displayOrder" : 2.0,
+    "display" : "Total CBAC risk assessment score",
+    "formElements" : [ {
+      "name" : "Total CBAC Risk Assessment Score",
+      "uuid" : "ed9bd70b-49b6-4788-8606-52f2569e1a78",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Total CBAC Risk Assessment Score",
+        "uuid" : "a48c31af-5de5-4549-942b-fa69d6754a00",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "highNormal" : 4.0,
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let scoreAgeBased = encounter.getObservationValue('54b230c9-2b2c-40dc-b8f5-0d0ae642d260');\n  let scoreTobaccoConsumption = encounter.getObservationValue('39b6614f-32a4-440b-9edc-d630dc7a3291');\n  let scoreAlcoholConsumption = encounter.getObservationValue('b9b6f383-5cfb-4e5a-8562-1d6bd6b0c1c6');\n  let scoreWaistBased = encounter.getObservationValue('83e7ee91-abb5-47c8-ae87-06e0bcab20ba');\n  let scoreActivityBased = encounter.getObservationValue('f8c333a9-008a-4add-be2a-09c8f78a441c');\n  let score = encounter.getObservationValue('23103568-4016-431f-bfff-1f128729231e');\n  \n  if ( scoreAgeBased && scoreTobaccoConsumption && scoreAlcoholConsumption && scoreWaistBased && scoreActivityBased && score ) {\n  value = _.toNumber(scoreAgeBased) + _.toNumber(scoreTobaccoConsumption) + _.toNumber(scoreAlcoholConsumption) + _.toNumber(scoreWaistBased) + _.toNumber(scoreActivityBased) + _.toNumber(score);\n    }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "a8a23d49-2cec-42c4-b70d-2ff62d440a6a",
+    "name" : "Part B1 - Early Detection",
+    "displayOrder" : 3.0,
+    "display" : "Part B1 - Early Detection",
+    "formElements" : [ {
+      "name" : "Shortness of breath",
+      "uuid" : "9d82c4c6-70c0-4d30-b0d0-778dc72d688f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Shortness of breath",
+        "uuid" : "d6646f88-825f-40a8-9a07-aa687cc3c8ea",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Coughing more than 2 weeks",
+      "uuid" : "962f62c7-5217-46e0-9099-0aba6a332fca",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Coughing more than 2 weeks",
+        "uuid" : "6f9501e9-3b8b-4fdf-aba8-c1fdbc424885",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Blood in sputum",
+      "uuid" : "88a38f41-5b22-4e9e-a625-a2fd6c038370",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Blood in sputum",
+        "uuid" : "f252e603-8117-4445-adf0-82c5f5a234e8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Fever for > 2 weeks",
+      "uuid" : "e8c09066-e503-4448-8be4-dff1535d708c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Fever for > 2 weeks",
+        "uuid" : "98abe9a5-08e3-4b3b-bba4-7846d8ce98ea",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Loss of weight",
+      "uuid" : "b5b0bcce-4134-417b-806b-63e8d9c9b475",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Loss of weight",
+        "uuid" : "84cdf7aa-137a-41a6-9675-b441e05ef955",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Night sweats",
+      "uuid" : "9dbf7381-c39e-4a5f-a6cb-d966c1ce6b3a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Night sweats",
+        "uuid" : "05690593-5d77-42c7-a2f9-8e061def4c57",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Collect the cough sample and take it to the nearest TB Test centre for testing purpose",
+      "uuid" : "287cf0c4-1ae2-4c38-a155-10312108bedb",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Collect the cough sample and take it to the nearest TB Test centre for testing purpose",
+        "uuid" : "8d9a9c9b-1dd5-4188-9ad0-44b810e99b2d",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"d6646f88-825f-40a8-9a07-aa687cc3c8ea\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"6f9501e9-3b8b-4fdf-aba8-c1fdbc424885\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"f252e603-8117-4445-adf0-82c5f5a234e8\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"98abe9a5-08e3-4b3b-bba4-7846d8ce98ea\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"84cdf7aa-137a-41a6-9675-b441e05ef955\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"05690593-5d77-42c7-a2f9-8e061def4c57\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Shortness of breath",
+                "conceptUuid" : "d6646f88-825f-40a8-9a07-aa687cc3c8ea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Coughing more than 2 weeks",
+                "conceptUuid" : "6f9501e9-3b8b-4fdf-aba8-c1fdbc424885",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Blood in sputum",
+                "conceptUuid" : "f252e603-8117-4445-adf0-82c5f5a234e8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Fever for > 2 weeks",
+                "conceptUuid" : "98abe9a5-08e3-4b3b-bba4-7846d8ce98ea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Loss of weight",
+                "conceptUuid" : "84cdf7aa-137a-41a6-9675-b441e05ef955",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Night sweats",
+                "conceptUuid" : "05690593-5d77-42c7-a2f9-8e061def4c57",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Are you currently taking anti-TB drugs?",
+      "uuid" : "47f108bf-e9ee-4fc9-a126-f8fc76b49f86",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you currently taking anti-TB drugs?",
+        "uuid" : "c9655c19-eb1e-4aae-ad97-46a864cc5406",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Anyone in family currently suffering from TB?",
+      "uuid" : "f0cba67b-e45b-4b07-bd1f-6ad73a68558b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Anyone in family currently suffering from TB?",
+        "uuid" : "f28a8570-b3b7-4242-8771-7b7883e34f77",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Inform ANM and request her to check whether other family members are also effected with TB or not",
+      "uuid" : "b0e61723-78fa-4485-809d-c7e87fe0b4f7",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "No", "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Inform ANM and request her to check whether other family members are also effected with TB or not",
+        "uuid" : "864fea0f-8554-4153-a999-8f77c716ead1",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"c9655c19-eb1e-4aae-ad97-46a864cc5406\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"f28a8570-b3b7-4242-8771-7b7883e34f77\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you currently taking anti-TB drugs?",
+                "conceptUuid" : "c9655c19-eb1e-4aae-ad97-46a864cc5406",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Anyone in family currently suffering from TB?",
+                "conceptUuid" : "f28a8570-b3b7-4242-8771-7b7883e34f77",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "History of TB",
+      "uuid" : "282a2928-3efc-45cc-8337-93a754b4ef6f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "History of TB",
+        "uuid" : "337f1fd8-c470-4b33-bce4-ba139a675d90",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Collect the cough sample and take it to the nearest TB Test centre for testing purpose",
+      "uuid" : "332c839e-c379-4b4b-980b-5f5748ec032f",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Collect the cough sample and take it to the nearest TB Test centre for  testing purpose",
+        "uuid" : "a544a4d1-7cc2-4340-aab2-fb9d4c1bf980",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"337f1fd8-c470-4b33-bce4-ba139a675d90\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "History of TB",
+                "conceptUuid" : "337f1fd8-c470-4b33-bce4-ba139a675d90",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Recurrent ulceration on palm or sole",
+      "uuid" : "21ff2ab4-9eec-44a2-b81b-fc38f4fd94c6",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Recurrent ulceration on palm or sole",
+        "uuid" : "e4e531fa-41a6-4966-8b41-e9c5230476dc",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Recurrent tingling on palm(s) or sole(s)",
+      "uuid" : "881bd772-91a9-404e-8983-b72a7e7971ae",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Recurrent tingling on palm(s) or sole(s)",
+        "uuid" : "d35cc2e7-3518-4871-b92b-886317c06a12",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Cloudy or blurred vision",
+      "uuid" : "00afea13-4e17-4d72-ba23-1ce2781a23df",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Cloudy or blurred vision",
+        "uuid" : "5e662d13-582a-4d84-8251-c91dfd581691",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 15.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Difficulty in Reading",
+      "uuid" : "d7d62d06-a4f3-40c9-9e35-997492d27469",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Difficulty in Reading",
+        "uuid" : "07364154-b496-4048-a060-3e3d8807dc53",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 16.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Difficulty in breathing",
+      "uuid" : "5c611cda-4527-451b-946a-5295c30c3b6d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Difficulty in breathing",
+        "uuid" : "c84e60b7-926e-4e9a-997f-58c2a4097bf4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 17.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Pain in eyes lasting for more than a week",
+      "uuid" : "53db85b7-8425-4c80-9333-470d5c5f3bec",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Pain in eyes lasting for more than a week",
+        "uuid" : "ba78c453-49a9-40f1-b0fa-d28a534d9e8e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 18.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Redness in eyes lasting for more than a week",
+      "uuid" : "d6b1959f-1397-407c-acce-cd12cbd8b7ee",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Redness in eyes lasting for more than a week",
+        "uuid" : "cbf9c7e1-4aa1-4bdb-9d0e-257e979f947a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 19.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Difficulty in hearing",
+      "uuid" : "fe46c7a4-f635-496f-8d7d-c95821e821fe",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Difficulty in hearing",
+        "uuid" : "f2bd3fe9-fd65-4543-97d9-2c7c01106035",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 20.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "History of fits",
+      "uuid" : "88015a45-bd3b-4877-8347-85195515cc1b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "History of fits",
+        "uuid" : "a1221388-b37a-4af5-b5d2-728338853475",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 21.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Difficulty in opening mouths",
+      "uuid" : "d5f7e18d-95a0-4503-a786-1cf6317095a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Difficulty in opening mouth",
+        "uuid" : "674f472f-af39-4ea5-a557-563dcd748bb6",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 22.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Ulcer/patch/growth in mouth that has not healed in two weeks",
+      "uuid" : "ef2c01a3-e51d-4836-b89d-08d96fe11237",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Ulcert/patch/growth in mouth that has not healed in two weeks",
+        "uuid" : "838689f0-6baa-4e76-af7a-bb349dfb2c25",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.defined.matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Ulcers in mouth not healed in 2 weeks",
+      "uuid" : "d6f68f23-b8f4-4f5c-9159-c57dccecbc72",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Ulcers in mouth not healed in 2 weeks",
+        "uuid" : "61b8349b-918a-491a-9152-dfccde8f930d",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 24.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Growth in mouth not healed in 2 weeks",
+      "uuid" : "5ea84770-ee9c-46be-b2b6-4114f2522a7a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Growth in mouth not healed in 2 weeks",
+        "uuid" : "54ab0abf-71dc-4999-84c6-20c25a3acd62",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 25.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any white or red patch in mouth not healed in 2 weeks",
+      "uuid" : "8c1bb7ee-1a7c-4bfb-b753-e6e911a9cd7b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any white or red patch in mouth not healed in 2 weeks",
+        "uuid" : "a0bed647-1337-4e75-9b82-786f94fac912",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 26.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Pain while chewing",
+      "uuid" : "5e93a0f9-ed2c-4914-aab5-831af60057c9",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Pain while chewing",
+        "uuid" : "9ee46c0b-ac3d-4dfc-add6-45432291f3b0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 27.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any change in tone of your voice",
+      "uuid" : "7b8f6976-281d-4f14-a3c4-983c0c2ec241",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any change in tone of your voice",
+        "uuid" : "0ea82fb5-41ae-4e23-9658-760bee6af04f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 28.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any hypo pigmented patches or discolour lesions with loss of sensation",
+      "uuid" : "946b1057-7e20-4182-bef1-7203af49bd21",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any hypo pigmented patches or discolour lesions with loss of sensation",
+        "uuid" : "85cf51fe-97f6-4ff6-94cc-4c1f72ddbbf0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 29.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any white or red Patch in Mouth Not Healed in 2 weeks",
+      "uuid" : "b108ec16-a516-43cd-a0c1-89b9fece4e6c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any hyper pigmented patch or discoloration on skin with loss of sensation",
+        "uuid" : "7ac20524-b53c-4dea-a4a4-e92c28153fcd",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 30.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any thickened skin",
+      "uuid" : "a47dabaa-bbbf-4795-8d13-bd3230418e9d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any thickened skin",
+        "uuid" : "69b6981b-f921-48c2-95f6-045287ed9410",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 31.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any nodules on skin",
+      "uuid" : "adc99ceb-1e93-4bbf-baa8-8fa9eef18bf4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any nodules on skin",
+        "uuid" : "6898414d-5070-489e-b6ff-d81509f3c9df",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 32.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Any patch or discoloration on skin",
+      "uuid" : "d8801d15-4428-4c2c-aa7c-5c1cd79b66c8",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any patch or discoloration on skin",
+        "uuid" : "c4de3cd0-ba57-4f35-89d6-8d4fcd451a78",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 33.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Recurrent numbness on palm(s) or sole(s)",
+      "uuid" : "d53a5a77-885e-4d3e-991f-5bc45919c862",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Recurrent numbness on palm(s) or sole(s)",
+        "uuid" : "72ffd110-9821-4f4d-852f-62734b6230f8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 34.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Clawing of fingers in hand(s) or feet",
+      "uuid" : "e0254be6-8789-4c1f-8830-0f295d277685",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Clawing of fingers in hand(s) or feet",
+        "uuid" : "4b93c05e-a64d-4e43-9189-b1f481e4a13b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 35.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Tingling and numbness in hand / or feet",
+      "uuid" : "2e1ca66f-aeb8-402a-be73-3da7e8ab286f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tingling and numbness in hand / or feet",
+        "uuid" : "e7b76cbd-a995-4778-9a11-0a9cfcec9960",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 36.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Inability to close eyelid",
+      "uuid" : "a8e3d928-5a2c-4fec-bc16-f39c17cfe6a2",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Inability to close eyelid",
+        "uuid" : "440bc616-55af-4722-9d1e-414c026e198a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 37.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Difficulty in holding object with fingers",
+      "uuid" : "43f817f4-2639-43f3-800d-8dbff6af6ba0",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Difficulty in holding object with fingers",
+        "uuid" : "1e36f2ef-a144-4345-9d1c-cf4f290fd3cb",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 38.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Weakness in feet that causes difficulty in walking",
+      "uuid" : "f0704fe3-bae8-4871-b352-67a4d55e706f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Weakness in feet that causes difficulty in walking",
+        "uuid" : "20573ea5-13ec-4e3a-91a8-44320d78dd2e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 39.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Blood stained discharge from the nipple",
+      "uuid" : "0f4312bb-8099-486e-bb15-86875576e42d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Blood stained discharge from the nipple",
+        "uuid" : "a6eb318f-0450-474d-a0b5-5542746c0ee3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23030.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Change in shape and size of the breast",
+      "uuid" : "c3ead026-a007-40b6-9926-4140c72f23ed",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Change in shape and size of the breast",
+        "uuid" : "a5a6c8a8-7ac7-4eaf-8e36-a6d6ae8e7611",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23031.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Bleeding between periods",
+      "uuid" : "21be94fa-fc63-466f-b994-300973abf6ad",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bleeding between periods",
+        "uuid" : "b3815dea-3521-43c4-87ea-7aeb393e1693",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23032.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Bleeding after menopause",
+      "uuid" : "beab640a-1138-466e-a4c2-b3823b757522",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bleeding after menopause",
+        "uuid" : "b2ce3803-ad81-4868-a09a-fc7a99d8fb09",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23033.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Bleeding after intercourse",
+      "uuid" : "b706619b-a28e-4177-bba9-527071234f78",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bleeding after intercourse",
+        "uuid" : "47f89ba0-5524-403d-9c24-84eb31bfd05d",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23034.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Foul smelling vaginal discharge",
+      "uuid" : "e905b4b5-c3d1-4b3a-9ac1-f88446767237",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Foul smelling vaginal discharge",
+        "uuid" : "768e75f6-c3f0-4a67-aef3-a45682ec4d63",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23035.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Lump in breast",
+      "uuid" : "cf2d71ac-263e-4e27-8315-b8e706f89f92",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Lump in breast",
+        "uuid" : "f8d6d06a-4de1-43b8-872e-6010e70dc8b7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23036.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "77abeb28-4e05-47df-9a65-d428cc98d552",
+    "name" : "Part B2 - Women only",
+    "displayOrder" : 4.0,
+    "display" : "Part B2 - Women only",
+    "formElements" : [ {
+      "name" : "Lump in breast",
+      "uuid" : "00e11758-4113-4852-ad28-803ea5e037d5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Lump in breast",
+        "uuid" : "f8d6d06a-4de1-43b8-872e-6010e70dc8b7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Bleeding after menopause",
+      "uuid" : "6c91541d-63fb-47d3-a00c-39ff0d062b1b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bleeding after menopause",
+        "uuid" : "b2ce3803-ad81-4868-a09a-fc7a99d8fb09",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Blood stained discharge from the nipple",
+      "uuid" : "5534589a-fd22-496a-a94d-4827d67668ae",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Blood stained discharge from the nipple",
+        "uuid" : "a6eb318f-0450-474d-a0b5-5542746c0ee3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Bleeding after intercourse",
+      "uuid" : "2e09f475-4bcf-45ac-9673-6692ea3114f7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Bleeding after intercourse",
+        "uuid" : "47f89ba0-5524-403d-9c24-84eb31bfd05d",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const encounter = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.gender.equals(\"Female\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "declarativeRule" : [ {
+      "actions" : [ {
+        "actionType" : "showFormElementGroup"
+      }, { } ],
+      "conditions" : [ {
+        "compoundRule" : {
+          "rules" : [ {
+            "lhs" : {
+              "type" : "gender"
+            },
+            "rhs" : {
+              "type" : "value",
+              "value" : "Female"
+            },
+            "operator" : "equals"
+          } ],
+          "conjunction" : "and"
+        }
+      } ]
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "699b002f-c69a-476e-a12f-95580497b943",
+    "name" : "Part B3: Elderly Specific",
+    "displayOrder" : 5.0,
+    "display" : "Part B3: Elderly Specific",
+    "formElements" : [ {
+      "name" : "Feeling unsteady while standing or walking",
+      "uuid" : "8a4e3578-0d70-4eb5-9a50-f97f65388c24",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Feeling unsteady while standing or walking",
+        "uuid" : "81bce0d7-d924-4afd-8292-8875f51728fb",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Suffering from any physical disability that restrict movement",
+      "uuid" : "75291452-d832-4d41-8e88-594203787742",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suffering from any physical disability that restrict movement",
+        "uuid" : "5c514d68-ca92-4ce2-b0e5-7cefec27fc2b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Needing help from others to perform every day activities such as eating, getting dressed, grooming, bathing, walking, or using the toilets",
+      "uuid" : "73bf804e-2551-4e1f-875a-0fdee4986237",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Needing help from others to perform every day activities such as eating, getting dressed, grooming, bathing, walking, or using the toilets",
+        "uuid" : "7649e977-2ff8-4fb8-8dfc-d2e1af71b1af",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Forgetting names of your near ones or your own home address",
+      "uuid" : "ebbcc13d-7ece-443f-89ba-bb7502fd0a13",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Forgetting names of your near ones or your own home address",
+        "uuid" : "8142a01e-fbf9-49f7-b68e-587c84512b37",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Send the patient to MOIC of nearest health center for treatment",
+      "uuid" : "830e8efd-4db5-4cfa-b973-985d54659405",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Send the patient to MOIC of nearest health center for treatment",
+        "uuid" : "fa8062cf-90cb-4704-9930-27120bd08c61",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"81bce0d7-d924-4afd-8292-8875f51728fb\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"5c514d68-ca92-4ce2-b0e5-7cefec27fc2b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"7649e977-2ff8-4fb8-8dfc-d2e1af71b1af\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"8142a01e-fbf9-49f7-b68e-587c84512b37\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Feeling unsteady while standing or walking",
+                "conceptUuid" : "81bce0d7-d924-4afd-8292-8875f51728fb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Suffering from any physical disability that restrict movement",
+                "conceptUuid" : "5c514d68-ca92-4ce2-b0e5-7cefec27fc2b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Needing help from others to perform every day activities such as eating, getting dressed, grooming, bathing, walking, or using the toilets",
+                "conceptUuid" : "7649e977-2ff8-4fb8-8dfc-d2e1af71b1af",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Forgetting names of your near ones or your own home address",
+                "conceptUuid" : "8142a01e-fbf9-49f7-b68e-587c84512b37",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const encounter = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.ageInYears.greaterThanOrEqualTo(60).matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "declarativeRule" : [ {
+      "actions" : [ {
+        "actionType" : "showFormElementGroup"
+      }, { } ],
+      "conditions" : [ {
+        "compoundRule" : {
+          "rules" : [ {
+            "lhs" : {
+              "type" : "ageInYears"
+            },
+            "rhs" : {
+              "type" : "value",
+              "value" : 60
+            },
+            "operator" : "greaterThanOrEqualTo"
+          } ]
+        }
+      } ]
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "71ec755a-07d4-4440-ad21-0b00319e0a62",
+    "name" : "Risk Factors for COPD",
+    "displayOrder" : 6.0,
+    "display" : "Risk Factors for COPD",
+    "formElements" : [ {
+      "name" : "Type of fuel used for cooking",
+      "uuid" : "f3f73d5f-304d-40cc-a599-963593a6f57c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of fuel used for cooking",
+        "uuid" : "f2e8d1a3-6d0e-40db-8124-29ca460dfa18",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cow dung cake",
+          "uuid" : "9d9e1026-a90a-43a4-b7b2-9de840b5748a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Crop residue",
+          "uuid" : "3c194fe7-72d9-4d9e-ae06-7429aea852e1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Coal",
+          "uuid" : "65e599c4-cd1d-4f5f-a3dc-c7d2a72864dc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Kerosene",
+          "uuid" : "2a561521-3d71-434b-addf-79c318a44ecb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Firewood",
+          "uuid" : "3d676e74-c150-43d8-a00f-1344cfd133f8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "LPG",
+          "uuid" : "701fbfa6-6f3e-4756-9c8c-858c062bdf57",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Occupational exposure",
+      "uuid" : "cc5cd09e-9a61-45f4-8a99-dd4a5354ad06",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Occupational exposure (voided~116765)",
+        "uuid" : "1a3c41a7-5528-446d-93af-8a61a7eebb6c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Working in industries with smoke, gas and dust exposure such as brick klins and glass factories etc (voided~116764)",
+          "uuid" : "823b38ba-419e-405d-ad7e-f0bf185f01d8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true,
+          "voided" : true
+        }, {
+          "name" : "Burning of garbage (voided~116763)",
+          "uuid" : "fbb90a09-f982-4dbf-b4f2-af04d166feb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true,
+          "voided" : true
+        }, {
+          "name" : "Crop residue burning (voided~116762)",
+          "uuid" : "e930dcb1-0c50-4aa7-9a07-84c66f0a5d54",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true,
+          "voided" : true
+        } ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "288d2a94-44d2-4fb9-a577-dd31a1174f6b",
+    "name" : "Occupational Exposure",
+    "displayOrder" : 7.0,
+    "display" : "Occupational Exposure",
+    "formElements" : [ {
+      "name" : "Crop residue burning",
+      "uuid" : "2e7ddf73-1f78-44bf-a00a-a52b1046dd46",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Crop residue burning",
+        "uuid" : "28b11831-0912-447e-90e1-7b360bb1c13c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Burning of garbage - leaves",
+      "uuid" : "84c1ed2e-3a46-426b-b144-ec45bb434a94",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Burning of garbage - leaves",
+        "uuid" : "034e6641-1bb5-4a25-af0d-3adebd013c42",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Working in industries with smoke, gas and dust exposure such as brick kilns & glass factory etc",
+      "uuid" : "d7b0962a-2a0f-4301-9c6c-cd497de95c86",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Working in industries with smoke, gas and dust exposure such as brick kilns & glass factory etc",
+        "uuid" : "72b18a42-a0b8-4f22-84f5-c06ce485ee8e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "6a4c2468-1f20-4030-ab0d-03df156e8ccd",
+    "name" : "PHQ 2",
+    "displayOrder" : 8.0,
+    "display" : "PHQ 2",
+    "formElements" : [ {
+      "name" : "Little interest or pleasure in doing things",
+      "uuid" : "8c10a84c-86d0-4e4c-98d7-63f55708b695",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Little interest or pleasure in doing things",
+        "uuid" : "46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Nearly every day",
+          "uuid" : "b20d1807-0bd5-4f82-ba6e-a75da7acc2dc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Several days",
+          "uuid" : "ce135ad0-e950-469b-9be2-33e8cf8d597d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not at all",
+          "uuid" : "016652c0-06ee-4db0-a9f1-5653e3f18716",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "More than half the days",
+          "uuid" : "14ae4fab-4d08-4d03-be29-f1a3dabd77a2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score (Interest based)",
+      "uuid" : "0cefe64a-56d3-4729-9137-bab0d2ee583b",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Interest based)",
+        "uuid" : "cd049678-c49e-4d1a-8aff-69daa7b9b071",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb\").containsAnswerConceptName(\"016652c0-06ee-4db0-a9f1-5653e3f18716\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb\").containsAnswerConceptName(\"ce135ad0-e950-469b-9be2-33e8cf8d597d\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb\").containsAnswerConceptName(\"14ae4fab-4d08-4d03-be29-f1a3dabd77a2\").matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb\").containsAnswerConceptName(\"b20d1807-0bd5-4f82-ba6e-a75da7acc2dc\").matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    if(condition13 ){\n    value = \"2\";  \n}\n    if(condition14 ){\n    value = \"3\";  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Little interest or pleasure in doing things",
+                "conceptUuid" : "46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Not at all" ],
+                "answerConceptUuids" : [ "016652c0-06ee-4db0-a9f1-5653e3f18716" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Little interest or pleasure in doing things",
+                "conceptUuid" : "46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Several days" ],
+                "answerConceptUuids" : [ "ce135ad0-e950-469b-9be2-33e8cf8d597d" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Little interest or pleasure in doing things",
+                "conceptUuid" : "46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "More than half the days" ],
+                "answerConceptUuids" : [ "14ae4fab-4d08-4d03-be29-f1a3dabd77a2" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "3"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Little interest or pleasure in doing things",
+                "conceptUuid" : "46aa4c1c-6fb5-460f-a1e5-a428c72bd6fb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Nearly every day" ],
+                "answerConceptUuids" : [ "b20d1807-0bd5-4f82-ba6e-a75da7acc2dc" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Feeling down, depressed or hopeless",
+      "uuid" : "6cb458cb-7e88-48a8-821d-dbfc37970d53",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Feeling down, depressed or hopeless",
+        "uuid" : "2188bc60-2e72-40f6-a87b-35e1f4a7fe55",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Several days",
+          "uuid" : "ce135ad0-e950-469b-9be2-33e8cf8d597d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not at all",
+          "uuid" : "016652c0-06ee-4db0-a9f1-5653e3f18716",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "More than half the days",
+          "uuid" : "14ae4fab-4d08-4d03-be29-f1a3dabd77a2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Nearly every day",
+          "uuid" : "b20d1807-0bd5-4f82-ba6e-a75da7acc2dc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Score (Mental state)",
+      "uuid" : "5a05959a-805b-4ec9-9c6c-4f441dbeb38d",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Score (Mental state)",
+        "uuid" : "38aaf5bd-c725-4610-a6a6-11dbf6ea09fb",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"2188bc60-2e72-40f6-a87b-35e1f4a7fe55\").containsAnswerConceptName(\"016652c0-06ee-4db0-a9f1-5653e3f18716\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"2188bc60-2e72-40f6-a87b-35e1f4a7fe55\").containsAnswerConceptName(\"ce135ad0-e950-469b-9be2-33e8cf8d597d\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"2188bc60-2e72-40f6-a87b-35e1f4a7fe55\").containsAnswerConceptName(\"14ae4fab-4d08-4d03-be29-f1a3dabd77a2\").matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"2188bc60-2e72-40f6-a87b-35e1f4a7fe55\").containsAnswerConceptName(\"b20d1807-0bd5-4f82-ba6e-a75da7acc2dc\").matches();\n  \n  if(condition11 ){\n    value = \"0\";  \n}\n    if(condition12 ){\n    value = \"1\";  \n}\n    if(condition13 ){\n    value = \"2\";  \n}\n    if(condition14 ){\n    value = \"3\";  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "value" : "0"
+          },
+          "actionType" : "value"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Feeling down, depressed or hopeless",
+                "conceptUuid" : "2188bc60-2e72-40f6-a87b-35e1f4a7fe55",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Not at all" ],
+                "answerConceptUuids" : [ "016652c0-06ee-4db0-a9f1-5653e3f18716" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "1"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Feeling down, depressed or hopeless",
+                "conceptUuid" : "2188bc60-2e72-40f6-a87b-35e1f4a7fe55",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Several days" ],
+                "answerConceptUuids" : [ "ce135ad0-e950-469b-9be2-33e8cf8d597d" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "2"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Feeling down, depressed or hopeless",
+                "conceptUuid" : "2188bc60-2e72-40f6-a87b-35e1f4a7fe55",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "More than half the days" ],
+                "answerConceptUuids" : [ "14ae4fab-4d08-4d03-be29-f1a3dabd77a2" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "value" : "3"
+          },
+          "actionType" : "value"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Feeling down, depressed or hopeless",
+                "conceptUuid" : "2188bc60-2e72-40f6-a87b-35e1f4a7fe55",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Nearly every day" ],
+                "answerConceptUuids" : [ "b20d1807-0bd5-4f82-ba6e-a75da7acc2dc" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "c0e7c5bc-9c9b-4b8a-ab0c-441c03a3237d",
+    "name" : "Total score",
+    "displayOrder" : 9.0,
+    "display" : "Total score",
+    "formElements" : [ {
+      "name" : "Total score",
+      "uuid" : "92bd8bbb-d25b-4554-a3b9-7b8dd92d19a0",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Total score",
+        "uuid" : "57be8a1b-4d6c-44d7-8d24-4a2c4e55f378",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let scoreInternetBased = encounter.getObservationValue('cd049678-c49e-4d1a-8aff-69daa7b9b071');\n  let scoreMentalState = encounter.getObservationValue('38aaf5bd-c725-4610-a6a6-11dbf6ea09fb');\n  \n  if ( scoreInternetBased && scoreMentalState ) {\n  value = _.toNumber(scoreInternetBased) + _.toNumber(scoreMentalState) ;\n    }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Refer the person to MOIC for treatment",
+      "uuid" : "7090feea-bcdc-40d5-a068-fa7657a755fd",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Refer the person to MOIC for treatment",
+        "uuid" : "58701cc1-d2a2-4a89-8d5c-05d2e39da244",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  let scoreInternetBased = encounter.getObservationValue('cd049678-c49e-4d1a-8aff-69daa7b9b071');\n  let scoreMentalState = encounter.getObservationValue('38aaf5bd-c725-4610-a6a6-11dbf6ea09fb');\n  \n  if ( scoreInternetBased && scoreMentalState && (_.toNumber(scoreInternetBased) + _.toNumber(scoreMentalState)) >= 3 ) {\n      visibility = true;\n    }\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "b84c8869-6102-4f81-b350-6592615a5817",
+    "name" : "Advices",
+    "displayOrder" : 10.0,
+    "display" : "Advices",
+    "formElements" : [ {
+      "name" : "Person at risk and needs to be prioritized for attending the weekly NCD day",
+      "uuid" : "430b3e3f-d771-458e-8857-703a89778cb0",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "dummy",
+        "uuid" : "ece2a389-4021-4eae-b758-f68fb0fef552",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"a48c31af-5de5-4549-942b-fa69d6754a00\").greaterThan(4).matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Total CBAC Risk Assessment Score",
+                "conceptUuid" : "a48c31af-5de5-4549-942b-fa69d6754a00",
+                "conceptDataType" : "Numeric"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 4
+              },
+              "operator" : "greaterThan"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Refer the patient immediately to the nearest facility where a Medical Officer is available",
+      "uuid" : "04d5b9f5-dca2-4c4c-aacb-41310d1e0410",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counselling point refer patient",
+        "uuid" : "38278495-72ef-4095-8fb6-b9fdef0458be",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"f28a8570-b3b7-4242-8771-7b7883e34f77\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"c9655c19-eb1e-4aae-ad97-46a864cc5406\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"337f1fd8-c470-4b33-bce4-ba139a675d90\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition31 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"6f9501e9-3b8b-4fdf-aba8-c1fdbc424885\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition41 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"f252e603-8117-4445-adf0-82c5f5a234e8\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition51 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"98abe9a5-08e3-4b3b-bba4-7846d8ce98ea\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition61 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"84cdf7aa-137a-41a6-9675-b441e05ef955\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition71 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"05690593-5d77-42c7-a2f9-8e061def4c57\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition81 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"e4e531fa-41a6-4966-8b41-e9c5230476dc\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition91 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"d35cc2e7-3518-4871-b92b-886317c06a12\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition101 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"5e662d13-582a-4d84-8251-c91dfd581691\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition111 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"c84e60b7-926e-4e9a-997f-58c2a4097bf4\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition121 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"ba78c453-49a9-40f1-b0fa-d28a534d9e8e\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition131 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"cbf9c7e1-4aa1-4bdb-9d0e-257e979f947a\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition141 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"f2bd3fe9-fd65-4543-97d9-2c7c01106035\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition151 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"d6646f88-825f-40a8-9a07-aa687cc3c8ea\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition161 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"a1221388-b37a-4af5-b5d2-728338853475\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition171 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"674f472f-af39-4ea5-a557-563dcd748bb6\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition181 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"838689f0-6baa-4e76-af7a-bb349dfb2c25\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition191 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"0ea82fb5-41ae-4e23-9658-760bee6af04f\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition201 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"9ee46c0b-ac3d-4dfc-add6-45432291f3b0\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition211 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"7ac20524-b53c-4dea-a4a4-e92c28153fcd\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition221 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"69b6981b-f921-48c2-95f6-045287ed9410\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition231 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"6898414d-5070-489e-b6ff-d81509f3c9df\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition241 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"72ffd110-9821-4f4d-852f-62734b6230f8\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition251 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"4b93c05e-a64d-4e43-9189-b1f481e4a13b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition261 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"440bc616-55af-4722-9d1e-414c026e198a\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition271 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"1e36f2ef-a144-4345-9d1c-cf4f290fd3cb\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition281 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"20573ea5-13ec-4e3a-91a8-44320d78dd2e\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition291 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"f8d6d06a-4de1-43b8-872e-6010e70dc8b7\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition301 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"a6eb318f-0450-474d-a0b5-5542746c0ee3\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition311 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"a5a6c8a8-7ac7-4eaf-8e36-a6d6ae8e7611\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition321 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"b3815dea-3521-43c4-87ea-7aeb393e1693\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition331 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"b2ce3803-ad81-4868-a09a-fc7a99d8fb09\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition341 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"47f89ba0-5524-403d-9c24-84eb31bfd05d\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition351 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"768e75f6-c3f0-4a67-aef3-a45682ec4d63\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 || condition21 || condition31 || condition41 || condition51 || condition61 || condition71 || condition81 || condition91 || condition101 || condition111 || condition121 || condition131 || condition141 || condition151 || condition161 || condition171 || condition181 || condition191 || condition201 || condition211 || condition221 || condition231 || condition241 || condition251 || condition261 || condition271 || condition281 || condition291 || condition301 || condition311 || condition321 || condition331 || condition341 || condition351 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Anyone in family currently suffering from TB?",
+                "conceptUuid" : "f28a8570-b3b7-4242-8771-7b7883e34f77",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you currently taking anti-TB drugs?",
+                "conceptUuid" : "c9655c19-eb1e-4aae-ad97-46a864cc5406",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "History of TB",
+                "conceptUuid" : "337f1fd8-c470-4b33-bce4-ba139a675d90",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Coughing more than 2 weeks",
+                "conceptUuid" : "6f9501e9-3b8b-4fdf-aba8-c1fdbc424885",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Blood in sputum",
+                "conceptUuid" : "f252e603-8117-4445-adf0-82c5f5a234e8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Fever for > 2 weeks",
+                "conceptUuid" : "98abe9a5-08e3-4b3b-bba4-7846d8ce98ea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Loss of weight",
+                "conceptUuid" : "84cdf7aa-137a-41a6-9675-b441e05ef955",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Night sweats",
+                "conceptUuid" : "05690593-5d77-42c7-a2f9-8e061def4c57",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Recurrent ulceration on palm or sole",
+                "conceptUuid" : "e4e531fa-41a6-4966-8b41-e9c5230476dc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Recurrent tingling on palm(s) or sole(s)",
+                "conceptUuid" : "d35cc2e7-3518-4871-b92b-886317c06a12",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Cloudy or blurred vision",
+                "conceptUuid" : "5e662d13-582a-4d84-8251-c91dfd581691",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Difficulty in breathing",
+                "conceptUuid" : "c84e60b7-926e-4e9a-997f-58c2a4097bf4",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Pain in eyes lasting for more than a week",
+                "conceptUuid" : "ba78c453-49a9-40f1-b0fa-d28a534d9e8e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Redness in eyes lasting for more than a week",
+                "conceptUuid" : "cbf9c7e1-4aa1-4bdb-9d0e-257e979f947a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Difficulty in hearing",
+                "conceptUuid" : "f2bd3fe9-fd65-4543-97d9-2c7c01106035",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Shortness of breath",
+                "conceptUuid" : "d6646f88-825f-40a8-9a07-aa687cc3c8ea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "History of fits",
+                "conceptUuid" : "a1221388-b37a-4af5-b5d2-728338853475",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Difficulty in opening mouth",
+                "conceptUuid" : "674f472f-af39-4ea5-a557-563dcd748bb6",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Ulcert/patch/growth in mouth that has not healed in two weeks",
+                "conceptUuid" : "838689f0-6baa-4e76-af7a-bb349dfb2c25",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Any change in tone of your voice",
+                "conceptUuid" : "0ea82fb5-41ae-4e23-9658-760bee6af04f",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Pain while chewing",
+                "conceptUuid" : "9ee46c0b-ac3d-4dfc-add6-45432291f3b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Any hyper pigmented patch or discoloration on skin with loss of sensation",
+                "conceptUuid" : "7ac20524-b53c-4dea-a4a4-e92c28153fcd",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Any thickened skin",
+                "conceptUuid" : "69b6981b-f921-48c2-95f6-045287ed9410",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Any nodules on skin",
+                "conceptUuid" : "6898414d-5070-489e-b6ff-d81509f3c9df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Recurrent numbness on palm(s) or sole(s)",
+                "conceptUuid" : "72ffd110-9821-4f4d-852f-62734b6230f8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Clawing of fingers in hand(s) or feet",
+                "conceptUuid" : "4b93c05e-a64d-4e43-9189-b1f481e4a13b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Inability to close eyelid",
+                "conceptUuid" : "440bc616-55af-4722-9d1e-414c026e198a",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Difficulty in holding object with fingers",
+                "conceptUuid" : "1e36f2ef-a144-4345-9d1c-cf4f290fd3cb",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Weakness in feet that causes difficulty in walking",
+                "conceptUuid" : "20573ea5-13ec-4e3a-91a8-44320d78dd2e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Lump in breast",
+                "conceptUuid" : "f8d6d06a-4de1-43b8-872e-6010e70dc8b7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Blood stained discharge from the nipple",
+                "conceptUuid" : "a6eb318f-0450-474d-a0b5-5542746c0ee3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Change in shape and size of the breast",
+                "conceptUuid" : "a5a6c8a8-7ac7-4eaf-8e36-a6d6ae8e7611",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Bleeding between periods",
+                "conceptUuid" : "b3815dea-3521-43c4-87ea-7aeb393e1693",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Bleeding after menopause",
+                "conceptUuid" : "b2ce3803-ad81-4868-a09a-fc7a99d8fb09",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Bleeding after intercourse",
+                "conceptUuid" : "47f89ba0-5524-403d-9c24-84eb31bfd05d",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Foul smelling vaginal discharge",
+                "conceptUuid" : "768e75f6-c3f0-4a67-aef3-a45682ec4d63",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Collect Sputum sample and transport to nearest TB testing center",
+      "uuid" : "c874a0be-76ea-4b2f-931f-191a67d98b03",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counselling point collect sputum",
+        "uuid" : "b8371428-2b5f-438c-a849-15bc8265554f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"6f9501e9-3b8b-4fdf-aba8-c1fdbc424885\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"f252e603-8117-4445-adf0-82c5f5a234e8\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"98abe9a5-08e3-4b3b-bba4-7846d8ce98ea\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"84cdf7aa-137a-41a6-9675-b441e05ef955\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"05690593-5d77-42c7-a2f9-8e061def4c57\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"337f1fd8-c470-4b33-bce4-ba139a675d90\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Coughing more than 2 weeks",
+                "conceptUuid" : "6f9501e9-3b8b-4fdf-aba8-c1fdbc424885",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Blood in sputum",
+                "conceptUuid" : "f252e603-8117-4445-adf0-82c5f5a234e8",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Fever for > 2 weeks",
+                "conceptUuid" : "98abe9a5-08e3-4b3b-bba4-7846d8ce98ea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Loss of weight",
+                "conceptUuid" : "84cdf7aa-137a-41a6-9675-b441e05ef955",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Night sweats",
+                "conceptUuid" : "05690593-5d77-42c7-a2f9-8e061def4c57",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "History of TB",
+                "conceptUuid" : "337f1fd8-c470-4b33-bce4-ba139a675d90",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Tracing of all family members to be done by ANM/MPW",
+      "uuid" : "45f7ffa6-214c-44bf-8038-8f7a5f19636b",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counselling pint tracing of all familly",
+        "uuid" : "c4d5f417-b091-4b7d-974b-0f5cde13da5f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const encounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({encounter, formElement}).when.valueInEncounter(\"c9655c19-eb1e-4aae-ad97-46a864cc5406\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEncounter(\"f28a8570-b3b7-4242-8771-7b7883e34f77\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you currently taking anti-TB drugs?",
+                "conceptUuid" : "c9655c19-eb1e-4aae-ad97-46a864cc5406",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Anyone in family currently suffering from TB?",
+                "conceptUuid" : "f28a8570-b3b7-4242-8771-7b7883e34f77",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

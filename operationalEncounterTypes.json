@@ -1,0 +1,123 @@
+{
+  "operationalEncounterTypes" : [ {
+    "uuid" : "4eea5697-4c4f-49e9-9a71-b2a38e513c39",
+    "encounterType" : {
+      "uuid" : "21b4874a-0ecd-48dc-8149-2ba547bb690c",
+      "voided" : false
+    },
+    "name" : "CBAC",
+    "voided" : false
+  }, {
+    "uuid" : "53f3b821-9956-4fcc-b4a3-e4d59644cc20",
+    "encounterType" : {
+      "uuid" : "082c6714-e26f-414c-abd1-3af99b93fe0d",
+      "voided" : false
+    },
+    "name" : "HBNC",
+    "voided" : false
+  }, {
+    "uuid" : "9963bf44-5f52-4902-9e25-ddcc296d4c28",
+    "encounterType" : {
+      "uuid" : "12f8f00b-b91f-493f-9433-4456a660c805",
+      "voided" : false
+    },
+    "name" : "ANC",
+    "voided" : false
+  }, {
+    "uuid" : "65c3d71f-5503-4e69-8a96-2a558a842972",
+    "encounterType" : {
+      "uuid" : "ec706f65-e1b8-49e7-a7d2-c0606d3655f3",
+      "voided" : false
+    },
+    "name" : "Child death review",
+    "voided" : false
+  }, {
+    "uuid" : "f34d6b05-9977-4064-9951-3803d73cdbff",
+    "encounterType" : {
+      "uuid" : "a58918b3-4917-4642-9735-5cff3734d6fd",
+      "voided" : false
+    },
+    "name" : "Maternal death review",
+    "voided" : false
+  }, {
+    "uuid" : "0c1eb282-71de-495a-af4a-00e198fe212a",
+    "encounterType" : {
+      "uuid" : "b49b8304-f959-4fa5-8801-060946558ae9",
+      "voided" : false
+    },
+    "name" : "Abortion",
+    "voided" : false
+  }, {
+    "uuid" : "61bf47d5-82ed-4137-9c75-4bb5df9cede3",
+    "encounterType" : {
+      "uuid" : "22bb14a9-e141-4713-a232-4ef923f7f81a",
+      "voided" : false
+    },
+    "name" : "FP followup",
+    "voided" : false
+  }, {
+    "uuid" : "3cb3df76-1506-4f79-8eeb-f21c351afd77",
+    "encounterType" : {
+      "uuid" : "06eefc0b-89a3-465e-9822-bbbbfd476de3",
+      "voided" : false
+    },
+    "name" : "Delivery",
+    "voided" : false
+  }, {
+    "uuid" : "a2534afd-6e09-477c-b492-0312bb5e3ede",
+    "encounterType" : {
+      "uuid" : "527bcc8e-27bb-4c07-a385-fef3293b0049",
+      "voided" : false
+    },
+    "name" : "HBYC",
+    "voided" : false
+  }, {
+    "uuid" : "b3745548-2bfe-4225-8f6b-eee28cc76bbc",
+    "encounterType" : {
+      "uuid" : "01ed20d3-6eaf-43e3-bfbc-ea8a9660ee4f",
+      "voided" : false
+    },
+    "name" : "PNC",
+    "voided" : false
+  }, {
+    "uuid" : "b6a3a4b1-3e6e-4516-9273-44a5283b0161",
+    "encounterType" : {
+      "uuid" : "5604d360-8390-4d58-94bb-0b61940345d4",
+      "voided" : false
+    },
+    "name" : "Malaria follow up",
+    "voided" : false
+  }, {
+    "uuid" : "3ba54914-40f5-477b-a411-36ecb3ee23bd",
+    "encounterType" : {
+      "uuid" : "fba98115-356c-47f2-9ab6-c57049a79f09",
+      "voided" : false
+    },
+    "name" : "Kala Azar follow up",
+    "voided" : false
+  }, {
+    "uuid" : "e4e05423-a4e0-44d0-9634-fd9b287af034",
+    "encounterType" : {
+      "uuid" : "2dbc344c-39c2-43bd-b574-2d0c8ac0d45d",
+      "voided" : false
+    },
+    "name" : "AES JE follow up",
+    "voided" : false
+  }, {
+    "uuid" : "cd176278-f878-4003-aa09-0eb402bd07bf",
+    "encounterType" : {
+      "uuid" : "9c7db43d-dcdd-4ec8-a1fb-c2290560c784",
+      "voided" : false
+    },
+    "name" : "Leprosy follow up",
+    "voided" : false
+  }, {
+    "uuid" : "9e4eca43-2347-44f4-beb3-7b233b8ff255",
+    "encounterType" : {
+      "uuid" : "5d8a40d5-5c23-4e41-9e88-44081a842760",
+      "voided" : false
+    },
+    "name" : "Tuberculosis follow up",
+    "voided" : false
+  } ]
+}

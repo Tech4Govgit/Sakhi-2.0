@@ -1,0 +1,139 @@
+[ {
+  "name" : "Maternal death review",
+  "uuid" : "a58918b3-4917-4642-9735-5cff3734d6fd",
+  "entityEligibilityCheckRule" : "",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Delivery",
+  "uuid" : "06eefc0b-89a3-465e-9822-bbbbfd476de3",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  let visibility = true;\n  const individual = params.entity;\n  const enrolments = individual.enrolments;\n  const pregnancyEnrolment = _.find(enrolments, enl => enl.program.name === 'Pregnancy' && enl.programExitDateTime == null);\n  \n  if (!_.isEmpty(pregnancyEnrolment)) {\n  const delivery = pregnancyEnrolment.hasEncounterOfType('Delivery');  \n  const abortion = pregnancyEnrolment.hasEncounterOfType('Abortion');\n  \n  if(abortion || delivery){\n      visibility = false;\n      }\n  }\n      \n  return visibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "CBAC",
+  "uuid" : "21b4874a-0ecd-48dc-8149-2ba547bb690c",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  return false;\n  //individual.getAgeInYears() >= 30;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "AES JE follow up",
+  "uuid" : "2dbc344c-39c2-43bd-b574-2d0c8ac0d45d",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const fiterered = individual.enrolments.filter(enl => enl.program.name == 'Acute Encephalitis')\n  .map(enl => enl.findLatestObservationInEntireEnrolment('5235bafa-ab83-4d8d-9065-a8268332d53e').getReadableValue())\n\n   if (fiterered[0] == 'Expired') {\n   eligibility = false;\n   }\n  \n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "ANC",
+  "uuid" : "12f8f00b-b91f-493f-9433-4456a660c805",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  let visibility = true;\n  const individual = params.entity;\n  const enrolments = individual.enrolments;\n  const pregnancyEnrolment = _.find(enrolments, enl => enl.program.name === 'Pregnancy' && enl.programExitDateTime == null);\n  \n  if (!_.isEmpty(pregnancyEnrolment)) {\n  const delivery = pregnancyEnrolment.hasEncounterOfType('Delivery');  \n  const abortion = pregnancyEnrolment.hasEncounterOfType('Abortion');\n  \n  if(abortion || delivery){\n      visibility = false;\n      }\n  }\n      \n  return visibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "PNC",
+  "uuid" : "01ed20d3-6eaf-43e3-bfbc-ea8a9660ee4f",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual}).when.gender.defined.matches();\n  \n  eligibility = !(condition11 );\n  \n  return eligibility;\n};",
+  "active" : true,
+  "entityEligibilityCheckDeclarativeRule" : [ {
+    "actions" : [ {
+      "actionType" : "hideEncounterType"
+    } ],
+    "conditions" : [ {
+      "compoundRule" : {
+        "rules" : [ {
+          "lhs" : {
+            "type" : "gender"
+          },
+          "rhs" : { },
+          "operator" : "defined"
+        } ]
+      }
+    } ]
+  } ],
+  "immutable" : false
+}, {
+  "name" : "HBNC",
+  "uuid" : "082c6714-e26f-414c-abd1-3af99b93fe0d",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual}).when.gender.defined.matches();\n  \n  eligibility = !(condition11 );\n  \n  return eligibility;\n};",
+  "active" : true,
+  "entityEligibilityCheckDeclarativeRule" : [ {
+    "actions" : [ {
+      "actionType" : "hideEncounterType"
+    } ],
+    "conditions" : [ {
+      "compoundRule" : {
+        "rules" : [ {
+          "lhs" : {
+            "type" : "gender"
+          },
+          "rhs" : { },
+          "operator" : "defined"
+        } ]
+      }
+    } ]
+  } ],
+  "immutable" : false
+}, {
+  "name" : "HBYC",
+  "uuid" : "527bcc8e-27bb-4c07-a385-fef3293b0049",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual}).when.gender.defined.matches();\n  \n  eligibility = !(condition11 );\n  \n  return eligibility;\n};",
+  "active" : true,
+  "entityEligibilityCheckDeclarativeRule" : [ {
+    "actions" : [ {
+      "actionType" : "hideEncounterType"
+    } ],
+    "conditions" : [ {
+      "compoundRule" : {
+        "rules" : [ {
+          "lhs" : {
+            "type" : "gender"
+          },
+          "rhs" : { },
+          "operator" : "defined"
+        } ]
+      }
+    } ]
+  } ],
+  "immutable" : false
+}, {
+  "name" : "Abortion",
+  "uuid" : "b49b8304-f959-4fa5-8801-060946558ae9",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  let visibility = true;\n  const individual = params.entity;\n  const enrolments = individual.enrolments;\n  const pregnancyEnrolment = _.find(enrolments, enl => enl.program.name === 'Pregnancy' && enl.programExitDateTime == null);\n  \n  if (!_.isEmpty(pregnancyEnrolment)) {\n  const delivery = pregnancyEnrolment.hasEncounterOfType('Delivery');  \n  const abortion = pregnancyEnrolment.hasEncounterOfType('Abortion');\n  \n  if(abortion || delivery){\n      visibility = false;\n      }\n  }\n      \n  return visibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Leprosy follow up",
+  "uuid" : "9c7db43d-dcdd-4ec8-a1fb-c2290560c784",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const fiterered = individual.enrolments.filter(enl => enl.program.name == 'Leprosy')\n  .map(enl => enl.findLatestObservationInEntireEnrolment('eb2e069a-cefd-44b3-a5df-4237d6d7a6e7').getReadableValue())\n\n   if (fiterered[0] == 'Death') {\n   eligibility = false;\n   }\n  \n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Kala Azar follow up",
+  "uuid" : "fba98115-356c-47f2-9ab6-c57049a79f09",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const fiterered = individual.enrolments.filter(enl => enl.program.name == 'Kala Azar')\n  .map(enl => enl.findLatestObservationInEntireEnrolment('Kala azar case status').getReadableValue())\n\n   if (fiterered[0] == 'Death') {\n   eligibility = false;\n   }\n  \n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Malaria follow up",
+  "uuid" : "5604d360-8390-4d58-94bb-0b61940345d4",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const fiterered = individual.enrolments.filter(enl => enl.program.name == 'Malaria')\n  .map(enl => enl.findLatestObservationInEntireEnrolment('d925f21c-2d17-4457-8bd8-b08928895f38').getReadableValue())\n\n   if (fiterered[0] == 'Treatment completed') {\n   eligibility = false;\n   }\n  \n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Tuberculosis follow up",
+  "uuid" : "5d8a40d5-5c23-4e41-9e88-44081a842760",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  const fiterered = individual.enrolments.filter(enl => enl.program.name == 'Tuberculosis')\n  .map(enl => enl.findLatestObservationInEntireEnrolment('e4af0511-023f-48af-934e-a919a98bcfea').getReadableValue())\n\n   if (fiterered[0] == 'Expired' || fiterered[0] == 'Cured' || fiterered[0] == 'Treatment completed' ) {\n   eligibility = false;\n   }\n  \n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "Child death review",
+  "uuid" : "ec706f65-e1b8-49e7-a7d2-c0606d3655f3",
+  "entityEligibilityCheckRule" : "//SAMPLE RULE EXAMPLE\n'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  \n  const individualsStatus = individual.getObservationReadableValue('34b441a2-d19b-415e-a6aa-2ed612af7f0d');\n  \n  if (individualsStatus && individualsStatus[0] === 'Dead') return false;\n  else return true;\n};",
+  "active" : true,
+  "immutable" : false
+}, {
+  "name" : "FP followup",
+  "uuid" : "22bb14a9-e141-4713-a232-4ef923f7f81a",
+  "entityEligibilityCheckRule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  let eligibility = true;\n  \n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual}).when.gender.equals(\"Female\").and.when.ageInYears.greaterThanOrEqualTo(18).matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({individual}).when.gender.equals(\"Male\").and.when.ageInYears.greaterThanOrEqualTo(21).matches();\n  \n  const programEnrolmentList = individual.enrolments.filter(enl => enl.program.name == 'Family planning' && enl.programExitDateTime == null);\n  \n  eligibility = condition11 || condition21 ;\n  \n\n  if(programEnrolmentList.length > 0){\n      let programEnrolment = programEnrolmentList[0];\n      let lastencounter = _(programEnrolment.nonVoidedEncounters()).sortBy([\"isActive\", \"encounterDateTime\"]).filter(enc => enc.encounterType.name === 'FP followup').last();\n      \n     if(lastencounter){\n         let isSelfVerified = lastencounter.getObservationReadableValue('13e0f1e1-fc63-410c-8f08-8f49241d89c8');\n         //console.log('======================>',isSelfVerified);\n         if(isSelfVerified == 'Yes'){\n                eligibility = false;\n         }\n     }\n  };\n\n  return eligibility;\n};",
+  "active" : true,
+  "immutable" : false
+} ]

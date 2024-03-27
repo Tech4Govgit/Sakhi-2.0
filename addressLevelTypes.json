@@ -1,0 +1,38 @@
+[ {
+  "uuid" : "8f78cd5d-33c7-4192-a538-5fa66ea2e2e2",
+  "id" : 604,
+  "name" : "State",
+  "level" : 5.0
+}, {
+  "uuid" : "2e96e572-cb90-4008-9910-aba2d21d9155",
+  "id" : 605,
+  "name" : "District",
+  "level" : 4.0,
+  "parent" : {
+    "uuid" : "8f78cd5d-33c7-4192-a538-5fa66ea2e2e2"
+  }
+}, {
+  "uuid" : "6f1b12dd-54fa-4d78-ade1-dcc64effd376",
+  "id" : 606,
+  "name" : "Block",
+  "level" : 3.0,
+  "parent" : {
+    "uuid" : "2e96e572-cb90-4008-9910-aba2d21d9155"
+  }
+}, {
+  "uuid" : "c17ff984-58a9-4e55-9fcd-d689e8ccdadf",
+  "id" : 607,
+  "name" : "Panchayat",
+  "level" : 2.0,
+  "parent" : {
+    "uuid" : "6f1b12dd-54fa-4d78-ade1-dcc64effd376"
+  }
+}, {
+  "uuid" : "52d75158-075d-400f-a1ce-1baa01094362",
+  "id" : 890,
+  "name" : "Village",
+  "level" : 1.0,
+  "parent" : {
+    "uuid" : "c17ff984-58a9-4e55-9fcd-d689e8ccdadf"
+  }
+} ]

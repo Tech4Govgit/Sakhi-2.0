@@ -1,0 +1,277 @@
+{
+  "name" : "Abortion Encounter Cancellation",
+  "uuid" : "2e33c53d-a440-4ebc-acd9-3ed98940b073",
+  "formType" : "ProgramEncounterCancellation",
+  "formElementGroups" : [ {
+    "uuid" : "c48b2fdc-d514-47a1-8d8c-77aa8d3cfa91",
+    "name" : "Cancel details",
+    "displayOrder" : 1.0,
+    "display" : "Cancel details",
+    "formElements" : [ {
+      "name" : "Reason for cancel",
+      "uuid" : "31c7efc7-f9c3-4f28-9e16-8b6cf766d2d7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Reason for cancel",
+        "uuid" : "5b67d92c-4d5d-41e0-92ae-18581912411e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Permanent migration",
+          "uuid" : "2c56976e-4292-403a-bc79-5ea2a14a7c17",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Other reason for cancel",
+      "uuid" : "5659f790-e459-46ef-aee0-a7c7654e92cb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other reason for cancel",
+        "uuid" : "359d8f7d-fd14-47f3-8fd9-ffa9436bde3d",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"5b67d92c-4d5d-41e0-92ae-18581912411e\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "cancelEncounter",
+                "conceptName" : "Reason for cancel",
+                "conceptUuid" : "5b67d92c-4d5d-41e0-92ae-18581912411e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false,
+    "voided" : true
+  }, {
+    "uuid" : "433d831d-76cd-4e79-a038-df01010e8045",
+    "name" : "Cancel details",
+    "displayOrder" : 2.0,
+    "display" : "Cancel details",
+    "formElements" : [ {
+      "name" : "Mothers condition",
+      "uuid" : "de554864-80cb-4129-ae09-2fdfdd234450",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mothers condition",
+        "uuid" : "83ce64af-544f-4e9c-814b-118f209e52d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Dead",
+          "uuid" : "c35d9184-7310-425f-bb1e-954a85d0ef3c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "f49c4582-7a17-46b2-9a58-45f2fcd27184",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Place of death",
+      "uuid" : "add024fd-087c-471b-9b82-443c987bb8f3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of death",
+        "uuid" : "d89190f6-3ee8-4308-b626-26763714dcac",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Home",
+          "uuid" : "fcecfcd6-22e9-46fe-84b6-961f0399c883",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "In-transit",
+          "uuid" : "af0963e7-09f4-4194-b683-b9b602f62e51",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Hospital",
+          "uuid" : "6dea27c7-20d5-416d-a5f2-d3d2e6b52fea",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Probable cause of Death",
+      "uuid" : "2da6d3ef-8ba8-478e-9d6a-3919389e446f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Probable cause of Death",
+        "uuid" : "229ac219-598d-4af1-a99f-b9f6a608bca3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Anaemia",
+          "uuid" : "be03c87b-3d27-4f68-8106-548eedbb1f99",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "High fever",
+          "uuid" : "9e7cb366-717c-418f-aaed-31891ef46ed7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Haemorrhage",
+          "uuid" : "e74ae14d-aa9d-425b-81e3-f4468fcaba8f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Eclampsia",
+          "uuid" : "eaa60d6f-7508-4b1d-a5d3-816ecfe18737",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"83ce64af-544f-4e9c-814b-118f209e52d5\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Other cause of death",
+      "uuid" : "3c681fba-5027-495b-a6e9-f3d0b0a81bef",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other cause of death",
+        "uuid" : "b6a969c2-b76c-4739-b1cc-2bfc6f3c96ec",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"229ac219-598d-4af1-a99f-b9f6a608bca3\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "cancelEncounter",
+                "conceptName" : "Probable cause of Death",
+                "conceptUuid" : "229ac219-598d-4af1-a99f-b9f6a608bca3",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "//SAMPLE RULE EXAMPLE\n  \"use strict\";\n({params, imports}) => {\n    const programEncounter = params.entity;\n    const decisions = params.decisions;\n    \n    let dateOfDeath = programEncounter.findExitObservation('ee91d2b0-c93c-4d31-8c48-58738df229ff');\n    \n    if (dateOfDeath) {\n    \n        decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Dead\"});\n        decisions.registrationDecisions.push({name : \"Date of death\", value: dateOfDeath.getReadableValue() });\n    }\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

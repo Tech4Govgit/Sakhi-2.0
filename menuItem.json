@@ -1,0 +1,10 @@
+[ {
+  "uuid" : "5f6e8df5-9882-43f3-b276-fdb0a141c1e1",
+  "id" : 1,
+  "displayKey" : "myDawaPrapatra",
+  "type" : "Link",
+  "icon" : "note-text-outline",
+  "group" : "Functionality",
+  "linkFunction" : "'use strict';\n  ({params}) => {\n  const userUUID = params.user.uuid;\n//  console.log(\"params.user----->\",params.user);\n  const userName = params.user.name;\n  const appUserName =params.user.username;\n//   console.log(\"userNameInDb.user----->\",appUserName);\n  const fromDate = params.moment().format(\"YYYY-MM\") + \"-01\";\n  const toDate = params.moment().format(\"YYYY-MM-DD\");\n  const token = params.token;\n   const link = `https://app.avniproject.org/extension/final_dawa_prapatra.html?appUserName=${appUserName}&userName=${userName}&fromDate=${fromDate}&toDate=${toDate}&AUTH-TOKEN=${token}`;\n   // console.log(\"link::::::\", link);\n   return link;\n  \n};",
+  "voided" : false
+} ]

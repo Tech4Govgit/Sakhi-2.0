@@ -1,0 +1,19 @@
+{
+  "operationalSubjectTypes" : [ {
+    "uuid" : "48b94e75-05a0-46ec-b760-90cfaa1f3ff7",
+    "subjectType" : {
+      "uuid" : "8ce8db7f-419e-485f-99ba-df7a0372f3de",
+      "voided" : false
+    },
+    "name" : "Individual",
+    "voided" : false
+  }, {
+    "uuid" : "142b2cb6-7c33-4e2e-b10f-cc96bec9718b",
+    "subjectType" : {
+      "uuid" : "a577a36e-f87a-44e9-b721-1015e889bea4",
+      "voided" : false
+    },
+    "name" : "Household",
+    "voided" : false
+  } ]
+}

@@ -1,0 +1,137 @@
+{
+  "name" : "AES JE follow up Encounter",
+  "uuid" : "a51d601a-467f-483e-9875-1d6e485d2647",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "f8bb412f-016b-47fa-a908-e9bdf0e4d94c",
+    "name" : "Follow-up Detail",
+    "displayOrder" : 1.0,
+    "display" : "Follow-up Detail",
+    "formElements" : [ {
+      "name" : "Follow up date",
+      "uuid" : "e1cccb0c-20f7-4f6c-8eeb-6e9732877f60",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Follow up date",
+        "uuid" : "a05f6b5f-214c-4033-9148-82105b0fffca",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "AES / JE case status",
+      "uuid" : "fc13ea7a-38c6-4d7e-aa32-2c8bc10c023e",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Suspected" ]
+      } ],
+      "concept" : {
+        "name" : "AES / JE case status",
+        "uuid" : "5235bafa-ab83-4d8d-9065-a8268332d53e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Expired",
+          "uuid" : "b7c5575c-96df-4c86-a8e2-d4750d2c7707",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Completed",
+          "uuid" : "28a8a895-9a95-4760-9bec-0c8b0a5c8b3f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other",
+      "uuid" : "81ac125b-907e-4113-a542-1aca620c466b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other reason for aes status",
+        "uuid" : "155a3030-5e40-4577-ad87-f4f683ddcf3b",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"5235bafa-ab83-4d8d-9065-a8268332d53e\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "AES / JE case status",
+                "conceptUuid" : "5235bafa-ab83-4d8d-9065-a8268332d53e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

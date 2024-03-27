@@ -1,0 +1,23 @@
+[ {
+  "uuid" : "ac3216e1-682c-40f0-9e82-42e1c694aa0f",
+  "groupSubjectTypeUUID" : "a577a36e-f87a-44e9-b721-1015e889bea4",
+  "memberSubjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de",
+  "role" : "Head of household",
+  "subjectMemberName" : "Individual",
+  "groupRoleUUID" : "ac3216e1-682c-40f0-9e82-42e1c694aa0f",
+  "maximumNumberOfMembers" : 1,
+  "minimumNumberOfMembers" : 1,
+  "primary" : false,
+  "voided" : false
+}, {
+  "uuid" : "eebc3f0d-12dc-4a85-ae9b-5e4bb1a5582d",
+  "groupSubjectTypeUUID" : "a577a36e-f87a-44e9-b721-1015e889bea4",
+  "memberSubjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de",
+  "role" : "Member",
+  "subjectMemberName" : "Individual",
+  "groupRoleUUID" : "eebc3f0d-12dc-4a85-ae9b-5e4bb1a5582d",
+  "maximumNumberOfMembers" : 100,
+  "minimumNumberOfMembers" : 1,
+  "primary" : false,
+  "voided" : false
+} ]

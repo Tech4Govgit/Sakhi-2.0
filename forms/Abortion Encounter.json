@@ -1,0 +1,407 @@
+{
+  "name" : "Abortion Encounter",
+  "uuid" : "ceae38fe-9799-4a54-a967-c96a0e8b7e3e",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "0b4739dc-9007-4ffa-8b38-b68def8f9d97",
+    "name" : "Abortion Details",
+    "displayOrder" : 1.0,
+    "display" : "Abortion Details",
+    "formElements" : [ {
+      "name" : "Is abortion done?",
+      "uuid" : "78672831-6213-4519-9686-1eeae30e6b65",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is abortion done",
+        "uuid" : "096dac2b-4535-45f4-a84e-2bec03fe6570",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "The name and other particulars of the women whose pregnancy has been terminated under MTP Act are confidential and should not be disclosed except to a person authorized by existing law",
+      "uuid" : "4363377d-ac6f-46ca-9c5b-595a50830c71",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "The name and other particulars of the women whose pregnancy has been terminated under MTP Act are confidential and should not be disclosed except to a person authorized by existing law",
+        "uuid" : "9a81dfc8-9aa1-41c1-84d4-ba9001bf43e4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"096dac2b-4535-45f4-a84e-2bec03fe6570\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Is abortion done",
+                "conceptUuid" : "096dac2b-4535-45f4-a84e-2bec03fe6570",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Whoever contravenes the provision of the act is punishable under the act",
+      "uuid" : "f41ad93e-0222-46e4-9f4c-c23d482cf898",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Whoever contravenes the provision of the act is punishable under the act",
+        "uuid" : "d2dbc3c6-e861-427d-be2a-6e2f3867b21a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"096dac2b-4535-45f4-a84e-2bec03fe6570\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Is abortion done",
+                "conceptUuid" : "096dac2b-4535-45f4-a84e-2bec03fe6570",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Tentative date",
+      "uuid" : "44a069de-422e-4851-8c44-f9b09608f879",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative Date",
+        "uuid" : "869f62f3-07df-4e2a-9700-845a62432e15",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"096dac2b-4535-45f4-a84e-2bec03fe6570\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"869f62f3-07df-4e2a-9700-845a62432e15\").lessThan(moment().startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the past\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "ASHA to guide pregnant woman to consult doctor at nearest government health facilities",
+      "uuid" : "c7863785-1c90-46ec-8fc4-4969b0fb3357",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counselling point 2",
+        "uuid" : "bb2da09a-9e6c-476e-87e9-73f17593218d",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"096dac2b-4535-45f4-a84e-2bec03fe6570\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Is abortion done",
+                "conceptUuid" : "096dac2b-4535-45f4-a84e-2bec03fe6570",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Abortion type",
+      "uuid" : "f5f14214-caff-4aa8-a634-9533ccf64822",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Abortion type",
+        "uuid" : "77d0694b-448c-4951-802c-89dd997c8927",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Spontaneous",
+          "uuid" : "3d3d342d-d281-4007-a5d5-564c32e6f5e7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Induced",
+          "uuid" : "1a87d8b7-fcdb-425e-8e4f-a6a985c8c7d4",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"096dac2b-4535-45f4-a84e-2bec03fe6570\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Is abortion done",
+                "conceptUuid" : "096dac2b-4535-45f4-a84e-2bec03fe6570",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Place of abortion",
+      "uuid" : "463319fe-e53b-4815-993b-6eeb008f0117",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of abortion",
+        "uuid" : "d17783da-8d71-4ef2-8955-d8cd27533e3e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Govt. Hospital",
+          "uuid" : "3dcd1e7b-82f1-47ed-84fa-50fec030c68c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Pvt. Hospital",
+          "uuid" : "377428b2-e9a3-4202-8e34-edf198503c9f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"77d0694b-448c-4951-802c-89dd997c8927\").containsAnswerConceptName(\"1a87d8b7-fcdb-425e-8e4f-a6a985c8c7d4\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Abortion type",
+                "conceptUuid" : "77d0694b-448c-4951-802c-89dd997c8927",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Induced" ],
+                "answerConceptUuids" : [ "1a87d8b7-fcdb-425e-8e4f-a6a985c8c7d4" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of abortion",
+      "uuid" : "b88f55cb-95fa-4a46-900f-861f4c3c5083",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of abortion",
+        "uuid" : "4847f937-0faa-4444-af6c-6348269840a5",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"77d0694b-448c-4951-802c-89dd997c8927\").containsAnswerConceptName(\"1a87d8b7-fcdb-425e-8e4f-a6a985c8c7d4\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"4847f937-0faa-4444-af6c-6348269840a5\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Date of Discharge",
+      "uuid" : "2722fbb8-21e8-4451-9918-d9cb1c66dab5",
+      "keyValues" : [ {
+        "key" : "datePickerMode",
+        "value" : "calendar"
+      } ],
+      "concept" : {
+        "name" : "Date of Discharge (Abortion)",
+        "uuid" : "af078519-51a2-4da1-811e-b029d0b1e584",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Do you want to adopt any family planning method",
+      "uuid" : "c3bade86-7803-4254-a29f-d3d5a164957e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you want to adopt any family planning method",
+        "uuid" : "c99147c6-ca97-465b-8743-87c27ecad066",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Enrol the pregnant woman to family planning program",
+      "uuid" : "3c7ea6f3-8eff-498a-ba80-2bd9a57f0d10",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counselling point 3",
+        "uuid" : "37180a21-daa6-40b2-8607-010891d61317",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

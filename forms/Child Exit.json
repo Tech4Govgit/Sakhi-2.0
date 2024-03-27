@@ -1,0 +1,131 @@
+{
+  "name" : "Child Exit",
+  "uuid" : "9744a765-2def-4768-9e89-b99be0769a28",
+  "formType" : "ProgramExit",
+  "formElementGroups" : [ {
+    "uuid" : "0c5b6b8a-70ca-4df5-b267-6887989df97e",
+    "name" : "Cancel details",
+    "displayOrder" : 1.0,
+    "display" : "Cancel details",
+    "formElements" : [ {
+      "name" : "Reason for exit",
+      "uuid" : "9b05257a-9955-421a-840d-fa083c25c1cd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Reason for exit",
+        "uuid" : "3b296852-e4bb-432c-b965-cab5d68608ed",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Individual migrated",
+          "uuid" : "f4931cb9-07c6-45f5-a88a-379050970de1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "b8b7450d-6372-44ae-9348-ff8fb120a396",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other reason for exit",
+        "uuid" : "580faead-7ae6-4e09-a72a-f247a68a1e05",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInExit(\"3b296852-e4bb-432c-b965-cab5d68608ed\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "exit",
+                "conceptName" : "Reason for exit",
+                "conceptUuid" : "3b296852-e4bb-432c-b965-cab5d68608ed",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "67fdfff0-830d-4436-bf62-7c5fc3c14238",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInExit(\"3b296852-e4bb-432c-b965-cab5d68608ed\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "exit",
+                "conceptName" : "Reason for exit",
+                "conceptUuid" : "3b296852-e4bb-432c-b965-cab5d68608ed",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "//SAMPLE RULE EXAMPLE\n  \"use strict\";\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const decisions = params.decisions;\n    \n    let dateOfDeath = programEnrolment.findExitObservation('ee91d2b0-c93c-4d31-8c48-58738df229ff');\n\n    if (dateOfDeath) {\n    \n        decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Dead\"});\n        decisions.registrationDecisions.push({name : \"Date of death\", value: dateOfDeath.getReadableValue() });\n    }\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

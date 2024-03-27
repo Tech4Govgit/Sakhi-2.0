@@ -1,0 +1,7 @@
+{
+  "name" : "Kala Azar follow up Encounter Cancellation",
+  "uuid" : "15e2260c-408f-42ca-9a99-147ac0edde97",
+  "formType" : "ProgramEncounterCancellation",
+  "formElementGroups" : [ ],
+  "decisionConcepts" : [ ]
+}

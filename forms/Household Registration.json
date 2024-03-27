@@ -1,0 +1,990 @@
+{
+  "name" : "Household Registration",
+  "uuid" : "38f5a162-7959-456a-8cdb-50fc058f7abe",
+  "formType" : "IndividualProfile",
+  "formElementGroups" : [ {
+    "uuid" : "e1fabc1e-22c0-4007-aaa0-d91e17d88920",
+    "name" : "Family Details",
+    "displayOrder" : 1.0,
+    "display" : "Family Details",
+    "formElements" : [ {
+      "name" : "House number",
+      "uuid" : "cc5eff41-3c0d-40d4-b709-bb8719956074",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "House number",
+        "uuid" : "7ac35705-ecbc-4846-b8df-9e723c1b1afa",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Ward number",
+      "uuid" : "f059dee7-abea-483f-8753-2b4a7b418bd5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Ward number",
+        "uuid" : "5235b8e5-a2f6-4594-9c78-58c9a630fa46",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Ward name",
+      "uuid" : "bb0d4798-0711-4c6a-8a79-4876e95dec5f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Ward name",
+        "uuid" : "c8151543-86f4-42bd-bf4f-f3597a1becff",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Mohalla name",
+      "uuid" : "208193dc-11e3-421e-ad85-f7400ea059df",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Mohalla name",
+        "uuid" : "0c2a5b82-122d-4ef2-ab65-e0fdce1f8600",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Poverty line",
+      "uuid" : "a6efacc6-8086-4cd7-951b-431cc8e314a2",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Poverty line",
+        "uuid" : "b21a2e7b-e067-430a-b4d6-ce4be7c4c7ba",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "BPL",
+          "uuid" : "fdfbcded-1f09-4707-9f05-726a99bfa914",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "APL",
+          "uuid" : "1daa6a3c-c2c9-490d-96eb-23761e362930",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Don't know",
+          "uuid" : "ecd723a3-e1ce-4c53-8b97-880bea5c31a6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false,
+    "voided" : true
+  }, {
+    "uuid" : "c389f2c2-2a41-4620-bbd5-1c3eda27c2f6",
+    "name" : "Other Details",
+    "displayOrder" : 2.0,
+    "display" : "Other Details",
+    "formElements" : [ {
+      "name" : "Address 1",
+      "uuid" : "bd58d1a3-5ece-498f-9bd2-8a5a5d3ed048",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Address 1",
+        "uuid" : "f6ec1252-dd84-4cd0-937e-a0611a101f62",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Address 2",
+      "uuid" : "cfeb6a33-03b9-4d2e-8d87-2499232e7792",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Address 2",
+        "uuid" : "5d666349-0f77-4e7f-9f8e-728beb138e8c",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "272ec7d1-e505-48a2-ac3c-7240674a323b",
+    "name" : "Household Details",
+    "displayOrder" : 3.0,
+    "display" : "Household Details",
+    "formElements" : [ {
+      "name" : "Type of house",
+      "uuid" : "67989da4-208a-4af9-95a2-31a8cba37026",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "None" ]
+      } ],
+      "concept" : {
+        "name" : "Type of house",
+        "uuid" : "35aee32d-eca4-413a-9d28-faac35f8f7cc",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Pucca",
+          "uuid" : "4b4a4c42-8140-4111-99d7-5755e5b13ed0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Concrete",
+          "uuid" : "b679074a-60c9-486b-8b9a-4a2a794d174a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Kuccha",
+          "uuid" : "4e3b97ae-562f-45b4-8046-5c8354679bcc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other type of house",
+      "uuid" : "0512afd8-2a77-4a51-91ff-efa919b6f4ab",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of house",
+        "uuid" : "f23eea6c-acaa-45b6-b156-2a6c0e9d675d",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"35aee32d-eca4-413a-9d28-faac35f8f7cc\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Type of house",
+                "conceptUuid" : "35aee32d-eca4-413a-9d28-faac35f8f7cc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Seasonal in migrant?",
+      "uuid" : "37efd4dc-95ce-4647-9c5a-95f12c8a38cd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Seasonal In migrant",
+        "uuid" : "52aebab0-6f49-4c52-b771-a3c755d3f986",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "House ownership",
+      "uuid" : "d0cf69db-7318-4dfd-9855-62348cfdcd8a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "House ownership",
+        "uuid" : "3363a904-fa55-4072-963d-21b0bcb80e13",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Owned",
+          "uuid" : "565e8c1c-1b10-43b4-9509-8cb3a52724dd",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Rented",
+          "uuid" : "7866cbaf-d1ea-47a9-a15a-ff374925980b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Does your family have an AB PMJAY card?",
+      "uuid" : "c30d1228-918d-4808-a187-f404edca962b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Does your family have an AB PMJAY card?",
+        "uuid" : "1ef0a54c-37cd-42eb-8e8e-4e4b837af94c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "AB PMJAY card number",
+      "uuid" : "65b566b2-8bf2-4e9f-a001-d1103df638e5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "AB PMJAY card number",
+        "uuid" : "c636d156-5f6c-420d-8e05-e405265d1c03",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"1ef0a54c-37cd-42eb-8e8e-4e4b837af94c\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Does your family have an AB PMJAY card?",
+                "conceptUuid" : "1ef0a54c-37cd-42eb-8e8e-4e4b837af94c",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[0-9A-Z]{10}$",
+        "descriptionKey" : "Enter a valid 10 digit alpha numeric code"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Type of residential area",
+      "uuid" : "cf50de75-343f-4296-93ba-00096c73793a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of residential area",
+        "uuid" : "c02c6523-cbc2-4913-bdcd-f7c270abd9fa",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Rural",
+          "uuid" : "7d88b389-f00f-40fd-90c1-746822a6711e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Tribal",
+          "uuid" : "3ac587f4-6a04-46b2-ada1-e0da0c755183",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Urban",
+          "uuid" : "00566b68-8245-4138-be5b-aceb3319795e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Other type of residential area",
+      "uuid" : "460aad45-6da0-45c0-86c8-b6ca67b31bdb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of residential area",
+        "uuid" : "dcd068ef-8813-4671-8d91-e267f11fc419",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"c02c6523-cbc2-4913-bdcd-f7c270abd9fa\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Type of residential area",
+                "conceptUuid" : "c02c6523-cbc2-4913-bdcd-f7c270abd9fa",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "7eca7a87-b0f7-4a7b-9641-5458be86d79c",
+    "name" : "Household amenities",
+    "displayOrder" : 4.0,
+    "display" : "Household amenities",
+    "formElements" : [ {
+      "name" : "Separate kitchen",
+      "uuid" : "b6743d80-cfc1-48d3-ae2c-88defddccec0",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Separate kitchen",
+        "uuid" : "e43264c4-46ec-4fcf-8e4a-5894a7e8eeb0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Type of fuel used for cooking",
+      "uuid" : "289382fc-9cf8-498a-b475-581e4f1c246f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of fuel used for cooking",
+        "uuid" : "f2e8d1a3-6d0e-40db-8124-29ca460dfa18",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cow dung cake",
+          "uuid" : "9d9e1026-a90a-43a4-b7b2-9de840b5748a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Crop residue",
+          "uuid" : "3c194fe7-72d9-4d9e-ae06-7429aea852e1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Coal",
+          "uuid" : "65e599c4-cd1d-4f5f-a3dc-c7d2a72864dc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Kerosene",
+          "uuid" : "2a561521-3d71-434b-addf-79c318a44ecb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Firewood",
+          "uuid" : "3d676e74-c150-43d8-a00f-1344cfd133f8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "LPG",
+          "uuid" : "701fbfa6-6f3e-4756-9c8c-858c062bdf57",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other type of fuel used for cooking",
+      "uuid" : "8389f6aa-71b2-4f3c-bec0-3287d737e770",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of fuel used for cooking",
+        "uuid" : "d77344f3-63f6-42a3-8266-1daec403f8c6",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"f2e8d1a3-6d0e-40db-8124-29ca460dfa18\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Type of fuel used for cooking",
+                "conceptUuid" : "f2e8d1a3-6d0e-40db-8124-29ca460dfa18",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Source of drinking water",
+      "uuid" : "67208f6f-b517-42fe-8318-4d88c3269c39",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Source of drinking water",
+        "uuid" : "11f87092-2180-4f76-9a16-8d4a5e88251e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Pond",
+          "uuid" : "9eee12f6-7556-4051-ab03-f432c2d3c28b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "River",
+          "uuid" : "f1446dbc-550b-4ac6-abd4-be6385664a44",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Hand pump inside house",
+          "uuid" : "3013d441-0fd3-4714-a937-69d203ac22ae",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Hand pump outside house",
+          "uuid" : "a94427ef-4b8a-4f40-91a4-7f4822341949",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Tank",
+          "uuid" : "9ed879e1-0d47-44db-b255-d9391cdac265",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Well",
+          "uuid" : "33a5a987-452f-44df-9dfd-f6a421edf920",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Tap water",
+          "uuid" : "53a542e0-45df-4ccf-b9ad-16f098b33fd4",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other source of water",
+      "uuid" : "5f2dea0b-924c-488a-b9d0-9296b79e17cd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other source of water",
+        "uuid" : "6f928407-b11b-4b82-a019-27bd7810924b",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"11f87092-2180-4f76-9a16-8d4a5e88251e\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Primary source of water",
+                "conceptUuid" : "11f87092-2180-4f76-9a16-8d4a5e88251e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Arrangement of electricity",
+      "uuid" : "4032a7f7-18f7-4f41-b636-b0f7346f0ed0",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Arrangement of electricity",
+        "uuid" : "71ffddae-9408-42b2-86e1-b2523d4533ad",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Solar power",
+          "uuid" : "7e8b0dac-c2ed-459d-af0f-eece35490e8b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Generator",
+          "uuid" : "5a173d1a-001a-44a7-b2d3-739b2e3b3d67",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Electricity supply",
+          "uuid" : "329ba641-6713-4623-9ed8-81ad37099f14",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Kerosene Lamp",
+          "uuid" : "407947dd-f50c-4d27-9433-ae88d3eca724",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other type of electricity",
+      "uuid" : "02a84542-8083-4647-b114-c90ede2b202d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of electricity",
+        "uuid" : "9e846bbb-366a-45ea-8fb4-7feafd4e4561",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"71ffddae-9408-42b2-86e1-b2523d4533ad\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Availability of electricity",
+                "conceptUuid" : "71ffddae-9408-42b2-86e1-b2523d4533ad",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Vehicle type available",
+      "uuid" : "6750243c-e239-4372-ab00-c0ef27b56138",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Vehicle type available",
+        "uuid" : "e39489ef-c556-415e-b8d0-00aa9deefec2",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Motorbike",
+          "uuid" : "d19594ed-1ed6-4a70-90f4-fd784052aaf9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Tractor",
+          "uuid" : "aa5834a4-39f4-4c06-9ba0-a804f89aa661",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "unique" : true,
+          "active" : true
+        }, {
+          "name" : "Car",
+          "uuid" : "d95594ad-2167-411c-aa56-4216f7a7bb76",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "MultiSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other vehicle",
+      "uuid" : "eb1590eb-5acc-45c5-8ecb-66de8b2386b9",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other vehicle",
+        "uuid" : "4f0e6cd6-c420-4dc1-8469-76b2feabc6d5",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"e39489ef-c556-415e-b8d0-00aa9deefec2\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Vehicle type available",
+                "conceptUuid" : "e39489ef-c556-415e-b8d0-00aa9deefec2",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Type of toilet",
+      "uuid" : "8a9d7324-43aa-436e-8e84-9022cf50c1b5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of toilet",
+        "uuid" : "88ab2690-47c5-4f0c-8aeb-16a0464222df",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Pit toilet with running water supply",
+          "uuid" : "2fc226fd-973c-41bb-8930-38b83c47848d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Flush toilet without water",
+          "uuid" : "e061324b-f81b-4a8f-8354-0879535ec5ad",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Flush toilet with running water",
+          "uuid" : "8933a114-769d-418f-b3bd-b667d2c9484c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Pit toilet without water supply",
+          "uuid" : "d35f93fa-0787-4684-aec0-4268b266bf3b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Other type of toilet",
+      "uuid" : "9704bd7a-0a63-4da2-8ea4-4b38da1db914",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of toilet",
+        "uuid" : "1263ad60-0c00-4cbc-90f1-b752eae47340",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const individual = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({individual, formElement}).when.valueInRegistration(\"88ab2690-47c5-4f0c-8aeb-16a0464222df\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "registration",
+                "conceptName" : "Availability of toilet",
+                "conceptUuid" : "88ab2690-47c5-4f0c-8aeb-16a0464222df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

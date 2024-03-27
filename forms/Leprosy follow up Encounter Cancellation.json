@@ -1,0 +1,7 @@
+{
+  "name" : "Leprosy follow up Encounter Cancellation",
+  "uuid" : "e213dbc7-c954-4296-b88f-5af4ca93c851",
+  "formType" : "ProgramEncounterCancellation",
+  "formElementGroups" : [ ],
+  "decisionConcepts" : [ ]
+}

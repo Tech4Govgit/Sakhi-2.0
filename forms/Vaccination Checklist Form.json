@@ -1,0 +1,67 @@
+{
+  "name" : "Vaccination Checklist Form",
+  "uuid" : "90e93d21-50b1-40d1-b70d-c4bc7de0e7c0",
+  "formType" : "ChecklistItem",
+  "formElementGroups" : [ {
+    "uuid" : "9096ae29-afe9-4370-b8f8-0b0b60541914",
+    "name" : "Vaccination details",
+    "displayOrder" : 1.0,
+    "display" : "Vaccination details",
+    "formElements" : [ {
+      "name" : "Provided by",
+      "uuid" : "4fff9bcb-09a9-4654-84c8-435e2e3e9e7f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Vaccination details",
+        "uuid" : "df29d27e-28c4-4f80-901a-d4e0890473d8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Anganwadi centre",
+          "uuid" : "c21915f7-133b-4d5c-85e9-6e13292922a7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Subcentre",
+          "uuid" : "63b47d97-1856-464e-86a2-f881d6e1719a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

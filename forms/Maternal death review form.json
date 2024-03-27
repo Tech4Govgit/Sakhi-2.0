@@ -1,0 +1,102 @@
+{
+  "name" : "Maternal death review form",
+  "uuid" : "9f32e165-cf62-45aa-b79c-a3cf48413274",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "864486e3-ad3c-4135-98b2-feb09e38d7b0",
+    "name" : "Details",
+    "displayOrder" : 1.0,
+    "display" : "Details",
+    "formElements" : [ {
+      "name" : "Date of death",
+      "uuid" : "effad27f-afae-415a-ae61-e5825e836923",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Cause of death",
+      "uuid" : "fa18d07c-05c3-47f3-9038-6e8b883f0d35",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Cause of death",
+        "uuid" : "21f62906-ec81-445d-8848-cd38c481f051",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Maternal",
+          "uuid" : "ace7155c-cf77-4d34-8a90-0db5cde7c391",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Non-maternal",
+          "uuid" : "f1b37423-8e02-4ab7-8cc3-66521fe979ca",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Date of field investigation",
+      "uuid" : "10634601-c406-4022-989f-6daf64de75d6",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of field investigation",
+        "uuid" : "220bd59c-4a6f-4dd8-bfe8-02155d432b75",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Action taken?",
+      "uuid" : "f27d960d-cc0d-485d-9b61-b809217fd39c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Action taken",
+        "uuid" : "2603b564-15b3-41a8-aeb1-c39c1425147a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "\"use strict\";\n({params, imports}) => {\n    const programEncounter = params.entity;\n    const moment = imports.moment;\n    const decisions = params.decisions;\n    \n  const dateOfDeath = programEncounter.getObservationReadableValue('ee91d2b0-c93c-4d31-8c48-58738df229ff');\n  \n  if (dateOfDeath) {\n     decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Dead\"});\n      decisions.registrationDecisions.push({name : \"Date of death\", value: dateOfDeath });\n}\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

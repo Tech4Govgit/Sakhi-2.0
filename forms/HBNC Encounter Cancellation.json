@@ -1,0 +1,163 @@
+{
+  "name" : "HBNC Encounter Cancellation",
+  "uuid" : "66d73ac8-f06b-46b4-a46e-39337d819573",
+  "formType" : "ProgramEncounterCancellation",
+  "formElementGroups" : [ {
+    "uuid" : "50489a39-a028-4176-8cba-6dd30a1ee949",
+    "name" : "Basic details",
+    "displayOrder" : 1.0,
+    "display" : "Basic details",
+    "formElements" : [ {
+      "name" : "Child condition post delivery",
+      "uuid" : "31732fca-345f-49bb-90d4-43869504ef8c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Child condition post delivery",
+        "uuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "6fea5fae-0ada-4b8f-921b-32071eab5f3f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "cancelEncounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Place of Death",
+      "uuid" : "d89b06ba-9d18-4797-9f88-3e629862c0e6",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of Death",
+        "uuid" : "5368977b-52be-4df5-98dc-65fb0ef0f6cc",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "cancelEncounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Probable cause of death",
+      "uuid" : "ed5bcb4d-7e40-4a96-a1bb-3482b1243a5b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Probable cause of death",
+        "uuid" : "38a13868-0751-4760-abce-26f909517814",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInCancelEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "cancelEncounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "//SAMPLE RULE EXAMPLE\n\"use strict\";\n({ params, imports }) => {\n  const programEncounter = params.entity;\n  const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({\n    programEncounter\n  });\n  const _ = imports.lodash;\n  const moment = imports.moment;\n\n  const encounterScheduler = [\n        {\"name\": \"HBNC 2\",\"encName\":'HBNC', \"earliest\": 3, \"max\": 5},\n        {\"name\": \"HBNC 3\",\"encName\":'HBNC', \"earliest\": 7, \"max\": 9},\n        {\"name\": \"HBNC 4\",\"encName\":'HBNC', \"earliest\": 14, \"max\": 16},\n        {\"name\": \"HBNC 5\",\"encName\":'HBNC', \"earliest\": 21, \"max\": 23},\n        {\"name\": \"HBNC 6\",\"encName\":'HBNC', \"earliest\": 28, \"max\": 30},\n        {\"name\": \"HBNC 7\",\"encName\":'HBNC', \"earliest\": 42, \"max\": 44},\n        {\"name\": \"HBYC 1\",\"encName\":'HBYC', \"earliest\": 90, \"max\": 92}\n    ];\n\n  const dateOfBirth = programEncounter.individual.dateOfBirth;\n  const cancelDate = programEncounter.cacelDateTime;\n\n  const childsCondition = new imports.rulesConfig.RuleCondition({programEncounter}).when.valueInCancelEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n\n  let schedule = _.chain(encounterScheduler).filter(e => moment(cancelDate).isSameOrBefore(moment(dateOfBirth).add(e.earliest, 'days'), 'date') === true )\n                  .filter(e => (programEncounter.programEnrolment.hasEncounter('HBNC', e.name)) === false)\n                  .first()\n                  .value();\n\n   if (!_.isEmpty(schedule) && !childsCondition) {\n\n   scheduleBuilder\n            .add({\n                name: schedule.name,\n                encounterType: schedule.encName,\n                earliestDate:  moment(dateOfBirth).add(schedule.earliest, 'days').toDate() ,\n                maxDate: moment(dateOfBirth).add(schedule.max, 'days').toDate()\n            });\n\n   }\n\n\n\n  return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

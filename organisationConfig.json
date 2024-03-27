@@ -1,0 +1,76 @@
+{
+  "uuid" : "f9127f1e-4703-4441-b3be-278ba4d84e40",
+  "settings" : {
+    "otpLength" : null,
+    "extensions" : [ {
+      "label" : "myDawaPrapatra",
+      "fileName" : "final_dawa_prapatra.html",
+      "extensionScope" : {
+        "name" : "Generic",
+        "uuid" : "",
+        "scopeType" : "Generic"
+      }
+    } ],
+    "languages" : [ "en", "hi_IN" ],
+    "customRegistrationLocations" : [ {
+      "subjectTypeUUID" : "a577a36e-f87a-44e9-b721-1015e889bea4",
+      "locationTypeUUIDs" : [ ]
+    }, {
+      "subjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de",
+      "locationTypeUUIDs" : [ ]
+    } ],
+    "showHierarchicalLocation" : false,
+    "searchFilters" : [ {
+      "type" : "Name",
+      "widget" : "Default",
+      "titleKey" : "Name",
+      "subjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de"
+    }, {
+      "type" : "Name",
+      "widget" : "Default",
+      "titleKey" : "Household name",
+      "subjectTypeUUID" : "a577a36e-f87a-44e9-b721-1015e889bea4"
+    }, {
+      "type" : "Concept",
+      "scope" : "registration",
+      "widget" : "Default",
+      "titleKey" : "ABHA number",
+      "conceptName" : "ABHA number",
+      "conceptUUID" : "5d241f96-f5f3-4722-ac80-46c5db8bd5b9",
+      "conceptDataType" : "Numeric",
+      "scopeParameters" : {
+        "programUUIDs" : [ ],
+        "encounterTypeUUIDs" : [ ]
+      },
+      "subjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de"
+    }, {
+      "type" : "Concept",
+      "scope" : "programEnrolment",
+      "widget" : "Default",
+      "titleKey" : "RCH no",
+      "conceptName" : "RCH No.",
+      "conceptUUID" : "a3b41dea-8196-448c-96ab-3a2413544361",
+      "conceptDataType" : "Numeric",
+      "scopeParameters" : {
+        "programUUIDs" : [ "2e3b2ff5-6512-4931-a827-4d269ae31af8" ],
+        "encounterTypeUUIDs" : [ ]
+      },
+      "subjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de"
+    }, {
+      "type" : "Concept",
+      "scope" : "registration",
+      "widget" : "Default",
+      "titleKey" : "Mobile number",
+      "conceptName" : "Contact number",
+      "conceptUUID" : "ec7d9993-9084-4bde-a211-3ff78f840d21",
+      "conceptDataType" : "Text",
+      "scopeParameters" : {
+        "programUUIDs" : [ ],
+        "encounterTypeUUIDs" : [ ]
+      },
+      "subjectTypeUUID" : "8ce8db7f-419e-485f-99ba-df7a0372f3de"
+    } ],
+    "myDashboardFilters" : [ ]
+  },
+  "worklistUpdationRule" : ""
+}

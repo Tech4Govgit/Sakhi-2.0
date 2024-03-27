@@ -1,0 +1,100 @@
+[ {
+  "uuid" : "fdd338be-64cf-411e-9088-b3574c336035",
+  "id" : 524,
+  "name" : "Due",
+  "description" : "To show total due visits for the catchment on the date",
+  "color" : "#fd0061",
+  "standardReportCardTypeId" : 4,
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "5a70885b-91a8-4487-abc2-12c00c34cbba",
+  "id" : 525,
+  "name" : "Overdue",
+  "description" : "To show total visits which are overdue on that date.",
+  "color" : "#ff0000",
+  "standardReportCardTypeId" : 5,
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "1a52bc6e-f0c9-4190-8eb7-93bdb53d5cb5",
+  "id" : 526,
+  "name" : "Eligible Couple - Male",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.voided === false && individual.isMale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+  "description" : "To show total men between age 18 to 49 from registered beneficiaries and for whom sterilisation done is No",
+  "color" : "#70dbdb",
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "eb56ccce-2a2d-4b26-a303-3ce4bcaded77",
+  "id" : 522,
+  "name" : "Beneficiaries",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Individual');\n};",
+  "description" : "",
+  "color" : "#3e50b4",
+  "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/7b178cee-0abd-405f-8872-fa39c156db83.png",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "fe3f45aa-0ee1-4584-83a2-e672f22263d9",
+  "id" : 1377,
+  "name" : "CBAC completed",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\n    \n    const individualsCompletedCBAC = (params, imports) => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime != null)).length\n    };\n    \n    const lineListFunction = () => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime != null))\n    };\n    \n    \n    return {\n    primaryValue: individualsCompletedCBAC(params, imports),\n    lineListFunction\n    }\n};",
+  "description" : "",
+  "color" : "#20b14b",
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "bdf972a1-c797-4c7a-a1ef-c65623cbb8ea",
+  "id" : 523,
+  "name" : "Households",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual')\n     .filter((individual) => individual.voided === false && individual.subjectType.name === 'Household');\n};",
+  "description" : "",
+  "color" : "#5a5cec",
+  "iconFileS3Key" : "https://s3.ap-south-1.amazonaws.com/prod-user-media/sakhiapp/icons/de6d1990-e72b-45fa-b9eb-db4a23e7a465.png",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "cd969e96-7774-4726-aae5-de3228707167",
+  "id" : 527,
+  "name" : "Eligible Couple - Female",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.isFemale() && individual.getAgeInYears() >= 18 && individual.getAgeInYears() <= 49  &&  individual.getObservationReadableValue('Is sterilisation done') === 'No' )\n     \n};",
+  "description" : "To show total women between age 18 and 49 from registered beneficiaries for whom sterilisation done is No.",
+  "color" : "#ef3ae1",
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "61eeb14a-bf4e-40ce-80f3-e4c26cb4d124",
+  "id" : 1378,
+  "name" : "CBAC not completed",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\n    \n    const individualsCompletedCBAC = (params, imports) => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime == null)).length\n    };\n    \n    const lineListFunction = () => {\n        return params.db.objects('Individual')\n        .filter((individual) => individual.voided === false && _.some(individual.encounters, encounter => encounter.name === 'CBAC' && encounter.encounterDateTime == null))\n    };\n    \n    \n    return {\n    primaryValue: individualsCompletedCBAC(params, imports),\n    lineListFunction\n    }\n};",
+  "description" : "",
+  "color" : "#47e55a",
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+}, {
+  "uuid" : "b3b4b9a3-ce70-42a4-bcdd-650dce6f525a",
+  "id" : 528,
+  "name" : "HRP",
+  "query" : "// Documentation - https://docs.mongodb.com/realm-legacy/docs/javascript/latest/index.html#queries\n'use strict';\n({params, imports}) => {\n\nconst isHighRiskPregnancy = (individual) => {\n const pregnancyProgram = _.find(individual.enrolments, enrolment => enrolment.program.name === 'Pregnancy' && enrolment.programExitDateTime === null);\n if(_.isNil(pregnancyProgram)) { return false; }\n const whetherHRPconfirmed = pregnancyProgram.findLatestObservationInEntireEnrolment(\"Whether HRP confirmed\");\n if(_.isNil(whetherHRPconfirmed)) { return false; }\n return whetherHRPconfirmed.getReadableValue() === 'Yes';\n}\n     return params.db.objects('Individual').filtered(\"voided = false and subjectType.name = 'Individual'\" )\n     .filter( (individual) => individual.isFemale() &&  isHighRiskPregnancy(individual))\n     \n};",
+  "description" : "High Risk Pregnancy",
+  "color" : "#f21313",
+  "iconFileS3Key" : "",
+  "nested" : false,
+  "count" : 1,
+  "voided" : false
+} ]

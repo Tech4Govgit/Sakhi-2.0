@@ -1,0 +1,3424 @@
+{
+  "name" : "Pregnancy Enrolment",
+  "uuid" : "675ef2dd-0e0f-4f8b-9472-61b0d183c530",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "5391dcf5-ac7e-49b5-ade2-34e65616c3ef",
+    "name" : "Enrolment Basic Details",
+    "displayOrder" : 1.0,
+    "display" : "Enrolment Basic Details",
+    "formElements" : [ {
+      "name" : "Last date of menstruation",
+      "uuid" : "dc163fa3-07ee-431c-b3da-e2d71226ebce",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Last menstrual period",
+        "uuid" : "f58189f4-33f9-4030-94fe-1cc738a0b444",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"f58189f4-33f9-4030-94fe-1cc738a0b444\").greaterThan(moment(programEnrolment.enrolmentDateTime).toDate()).matches();\n  \n  const lastDateOfMenstruation = programEnrolment.getObservationValue('f58189f4-33f9-4030-94fe-1cc738a0b444');\n  \n  let numberOfDays = 0;\n  if(lastDateOfMenstruation != undefined) {\n  \n    numberOfDays = moment(programEnrolment.enrolmentDateTime).diff(moment(lastDateOfMenstruation),'days');\n//    console.log('numberOfDays---->',numberOfDays);\n  \n  }\n  \n  if( numberOfDays > 35 ){\n    validationErrors.push(\"LMP date cannot be more than 5 weeks in the past or in the future.\");  \n}\n\n  if (condition11) validationErrors.push(\"Date cannot be in the future\");\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "MCTS number",
+      "uuid" : "1da76fe9-f23d-4ff0-ab24-5fbc2a737866",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "MCTS number (voided~116772)",
+        "uuid" : "b8a1abda-8ec4-4f03-b99f-8b12789bb11a",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Estimated date of delivery",
+      "uuid" : "d6a13983-e45f-42e8-aee7-b648b6416692",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Estimated date of delivery",
+        "uuid" : "6cd124ed-fdca-4201-b346-ec55b24de0e8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  let lastDateOfMenstruation = programEnrolment.getObservationValue(\"Last menstrual period\");\n\n    value = moment(lastDateOfMenstruation).add(280,'days').toDate();\n     \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Whether pregnancy test done",
+      "uuid" : "45749274-75da-4049-bd08-90200dab5f44",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Whether pregnancy test done",
+        "uuid" : "8f6c0730-ac31-4ca4-aba0-edac5765c81c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Pregnancy test method",
+      "uuid" : "b9dac67d-5c93-47c8-b33c-2ceead354fc8",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Pregnancy test method",
+        "uuid" : "9dfa2660-fd57-4d1e-ad75-1918d502b8a7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Nischay kit",
+          "uuid" : "4e652f5c-f863-499e-8cf1-925b6d191f64",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"8f6c0730-ac31-4ca4-aba0-edac5765c81c\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Whether pregnancy test done",
+                "conceptUuid" : "8f6c0730-ac31-4ca4-aba0-edac5765c81c",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Confirm pregnancy by issuing “Nischay Kit\".",
+      "uuid" : "387b1fcb-9da2-4c81-972b-201daf69a680",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Confirm pregnancy by issuing 'Nischay Kit'",
+        "uuid" : "d103884b-d05f-452c-ab62-c74d385f4794",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"8f6c0730-ac31-4ca4-aba0-edac5765c81c\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").or.when.valueInEnrolment(\"9dfa2660-fd57-4d1e-ad75-1918d502b8a7\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Whether pregnancy test done",
+                "conceptUuid" : "8f6c0730-ac31-4ca4-aba0-edac5765c81c",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Pregnancy test method",
+                "conceptUuid" : "9dfa2660-fd57-4d1e-ad75-1918d502b8a7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Result of pregnancy test",
+      "uuid" : "47c6829d-76c7-432b-a0a4-944be684b7e4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Result of pregnancy test",
+        "uuid" : "bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Negative",
+          "uuid" : "a8b44d5e-39fa-4dc3-abd5-b90f3f642aec",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Positive",
+          "uuid" : "63bb2474-1ea3-4816-8c93-de7a5f28e7fb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"8f6c0730-ac31-4ca4-aba0-edac5765c81c\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Whether pregnancy test done",
+                "conceptUuid" : "8f6c0730-ac31-4ca4-aba0-edac5765c81c",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Height",
+      "uuid" : "411e98d4-f8e6-4fa5-8ce2-2358175fb7c3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Height",
+        "uuid" : "e20f7197-870a-4791-9d13-9987404c5b46",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowAbsolute" : 20.0,
+        "highAbsolute" : 300.0,
+        "lowNormal" : 30.0,
+        "highNormal" : 200.0,
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "RCH number",
+      "uuid" : "7a62d827-f2d6-4218-90cc-40a68ebde1cd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "R15 number (voided~116773)",
+        "uuid" : "83d07fb4-7356-4d29-933d-ceb8a2aa64d4",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Last menstrual period",
+      "uuid" : "d307e915-db86-469e-ba35-07727687a3d9",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Last menstrual period (voided~116774)",
+        "uuid" : "350871b6-0b84-421b-8d96-a20ea624a134",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Estimated date of delivery",
+      "uuid" : "2783fbf5-e93f-469b-98db-fdaee5c0076a",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Estimated date of delivery (voided~116775)",
+        "uuid" : "5a3d5a1e-4c69-4beb-8bd5-38e3cf7f05ef",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "\"use strict\";\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const formElement = params.formElement;\n    const value =  ruleServiceLibraryInterfaceForSharingModules.motherCalculations.estimatedDateOfDelivery(programEnrolment);\n    return new imports.rulesConfig.FormElementStatus(formElement.uuid, true, value);\n};",
+      "mandatory" : false,
+      "voided" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "2837b781-d776-4d1d-b69c-7ab67382c3a2",
+    "name" : "Previous pregnancy details",
+    "displayOrder" : 2.0,
+    "display" : "Previous pregnancy details",
+    "formElements" : [ {
+      "name" : "Is it her first pregnancy ?",
+      "uuid" : "e51a508f-638c-49af-b3d4-f3ca3109d28b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is it her first pregnancy",
+        "uuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Gravida",
+      "uuid" : "502708e0-d263-40f8-8cd8-6ee24b427a8d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Gravida",
+        "uuid" : "09f12caa-1e18-4861-bd08-c2bd4e0dcc94",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"09f12caa-1e18-4861-bd08-c2bd4e0dcc94\").lessThan(2).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Gravida cannot be less than 2.\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "validationError" : "Gravida cannot be less than 2."
+          },
+          "actionType" : "validationError"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Gravida",
+                "conceptUuid" : "09f12caa-1e18-4861-bd08-c2bd4e0dcc94",
+                "conceptDataType" : "Numeric"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 2
+              },
+              "operator" : "lessThan"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Parity",
+      "uuid" : "eeaebf71-d24d-497d-a191-811e13370e91",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Parity",
+        "uuid" : "aa3b65ab-3ba8-420f-b78a-6a3f239dbab0",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "lowNormal" : 1.0,
+        "highNormal" : 10.0,
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").and.when.valueInEnrolment(\"aa3b65ab-3ba8-420f-b78a-6a3f239dbab0\").equals(0).matches();\n    let gravidaObservation = programEnrolment.findObservation('09f12caa-1e18-4861-bd08-c2bd4e0dcc94');\n  let gravidaValue = _.isEmpty(gravidaObservation) ? gravidaObservation : gravidaObservation.getReadableValue();\n  const condition13 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"aa3b65ab-3ba8-420f-b78a-6a3f239dbab0\").greaterThan(gravidaValue).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Parity cannot be equal to zero.\");  \n}\n    if(condition13 ){\n    validationErrors.push(\"Parity cannot greater than Gravida.\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "validationError" : "Parity cannot be equal to zero."
+          },
+          "actionType" : "validationError"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Parity",
+                "conceptUuid" : "aa3b65ab-3ba8-420f-b78a-6a3f239dbab0",
+                "conceptDataType" : "Numeric"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 0
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "validationError" : "Parity cannot greater than Gravida."
+          },
+          "actionType" : "validationError"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Parity",
+                "conceptUuid" : "aa3b65ab-3ba8-420f-b78a-6a3f239dbab0",
+                "conceptDataType" : "Numeric"
+              },
+              "rhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Gravida",
+                "conceptUuid" : "09f12caa-1e18-4861-bd08-c2bd4e0dcc94"
+              },
+              "operator" : "greaterThan"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Gravida",
+      "uuid" : "e795b7f9-eed3-49f2-a1e8-ea3e00f19ddb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Gravida (voided~125463)",
+        "uuid" : "92eb15fd-d546-4917-8815-8586add6269c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "3",
+          "uuid" : "8e9b38ef-728c-440a-8bc6-8d12183c8bb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "4",
+          "uuid" : "2edb2147-9878-4553-92ec-6ba2ca3c8af9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Last pregnancy complications",
+      "uuid" : "9420d1fa-994a-4b84-bee1-283f71338d6a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Last pregnancy complications",
+        "uuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Congenital anomaly",
+          "uuid" : "aa479ba7-c9cb-4d09-9a3e-ae1569dff218",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "PPH",
+          "uuid" : "d32d0026-9af2-4380-8db8-6b7226441a65",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Pregnancy induce hypertension (PIH)",
+          "uuid" : "7341de9f-bf31-4dcd-80a2-c142b76993c2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Caesarean section",
+          "uuid" : "87c3a2f7-dd89-4ebc-afbe-ed8dd2044284",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Any other",
+          "uuid" : "953834fc-8d69-4610-9d43-53b470dff0fd",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "active" : true
+        }, {
+          "name" : "Blood transfusion",
+          "uuid" : "82e4fb9b-1717-4d15-8442-d081c010007a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Convulsions",
+          "uuid" : "d6d868bd-9544-4af7-b933-c62c01311ae0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "APH",
+          "uuid" : "9ce2be20-6a80-494f-92ed-ce0395465c36",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Obstructed labour",
+          "uuid" : "4fde268f-d724-4bab-8563-43903b9a93cc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 12.0,
+          "active" : true
+        }, {
+          "name" : "Stillbirth",
+          "uuid" : "b5f1ba1f-6a46-4dc4-83ae-ddf9ed6d4662",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Repeated abortion",
+          "uuid" : "3c35b099-492e-4abe-be0e-8ab3371e0735",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Twins",
+          "uuid" : "01e5dd4d-09fd-4582-a5b9-95b8b61d6c82",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Parity",
+      "uuid" : "6348580e-8977-40f7-88f3-cb5d862776da",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Parity (voided~124684)",
+        "uuid" : "b3bcdb4b-57e3-4596-a3c2-8103bb6ca93e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "4",
+          "uuid" : "2edb2147-9878-4553-92ec-6ba2ca3c8af9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "3",
+          "uuid" : "8e9b38ef-728c-440a-8bc6-8d12183c8bb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Any other pregnancy complication",
+      "uuid" : "5fb2e9a5-8187-4283-8972-c0631ec15716",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Any other pregnancy complication",
+        "uuid" : "c4b22cea-557e-4117-8f77-90d52b2d184c",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnswerConceptName(\"953834fc-8d69-4610-9d43-53b470dff0fd\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Any other" ],
+                "answerConceptUuids" : [ "953834fc-8d69-4610-9d43-53b470dff0fd" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Pregnancy outcome",
+      "uuid" : "e281c1f9-a3e3-4765-afc8-d7e9d102be6f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Pregnancy outcome",
+        "uuid" : "c84d3165-d9ff-48be-850f-5fdb297eae36",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Miscarriage",
+          "uuid" : "4971c8b3-5d4f-4df3-b07c-852f911fd0ce",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Still birth",
+          "uuid" : "4683bed7-11f5-4afc-9075-4be4e70ef3a6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Live birth",
+          "uuid" : "42bff662-a822-4f3c-ba0b-e85297455f8c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Delivery type",
+      "uuid" : "3af395d2-e95a-4c4b-8729-9169004604ad",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Delivery type",
+        "uuid" : "8914b099-117f-4eb9-90a4-274eb70258d5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Normal",
+          "uuid" : "69009c81-77ba-4127-bc42-d10611a23dd1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "C-section",
+          "uuid" : "d070ec22-e0f5-44bc-a93b-b8d9dea257e8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "C section",
+          "uuid" : "347391de-cf5b-4c9c-b30e-1427220e3aa1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Assisted",
+          "uuid" : "c74dc59d-fc6e-4d47-a666-f6ecc662b1a0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"c84d3165-d9ff-48be-850f-5fdb297eae36\").containsAnyAnswerConceptName(\"42bff662-a822-4f3c-ba0b-e85297455f8c\",\"4683bed7-11f5-4afc-9075-4be4e70ef3a6\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Pregnancy outcome",
+                "conceptUuid" : "c84d3165-d9ff-48be-850f-5fdb297eae36",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Live birth", "Still birth" ],
+                "answerConceptUuids" : [ "42bff662-a822-4f3c-ba0b-e85297455f8c", "4683bed7-11f5-4afc-9075-4be4e70ef3a6" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+      "uuid" : "896459dc-e920-4e0d-9498-e4b29e56da73",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+        "uuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Please select the disease for which pregnant women is taking medicine",
+      "uuid" : "01785fde-3e3c-4c06-91f4-24df810a9351",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Disease for which pregnant women is taking medicine",
+        "uuid" : "8c146eb6-09ad-4b66-9610-19d26d07af2c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Diabetes",
+          "uuid" : "8c012ef0-3887-4c09-882d-6abd77630350",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "HIV positive",
+          "uuid" : "53d59552-ee06-4b24-896e-74d92bdc2a83",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Asthma",
+          "uuid" : "2c054f7d-f160-474b-8a70-2dd845e0d08e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Heart Disease",
+          "uuid" : "9b79a61a-0f46-4c78-8044-b919d95a4b6d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Hypertension",
+          "uuid" : "46e54936-0997-4819-a835-75ea3e7e028b",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Epileptic (convulsion)",
+          "uuid" : "f01d26a5-83db-4b72-b20c-0f781a670eb2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Tuberculosis",
+          "uuid" : "e8f42522-2631-4f3f-aa86-6171be78ce93",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Hepatitis B",
+          "uuid" : "f55a0e6d-818b-4ddd-8d2b-ba9aecd4e9c3",
+          "dataType" : "Coded",
+          "answers" : [ {
+            "name" : "Yes",
+            "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+            "dataType" : "NA",
+            "answers" : [ ],
+            "order" : 0.0,
+            "active" : true
+          }, {
+            "name" : "Don't know",
+            "uuid" : "ecd723a3-e1ce-4c53-8b97-880bea5c31a6",
+            "dataType" : "NA",
+            "answers" : [ ],
+            "order" : 2.0,
+            "active" : true
+          }, {
+            "name" : "No",
+            "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+            "dataType" : "NA",
+            "answers" : [ ],
+            "order" : 1.0,
+            "active" : true
+          } ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "STI / RTI",
+          "uuid" : "7be6f6b3-abc2-401a-bc22-7e07129202fa",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "MultiSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Specify other disease",
+      "uuid" : "18049be4-2ee5-4340-844b-c22db583d103",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Specify other disease",
+        "uuid" : "a42309f9-c98a-4b04-9555-550389c09ebc",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"8c146eb6-09ad-4b66-9610-19d26d07af2c\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Disease for which pregnant women is taking medicine",
+                "conceptUuid" : "8c146eb6-09ad-4b66-9610-19d26d07af2c",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Do you have MCP card ?",
+      "uuid" : "dc62d207-8652-431b-9841-bb00b1d7a9d4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you have MCP card",
+        "uuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Is it lost / damaged ?",
+      "uuid" : "065da13a-28de-49c2-958e-2a173ac94f7f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is it lost / damaged ?",
+        "uuid" : "81c1a2ca-aaf0-4ea5-a8c6-7c526b07ede5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Avail the RCH ID from beneficiary's mobile number after visiting PHC",
+      "uuid" : "d52a6301-5092-4b7f-ab1b-42bc51d72de6",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Avail the RCH ID from beneficiary's mobile number after visiting PHC",
+        "uuid" : "657bf701-e09f-45bc-b083-55c957ded1b5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 15.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"81c1a2ca-aaf0-4ea5-a8c6-7c526b07ede5\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it lost / damaged ?",
+                "conceptUuid" : "81c1a2ca-aaf0-4ea5-a8c6-7c526b07ede5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Date of registration",
+      "uuid" : "75ce7beb-46ca-41c8-91f2-b95121d7c085",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of registration for MCP card (voided~142564)",
+        "uuid" : "90cc8679-cf71-415c-be84-049f39b0c5bb",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 16.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Have visited PHC and collected details about MCP card?",
+      "uuid" : "17771b93-f687-4772-90c2-165f2afd2f47",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Have visited PHC and collected details about MCP card",
+        "uuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 17.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"81c1a2ca-aaf0-4ea5-a8c6-7c526b07ede5\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it lost / damaged ?",
+                "conceptUuid" : "81c1a2ca-aaf0-4ea5-a8c6-7c526b07ede5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Refer to VHSND date",
+      "uuid" : "7684e886-1163-4710-9c4e-be6b83f449aa",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Refer to VHSND date",
+        "uuid" : "bc9d0f02-6b85-4551-a01e-bceb444feeeb",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 18.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bc9d0f02-6b85-4551-a01e-bceb444feeeb\").lessThan(moment(programEnrolment.enrolmentDateTime).startOf('day').toDate()).matches();\n  \n    if(condition12 ){\n    validationErrors.push(\"Date cannot be earlier than enrolment date.\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "RCH No.",
+      "uuid" : "d255cfa3-fe99-4a61-8f62-0b62a29a4128",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "RCH No.",
+        "uuid" : "a3b41dea-8196-448c-96ab-3a2413544361",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 19.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Registration date",
+      "uuid" : "ce85a4e2-b4df-4355-8cec-00c8841ca1f7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Registration date",
+        "uuid" : "ebe4fed1-8d1e-46aa-b235-56cd8baa056f",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 20.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Place of registration",
+      "uuid" : "99d0ab0a-12b7-4d96-889a-5b500b7a4e61",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of registration",
+        "uuid" : "dde1442a-92dc-4641-8408-29e1fedaf9b8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Sub-divisional hospital",
+          "uuid" : "3973835d-cdb8-4fbe-af1e-c6947e95ede2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Medical college",
+          "uuid" : "39d5f5ad-97c9-432e-9b51-2549468563ac",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "VHND",
+          "uuid" : "ff337716-d5b3-4a16-9ba4-cd8b8b03c990",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 21.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Is any ANC done ?",
+      "uuid" : "830392b4-8852-461d-b9fe-e340219c6ec1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is any ANC done",
+        "uuid" : "4ce9eece-1c41-4341-8781-2a222cc1e224",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 22.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "How many ANC done ?",
+      "uuid" : "b47059fa-db45-41ec-af24-7f4c11f0edcf",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "How many ANC done",
+        "uuid" : "ab44b277-f8d7-42d8-a050-29471d8a80ca",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "4",
+          "uuid" : "2edb2147-9878-4553-92ec-6ba2ca3c8af9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "3",
+          "uuid" : "8e9b38ef-728c-440a-8bc6-8d12183c8bb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "0",
+          "uuid" : "0f2d25fe-58c1-4669-877a-181f8c572ba6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 23.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Last ANC date",
+      "uuid" : "6328e985-bf2f-4fa2-b333-f68152cdddf4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Last ANC date",
+        "uuid" : "031cdbb9-306a-4fbe-afda-c457807bcf9c",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 24.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ab44b277-f8d7-42d8-a050-29471d8a80ca\").containsAnyAnswerConceptName(\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\",\"2dc6668b-770a-454c-905f-bd3f47fd89d9\",\"8e9b38ef-728c-440a-8bc6-8d12183c8bb6\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "How many ANC done",
+                "conceptUuid" : "ab44b277-f8d7-42d8-a050-29471d8a80ca",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "1", "2", "3" ],
+                "answerConceptUuids" : [ "f5bcb235-c1d8-43e2-a2bc-104e1651079a", "2dc6668b-770a-454c-905f-bd3f47fd89d9", "8e9b38ef-728c-440a-8bc6-8d12183c8bb6" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Suggested next ANC date",
+      "uuid" : "3688324e-5657-4724-91f0-2da9b282a0d7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suggested next ANC date",
+        "uuid" : "14f82aae-0e37-43b6-a074-563dae1f0c6a",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 25.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Expected delivery place",
+      "uuid" : "2091e1f9-c1ae-4c38-a361-111abf7647e0",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Expected delivery place",
+        "uuid" : "1dae6496-fdc9-42be-b872-0e448d5e58c2",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Medical college",
+          "uuid" : "39d5f5ad-97c9-432e-9b51-2549468563ac",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Sub-divisional hospital",
+          "uuid" : "3973835d-cdb8-4fbe-af1e-c6947e95ede2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 26.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Specify other for expected delivery place",
+      "uuid" : "6161bbd8-d221-44e8-b082-4690c3bd4179",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Specify other for expected delivery place",
+        "uuid" : "f6ba030c-b749-4d2c-93e7-c346ce29ab08",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 27.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"1dae6496-fdc9-42be-b872-0e448d5e58c2\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Expected delivery place",
+                "conceptUuid" : "1dae6496-fdc9-42be-b872-0e448d5e58c2",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Actual delivery place",
+      "uuid" : "d862f3b7-da31-494b-9375-757a52fa4e83",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Actual delivery place",
+        "uuid" : "58f51173-b3fc-482b-9e32-d1af1973c744",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Sub-divisional hospital",
+          "uuid" : "3973835d-cdb8-4fbe-af1e-c6947e95ede2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Medical college",
+          "uuid" : "39d5f5ad-97c9-432e-9b51-2549468563ac",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 28.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Specify other for actual delivery place",
+      "uuid" : "ad7a400d-89b0-488c-b9e9-556d5aabcef3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Specify other for actual delivery place",
+        "uuid" : "254f3e69-915c-4680-a402-a7d9dabaa8e4",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 29.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"58f51173-b3fc-482b-9e32-d1af1973c744\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Actual delivery place",
+                "conceptUuid" : "58f51173-b3fc-482b-9e32-d1af1973c744",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "How many TD dose taken in last pregnancy",
+      "uuid" : "7b8f3526-3743-42f2-bc80-fac8c241bfae",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "How many TD dose taken in last pregnancy",
+        "uuid" : "ec78e264-4166-40a9-8d37-ca59e377a5f6",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "0",
+          "uuid" : "0f2d25fe-58c1-4669-877a-181f8c572ba6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 30.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Approximate date of last dose",
+      "uuid" : "0270dcc5-4581-479b-9d99-9680b471d272",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Approximate date of last dose",
+        "uuid" : "b414ec13-4238-4b89-8950-6b98c140bdbf",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 31.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+      "uuid" : "742239c0-5bed-405a-90dd-c2c88ec17da1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative TD 1 Date (VHND / PMSMA) (voided~124727)",
+        "uuid" : "1d28c6c0-23d6-4ab2-bcc1-a43b0138682a",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 32.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  const statusBuilder = new imports.rulesConfig.FormElementStatusBuilder({programEnrolment, formElement});\n  \n  let nextDate = programEnrolment.getObservationValue(\"Suggested next ANC date\");\n  console.log('nextDate----->',nextDate);\n  \n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n  \n  visibility = condition11 || condition21;\n      let val = moment(nextDate).format('d-mm-yyyy');\n      console.log('val---------->'Date(val));\n      statusBuilder.value(Date(val));\n      console.log(\"finishedddddddddddddd\");\n  \n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+      "uuid" : "afd5cdf2-164e-4734-a2c6-894f5e3ba4cb",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Tentative TD 1 Date (VHND / PMSMA) (voided~125168)",
+        "uuid" : "00548ee7-0981-4845-b78a-94e8e7d76e31",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 33.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  const statusBuilder = new imports.rulesConfig.FormElementStatusBuilder({programEnrolment, formElement});\n  \n  let nextDate = programEnrolment.getObservationValue(\"Suggested next ANC date\");   // Object\n  console.log('nextDate---->', nextDate);\n  \n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n  \n  visibility = condition11 || condition21;\n      let val = moment(nextDate).toDate();\n      console.log('val---->',val)\n      console.log(typeof val);\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, val, answersToSkip, validationErrors);\n};",
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+      "uuid" : "57ee22bc-3b45-4c71-af18-edc6be3f9184",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+        "uuid" : "21a23197-4aac-44fe-befb-9664dc2a8873",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 34.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n  \n  visibility = condition11 || condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "How many TD dose taken in last pregnancy",
+                "conceptUuid" : "ec78e264-4166-40a9-8d37-ca59e377a5f6",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "0", "1" ],
+                "answerConceptUuids" : [ "0f2d25fe-58c1-4669-877a-181f8c572ba6", "f5bcb235-c1d8-43e2-a2bc-104e1651079a" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Tentative TD 2 Date (VHND / PMSMA)",
+      "uuid" : "b1b6655a-2ae6-4483-93d2-d69a6e251aca",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative TD 2 Date (VHND / PMSMA) (voided~125447)",
+        "uuid" : "e0c1d5e3-fc64-4785-80ed-9dc4c420a573",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 35.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n  \n  visibility = condition11 || condition21 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "How many TD dose taken in last pregnancy",
+                "conceptUuid" : "ec78e264-4166-40a9-8d37-ca59e377a5f6",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "0", "1" ],
+                "answerConceptUuids" : [ "0f2d25fe-58c1-4669-877a-181f8c572ba6", "f5bcb235-c1d8-43e2-a2bc-104e1651079a" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Tentative date for booster (VHND / PMSMA)",
+      "uuid" : "c26b4bce-a9c2-4522-b123-be54678901fa",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Tentative date for booster (VHND / PMSMA)",
+        "uuid" : "10a0c592-2146-4f3d-8caa-a9238bd227a0",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 36.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnswerConceptName(\"2dc6668b-770a-454c-905f-bd3f47fd89d9\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "How many TD dose taken in last pregnancy",
+                "conceptUuid" : "ec78e264-4166-40a9-8d37-ca59e377a5f6",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "2" ],
+                "answerConceptUuids" : [ "2dc6668b-770a-454c-905f-bd3f47fd89d9" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false,
+      "voided" : true
+    }, {
+      "name" : "Suspected high risk pregnancy",
+      "uuid" : "cf5490be-7e51-41e4-82b5-6264efd7aa96",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suspected high risk pregnancy",
+        "uuid" : "c1da7728-30e5-46af-9934-bbd2b7687a95",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "abnormal" : true,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 37.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnyAnswerConceptName(\"d6d868bd-9544-4af7-b933-c62c01311ae0\",\"9ce2be20-6a80-494f-92ed-ce0395465c36\",\"7341de9f-bf31-4dcd-80a2-c142b76993c2\",\"3c35b099-492e-4abe-be0e-8ab3371e0735\",\"4683bed7-11f5-4afc-9075-4be4e70ef3a6\",\"aa479ba7-c9cb-4d09-9a3e-ae1569dff218\",\"87c3a2f7-dd89-4ebc-afbe-ed8dd2044284\",\"82e4fb9b-1717-4d15-8442-d081c010007a\",\"01e5dd4d-09fd-4582-a5b9-95b8b61d6c82\",\"4fde268f-d724-4bab-8563-43903b9a93cc\",\"d32d0026-9af2-4380-8db8-6b7226441a65\",\"953834fc-8d69-4610-9d43-53b470dff0fd\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  if(condition11 || condition21 ) {\n    _.forEach([\"df6c5df0-f3ce-4d9a-be43-240b137b2934\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "No" ],
+            "answerUuidsToSkip" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Convulsions", "APH", "Pregnancy induce hypertension (PIH)", "Repeated abortion", "Still birth", "Congenital anomaly", "Caesarean section", "Blood transfusion", "Twins", "Obstructed labour", "PPH", "Any other" ],
+                "answerConceptUuids" : [ "d6d868bd-9544-4af7-b933-c62c01311ae0", "9ce2be20-6a80-494f-92ed-ce0395465c36", "7341de9f-bf31-4dcd-80a2-c142b76993c2", "3c35b099-492e-4abe-be0e-8ab3371e0735", "4683bed7-11f5-4afc-9075-4be4e70ef3a6", "aa479ba7-c9cb-4d09-9a3e-ae1569dff218", "87c3a2f7-dd89-4ebc-afbe-ed8dd2044284", "82e4fb9b-1717-4d15-8442-d081c010007a", "01e5dd4d-09fd-4582-a5b9-95b8b61d6c82", "4fde268f-d724-4bab-8563-43903b9a93cc", "d32d0026-9af2-4380-8db8-6b7226441a65", "953834fc-8d69-4610-9d43-53b470dff0fd" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "declarativeRule" : [ {
+      "actions" : [ {
+        "actionType" : "showFormElementGroup"
+      } ],
+      "conditions" : [ {
+        "compoundRule" : {
+          "rules" : [ {
+            "lhs" : {
+              "type" : "concept",
+              "scope" : "enrolment",
+              "conceptName" : "Result of pregnancy test",
+              "conceptUuid" : "bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce",
+              "conceptDataType" : "Coded"
+            },
+            "rhs" : {
+              "type" : "answerConcept",
+              "answerConceptNames" : [ "Positive" ],
+              "answerConceptUuids" : [ "63bb2474-1ea3-4816-8c93-de7a5f28e7fb" ]
+            },
+            "operator" : "containsAnswerConceptName"
+          } ]
+        }
+      } ]
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "fa469628-726b-4c90-8009-84e0d42dcdd3",
+    "name" : "Antenatal Services",
+    "displayOrder" : 3.0,
+    "display" : "Antenatal Services",
+    "formElements" : [ {
+      "name" : "RCH No.",
+      "uuid" : "8d209c58-03d7-4c27-a718-00f84cdfa40a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "RCH No.",
+        "uuid" : "a3b41dea-8196-448c-96ab-3a2413544361",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "validFormat" : {
+        "regex" : "^[0-9]{12}$",
+        "descriptionKey" : "Enter a 12 digit number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Registration date",
+      "uuid" : "c991a285-dd07-43fb-a32a-e881ccdc8767",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Registration date",
+        "uuid" : "ebe4fed1-8d1e-46aa-b235-56cd8baa056f",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Place of registration",
+      "uuid" : "9d9159ae-4107-491c-b37f-0eef3f3b3313",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of registration",
+        "uuid" : "dde1442a-92dc-4641-8408-29e1fedaf9b8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Sub-divisional hospital",
+          "uuid" : "3973835d-cdb8-4fbe-af1e-c6947e95ede2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Medical college",
+          "uuid" : "39d5f5ad-97c9-432e-9b51-2549468563ac",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "VHND",
+          "uuid" : "ff337716-d5b3-4a16-9ba4-cd8b8b03c990",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Is any ANC done ?",
+      "uuid" : "a25a9e89-41f6-4e41-bdda-a7803c3cc742",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is any ANC done",
+        "uuid" : "4ce9eece-1c41-4341-8781-2a222cc1e224",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEnrolment(\"d5a6616c-900b-42b3-8a2f-1d0bac3ad40b\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Do you have MCP card",
+                "conceptUuid" : "483bc3f7-5a3a-4dfa-9ba7-c9ebbc175c95",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Have visited PHC and collected details about MCP card",
+                "conceptUuid" : "d5a6616c-900b-42b3-8a2f-1d0bac3ad40b",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "or"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "How many ANC done ?",
+      "uuid" : "5c3b7295-afeb-405d-a964-66c3db4f1f6c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "How many ANC done",
+        "uuid" : "ab44b277-f8d7-42d8-a050-29471d8a80ca",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "4",
+          "uuid" : "2edb2147-9878-4553-92ec-6ba2ca3c8af9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "3",
+          "uuid" : "8e9b38ef-728c-440a-8bc6-8d12183c8bb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "0",
+          "uuid" : "0f2d25fe-58c1-4669-877a-181f8c572ba6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"4ce9eece-1c41-4341-8781-2a222cc1e224\").defined.and.when.valueInEnrolment(\"4ce9eece-1c41-4341-8781-2a222cc1e224\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"4ce9eece-1c41-4341-8781-2a222cc1e224\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n    if(condition12 ) {\n    _.forEach([\"0f2d25fe-58c1-4669-877a-181f8c572ba6\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is any ANC done",
+                "conceptUuid" : "4ce9eece-1c41-4341-8781-2a222cc1e224",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is any ANC done",
+                "conceptUuid" : "4ce9eece-1c41-4341-8781-2a222cc1e224",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "0" ],
+            "answerUuidsToSkip" : [ "0f2d25fe-58c1-4669-877a-181f8c572ba6" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is any ANC done",
+                "conceptUuid" : "4ce9eece-1c41-4341-8781-2a222cc1e224",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Last ANC date",
+      "uuid" : "61d2cb15-611e-4765-b881-6757c26f4e3d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Last ANC date",
+        "uuid" : "031cdbb9-306a-4fbe-afda-c457807bcf9c",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ab44b277-f8d7-42d8-a050-29471d8a80ca\").containsAnyAnswerConceptName(\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\",\"2dc6668b-770a-454c-905f-bd3f47fd89d9\",\"8e9b38ef-728c-440a-8bc6-8d12183c8bb6\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "How many ANC done",
+                "conceptUuid" : "ab44b277-f8d7-42d8-a050-29471d8a80ca",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "1", "2", "3" ],
+                "answerConceptUuids" : [ "f5bcb235-c1d8-43e2-a2bc-104e1651079a", "2dc6668b-770a-454c-905f-bd3f47fd89d9", "8e9b38ef-728c-440a-8bc6-8d12183c8bb6" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Expected delivery place",
+      "uuid" : "66b3cf66-b68a-4869-8ebc-790470031996",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Expected delivery place",
+        "uuid" : "1dae6496-fdc9-42be-b872-0e448d5e58c2",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Medical college",
+          "uuid" : "39d5f5ad-97c9-432e-9b51-2549468563ac",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "CHC",
+          "uuid" : "9ac6fa8d-e4b6-4713-b9d5-b7031c482de5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Sub-divisional hospital",
+          "uuid" : "3973835d-cdb8-4fbe-af1e-c6947e95ede2",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "PHC",
+          "uuid" : "b684360a-d316-437f-9cad-4b7703d7e4f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other for expected delivery place",
+      "uuid" : "33b1da80-dc25-4ee3-afcd-a0bfc1e8a20a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Specify other for expected delivery place",
+        "uuid" : "f6ba030c-b749-4d2c-93e7-c346ce29ab08",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"1dae6496-fdc9-42be-b872-0e448d5e58c2\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Expected delivery place",
+                "conceptUuid" : "1dae6496-fdc9-42be-b872-0e448d5e58c2",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Next ANC date",
+      "uuid" : "426ba64c-c414-49f8-9b50-3b7a0b01b915",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suggested next ANC date",
+        "uuid" : "14f82aae-0e37-43b6-a074-563dae1f0c6a",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "timed" : false
+  }, {
+    "uuid" : "c4bb66e9-d0e3-48ad-aa21-24adb85d3999",
+    "name" : "Vaccination",
+    "displayOrder" : 4.0,
+    "display" : "Vaccination",
+    "formElements" : [ {
+      "name" : "How many TD dose taken in last pregnancy",
+      "uuid" : "4951ab68-9e5e-43d0-8e1b-67ee33ace893",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "How many TD dose taken in last pregnancy",
+        "uuid" : "ec78e264-4166-40a9-8d37-ca59e377a5f6",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "0",
+          "uuid" : "0f2d25fe-58c1-4669-877a-181f8c572ba6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Is it her first pregnancy",
+                "conceptUuid" : "b6f21008-537e-40da-9543-82a430cd0563",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Approximate date of last dose",
+      "uuid" : "40cfc409-2102-441d-ad8d-16318ef82e4d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Approximate date of last dose",
+        "uuid" : "b414ec13-4238-4b89-8950-6b98c140bdbf",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnswerConceptName(\"2dc6668b-770a-454c-905f-bd3f47fd89d9\").matches();\n  \n  visibility = condition11 ;\n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b414ec13-4238-4b89-8950-6b98c140bdbf\").greaterThan(moment().toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future.\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+      "uuid" : "41fada58-94de-4dfd-83f5-719bc40de0c3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative TD 1 Date (VHND / PMSMA)",
+        "uuid" : "21a23197-4aac-44fe-befb-9664dc2a8873",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const firstPregnancyAnswerIsYes = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const tdDoseTakenInLastPregnancyIs0Or1 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n    \n  const tdDoseTakenInLastPregnancyIsTwo = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnswerConceptName(\"2dc6668b-770a-454c-905f-bd3f47fd89d9\").matches();\n  \n  const approximateDateOfLastDose = programEnrolment.getObservationValue('b414ec13-4238-4b89-8950-6b98c140bdbf');\n  \n  if ( tdDoseTakenInLastPregnancyIsTwo && moment(programEnrolment.enrolmentDateTime).diff(moment(approximateDateOfLastDose),'months') >= 30 ) {\n  visibility = true;\n  }\n  \n  if (  tdDoseTakenInLastPregnancyIs0Or1 ) visibility = true;\n  \n  if ( firstPregnancyAnswerIsYes ) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Tentative TD 2 Date (VHND / PMSMA)",
+      "uuid" : "e57c2065-47b4-4110-9a05-e57396fc410e",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Tentative TD 2 Date (VHND / PMSMA)",
+        "uuid" : "cdc97e33-c924-4203-8a3b-8e544ab750de",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Tentative date for booster (VHND / PMSMA)",
+      "uuid" : "b476efb0-6416-423b-965c-36bcd08e1c7a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative date for booster (VHND / PMSMA)",
+        "uuid" : "10a0c592-2146-4f3d-8caa-a9238bd227a0",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"2dc6668b-770a-454c-905f-bd3f47fd89d9\").matches();\n  \n  if (condition11) {\n  \n  let dateOfLastDose = programEnrolment.getObservationValue('Approximate date of last dose');\n  \n  if ( dateOfLastDose && moment().diff(moment(dateOfLastDose),'months') < 30 ){\n  \n      visibility = true ;\n      \n  }\n}\n    const dateCheck = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"10a0c592-2146-4f3d-8caa-a9238bd227a0\").greaterThan(moment().toDate()).matches();\n  \n    if(dateCheck ){\n    validationErrors.push(\"Date cannot be in the future.\");  \n}\n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Tentative TD 2 Date (VHND / PMSMA)",
+      "uuid" : "d7545e7f-1183-4b94-bbe7-4aa0daaa321c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Tentative TD 2 Date (VHND / PMSMA) (voided~125447)",
+        "uuid" : "e0c1d5e3-fc64-4785-80ed-9dc4c420a573",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true,
+        "voided" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"b6f21008-537e-40da-9543-82a430cd0563\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").or.when.valueInEnrolment(\"ec78e264-4166-40a9-8d37-ca59e377a5f6\").containsAnyAnswerConceptName(\"0f2d25fe-58c1-4669-877a-181f8c572ba6\",\"f5bcb235-c1d8-43e2-a2bc-104e1651079a\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"e0c1d5e3-fc64-4785-80ed-9dc4c420a573\").lessThan(moment(programEnrolment.enrolmentDateTime).toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"TD 2 date cannot be earlier than enrolment date.\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true,
+      "voided" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "timed" : false
+  }, {
+    "uuid" : "4179053a-20db-4bfa-a353-e6abdc86d404",
+    "name" : "High Risk Pregnancy",
+    "displayOrder" : 5.0,
+    "display" : "High Risk Pregnancy",
+    "formElements" : [ {
+      "name" : "Suspected high risk pregnancy",
+      "uuid" : "957b7449-d613-434e-ac63-78a83ea53dbc",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suspected high risk pregnancy",
+        "uuid" : "c1da7728-30e5-46af-9934-bbd2b7687a95",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "abnormal" : true,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnswerConceptNameOtherThan(\"73d44ad2-1538-4884-8ed2-4762245ff929\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnswerConceptNameOtherThan(\"73d44ad2-1538-4884-8ed2-4762245ff929\").matches();\n  \n  const condition22 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnswerConceptName(\"73d44ad2-1538-4884-8ed2-4762245ff929\").matches();\n  \n  const condition23 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition14 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").containsAnswerConceptName(\"73d44ad2-1538-4884-8ed2-4762245ff929\").matches();\n  \n  const condition24 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n    \n  const condition15 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").notDefined.matches();\n  \n  const condition25 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition16 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"13b05831-a291-4c8e-a262-1fda190b97b0\").notDefined.matches();\n  \n  const condition26 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"a908211b-e1e6-4ca4-9cc2-f719c4865d11\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  if(condition11 && condition21 ) {\n    _.forEach([\"df6c5df0-f3ce-4d9a-be43-240b137b2934\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition12 && condition22 ) {\n    _.forEach([\"df6c5df0-f3ce-4d9a-be43-240b137b2934\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition13 && condition23 ) {\n    _.forEach([\"df6c5df0-f3ce-4d9a-be43-240b137b2934\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition14 && condition24 ) {\n    _.forEach([\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition15 && condition25 ) {\n    _.forEach([\"df6c5df0-f3ce-4d9a-be43-240b137b2934\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition16 && condition26 ) {\n    _.forEach([\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "No" ],
+            "answerUuidsToSkip" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+          },
+          "actionType" : "skipAnswers"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "None" ],
+                "answerConceptUuids" : [ "73d44ad2-1538-4884-8ed2-4762245ff929" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "No" ],
+            "answerUuidsToSkip" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "None" ],
+                "answerConceptUuids" : [ "73d44ad2-1538-4884-8ed2-4762245ff929" ]
+              },
+              "operator" : "containsAnswerConceptNameOtherThan"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "No" ],
+            "answerUuidsToSkip" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "None" ],
+                "answerConceptUuids" : [ "73d44ad2-1538-4884-8ed2-4762245ff929" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Yes" ],
+            "answerUuidsToSkip" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "None" ],
+                "answerConceptUuids" : [ "73d44ad2-1538-4884-8ed2-4762245ff929" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "No" ],
+            "answerUuidsToSkip" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "notDefined"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Yes" ],
+            "answerUuidsToSkip" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Last pregnancy complications",
+                "conceptUuid" : "13b05831-a291-4c8e-a262-1fda190b97b0",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "notDefined"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Are you taking any medicine for TB / BP / Diabetes / Heart disease / Kidney Disorder / Liver Disorder",
+                "conceptUuid" : "a908211b-e1e6-4ca4-9cc2-f719c4865d11",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "timed" : false
+  }, {
+    "uuid" : "1ce77ce9-eda4-4134-ba9d-7b815f9806dd",
+    "name" : "Next ANC date",
+    "displayOrder" : 6.0,
+    "display" : "Next ANC date",
+    "formElements" : [ {
+      "name" : "Do you want to continue with the pregnancy?",
+      "uuid" : "dbd686a4-969d-411e-b40c-8dc43e3bc35f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you want to continue with the pregnancy?",
+        "uuid" : "9014b40b-eb35-4014-af8f-b107dbc13b2a",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Next ANC date",
+      "uuid" : "4ce8840b-a21e-4c0c-b912-2d73c2cfc692",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suggested next ANC date",
+        "uuid" : "14f82aae-0e37-43b6-a074-563dae1f0c6a",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"9014b40b-eb35-4014-af8f-b107dbc13b2a\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  const lastAncDate = programEnrolment.getObservationValue('031cdbb9-306a-4fbe-afda-c457807bcf9c');\n  \n  if (lastAncDate) value = moment(lastAncDate).add(28,'days');\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "rule" : "'use strict';\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const formElementGroup = params.formElementGroup;\n    const _ = imports.lodash;\n    let visibility = true;\n    return formElementGroup.formElements.map((formElement) => {\n        \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n  \n        visibility = condition11 ;\n  \n        return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, null);\n    });\n};",
+    "timed" : false
+  } ],
+  "decisionRule" : "//SAMPLE RULE EXAMPLE\n  \"use strict\";\n({params, imports}) => {\n    const programEnrolment = params.entity;\n    const decisions = params.decisions;\n    \n    let dateOfDeath = programEnrolment.findExitObservation('ee91d2b0-c93c-4d31-8c48-58738df229ff');\n\n    if (dateOfDeath) {\n    \n        decisions.registrationDecisions.push({name : \"Individuals status\", value : \"Dead\"});\n        decisions.registrationDecisions.push({name : \"Date of death\", value: dateOfDeath.getReadableValue() });\n    }\n    \n    return decisions;\n};",
+  "visitScheduleRule" : "\"use strict\";\n({ params, imports }) => {\n    const programEnrolment = params.entity;\n    const moment = imports.moment;\n    const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({ programEnrolment });\n\n    const estimatedDateOfDelivery = programEnrolment.getObservationReadableValue(\"6cd124ed-fdca-4201-b346-ec55b24de0e8\");\n    \n    const positiveForPregnancy = new imports.rulesConfig.RuleCondition({ programEnrolment }).when.valueInEnrolment(\"bf9d7ac8-80d2-4d45-982f-bfe2e43e9dce\").containsAnswerConceptName(\"63bb2474-1ea3-4816-8c93-de7a5f28e7fb\").matches();\n    \n    const continuePregnancy = new imports.rulesConfig.RuleCondition({ programEnrolment }).when.valueInEnrolment(\"9014b40b-eb35-4014-af8f-b107dbc13b2a\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n    const lmp = programEnrolment.getObservationValue('f58189f4-33f9-4030-94fe-1cc738a0b444');\n    \n    let individualIsUnder2Trimester = moment(programEnrolment.enrolmentDateTime).diff(moment(lmp),'weeks'); \n    \n    if (positiveForPregnancy && continuePregnancy) {\n\n            const earliestDate = moment(programEnrolment.getObservationReadableValue('14f82aae-0e37-43b6-a074-563dae1f0c6a')).add(0, 'days').toDate();\n            const maxDate = moment(programEnrolment.getObservationReadableValue('14f82aae-0e37-43b6-a074-563dae1f0c6a')).add(2, 'days').toDate();\n            scheduleBuilder.add({ name: \"ANC 1\", encounterType: \"ANC\", earliestDate, maxDate });\n\n    }\n    \n        if ( positiveForPregnancy && estimatedDateOfDelivery && continuePregnancy) {\n        \n        const dueDate = moment(estimatedDateOfDelivery).add(0,'days').toDate();\n        const overDueDate = moment(dueDate).add(3,'days').toDate();\n        scheduleBuilder.add({ name: \"Delivery\", encounterType: \"Delivery\", earliestDate: dueDate, maxDate: overDueDate });\n        \n        }\n            \n        if (positiveForPregnancy && !continuePregnancy && individualIsUnder2Trimester < 27)\n        {\n        const dueDate = moment(programEnrolment.enrolmentDateTime).add(0,'days').toDate();\n        const overDueDate = moment(dueDate).add(3,'days').toDate();\n        scheduleBuilder.add({ name: \"Abortion\", encounterType: \"Abortion\", earliestDate: dueDate, maxDate: overDueDate });\n        }\n        \n        \n    \n\n\n    return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

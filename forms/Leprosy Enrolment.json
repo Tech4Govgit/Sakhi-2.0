@@ -1,0 +1,343 @@
+{
+  "name" : "Leprosy Enrolment",
+  "uuid" : "216854db-989a-4fbc-b655-3f77345d6608",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "7cc13ae2-cc07-43fd-b081-01fdad62dbb7",
+    "name" : "Leprosy Detail",
+    "displayOrder" : 1.0,
+    "display" : "Leprosy Detail",
+    "formElements" : [ {
+      "name" : "Home visit date",
+      "uuid" : "ab8f95bf-b271-41c9-91bb-556476d0f0af",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Home visit date",
+        "uuid" : "44506d7b-78bf-4d0e-84b9-50aea1e749a8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n    value = moment().startOf('day').toDate();\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Leprosy status",
+      "uuid" : "915a26c7-278d-466a-b620-c5efb58b7202",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Cured", "Regularly taking medicines", "Not regularly taking medicines", "Other", "Confirmed", "Treatment started", "Not confirmed", "Death", "Recurrence of symptoms", "Treatment completed", "Recovering" ]
+      } ],
+      "concept" : {
+        "name" : "Leprosy status",
+        "uuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Regularly taking medicines",
+          "uuid" : "c2539439-b8e0-46c2-9435-1b370b34cbdc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "active" : true
+        }, {
+          "name" : "Not regularly taking medicines",
+          "uuid" : "f39eb9d7-b8d3-4658-b39e-ccc39c1bf0fa",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 12.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 14.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Not screened",
+          "uuid" : "40d1454c-8bd5-43e8-9d43-00db02ee1765",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Screened",
+          "uuid" : "9adfacba-26db-45d7-9ca1-16ac14a24d5c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Denied",
+          "uuid" : "a2a14749-5e1e-4fba-89a7-6defe05bdb42",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Treatment completed",
+          "uuid" : "ff6e41d0-08db-40d7-909d-8df74232bbd7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 13.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Referred to",
+      "uuid" : "e65eba07-8d2c-465d-9754-4d86e57d428e",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Referred to",
+        "uuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"eb2e069a-cefd-44b3-a5df-4237d6d7a6e7\").containsAnswerConceptName(\"76107aa2-26a5-431d-a294-3e0d82911a4a\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Leprosy status",
+                "conceptUuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Suspected" ],
+                "answerConceptUuids" : [ "76107aa2-26a5-431d-a294-3e0d82911a4a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Other referred to",
+      "uuid" : "a1e29ad2-537b-4761-a384-18b10783feb5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other referred to",
+        "uuid" : "2615d42a-af2f-4b0e-95e4-875bec39ca98",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"772e7054-d688-4484-9092-afa9538b5b02\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Referred to",
+                "conceptUuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Leprosy status date",
+      "uuid" : "e09cc6de-cc93-4dfa-9574-28f5e20adddc",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Leprosy status date",
+        "uuid" : "f78bc68c-4f68-4e32-a825-fa173e364407",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"f78bc68c-4f68-4e32-a825-fa173e364407\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  if(condition11 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Type of Leprosy",
+      "uuid" : "ab248b3e-8e34-43f2-82f0-15138cf5181f",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of Leprosy",
+        "uuid" : "27729765-b104-44fd-8956-a60fe8185df3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Paucibacillary (PB)",
+          "uuid" : "833bd5c3-d175-405b-a20c-c0e820aa3e8c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Multibacillary (MB)",
+          "uuid" : "7add1a16-7ad2-4e48-8a5c-e05daaf8b175",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"eb2e069a-cefd-44b3-a5df-4237d6d7a6e7\").containsAnswerConceptName(\"c174a25f-feff-4969-90f5-7867cee74c80\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Leprosy status",
+                "conceptUuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Confirmed" ],
+                "answerConceptUuids" : [ "c174a25f-feff-4969-90f5-7867cee74c80" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

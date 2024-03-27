@@ -1,0 +1,731 @@
+{
+  "name" : "HBYC Encounter",
+  "uuid" : "e20097bf-e097-4583-bb5a-7f4dbc6bd1f7",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "f4c1c4e9-bf5e-413b-8a70-f08943ab153b",
+    "name" : "Basic Detail",
+    "displayOrder" : 1.0,
+    "display" : "Basic Detail",
+    "formElements" : [ {
+      "name" : "Child condition post delivery",
+      "uuid" : "705be4d8-4ff2-4e5d-82df-b386f701e0ea",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Child condition post delivery",
+        "uuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Live",
+          "uuid" : "3fa49dce-d290-436b-9498-e7428c1b13d7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Date of death",
+      "uuid" : "de4b5ad8-290c-4fa5-b143-9d5028114355",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of death",
+        "uuid" : "ee91d2b0-c93c-4d31-8c48-58738df229ff",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Place of death",
+      "uuid" : "e11d7692-0c19-413c-9c5d-a96cf2494e9b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Place of Death",
+        "uuid" : "5368977b-52be-4df5-98dc-65fb0ef0f6cc",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Probable cause of death",
+      "uuid" : "26fdac61-d033-4399-a63a-ae8bc9db5a14",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Probable cause of death",
+        "uuid" : "38a13868-0751-4760-abce-26f909517814",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6762689c-b345-4849-afe0-3301ae9bde56\").containsAnswerConceptName(\"90ba47ec-decd-46ed-ba8f-c9840105d2c1\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Child condition post delivery",
+                "conceptUuid" : "6762689c-b345-4849-afe0-3301ae9bde56",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Death" ],
+                "answerConceptUuids" : [ "90ba47ec-decd-46ed-ba8f-c9840105d2c1" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Whether child is sick ?",
+      "uuid" : "7ce2030d-44d8-4cd5-b155-953c360569a9",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Whether child is sick",
+        "uuid" : "42008572-2b27-4964-8245-2ffa3a7ae46e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Breastfeeding continued",
+      "uuid" : "110784e4-a005-458d-81f8-602db0878dbe",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Breastfeeding continued",
+        "uuid" : "9719e4d5-1359-4eb0-a5a3-5ed001514cd8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Complementary food given",
+      "uuid" : "acfb2599-2aaa-40e7-87c2-c199d2663b42",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Complementary food given",
+        "uuid" : "c42da729-5714-4540-9954-e2ab94a96421",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "½ cup/katori serving at a time",
+          "uuid" : "65fe3fd5-ad21-4b6f-af0c-ca4cf3d220f7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "2-3 times each day",
+          "uuid" : "3abe62a9-96fe-44d4-bd6e-2dc3b093b3a7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "2-3 table spoon of food at a time",
+          "uuid" : "e69e17e2-da0c-4b2f-9eea-96f411f53957",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "½ cup / katori serving at a time",
+          "uuid" : "dca5b7cb-a8a7-4355-98e5-cd90f9d79f27",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "¾ to 1 cup/katori serving at a time",
+          "uuid" : "aea2412d-74fa-42a4-a442-a09d3cc0f96a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "3-4 times each day with 1-2 snacks between meals",
+          "uuid" : "d8048d63-ef63-4601-9804-af41e7200d7e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "2-3 times each day with 1-2 snacks between meals",
+          "uuid" : "c54a7403-6d0f-4e85-bf47-5c3c2978a3f5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  const getEnc = programEncounter.programEnrolment.getEncountersOfType('HBYC');\n  const allENc = getEnc.map(x => x.name);\n\n  if (allENc.length > 1) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Recording of weight-for-age by AWW",
+      "uuid" : "6eb6fba9-ab71-4fcb-a833-1152fce17c4a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Recording of weight-for-age by AWW",
+        "uuid" : "495f87da-4d44-4fb2-8bcb-8f946f489207",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Recording of weight-for-length/height by AWW",
+      "uuid" : "f9bf0d39-1702-45e7-b18e-a4be7e9234b5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Recording of weight-for-length/height by AWW",
+        "uuid" : "231a1284-7a97-425b-a49b-482c715bba32",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Developmental delay checked ?",
+      "uuid" : "86117a74-bec7-4960-a9db-e3d8d2de716d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Developmental delay checked",
+        "uuid" : "537dd7fb-cc46-4d7f-bc26-25617fabef5e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Immunisation status checked ?",
+      "uuid" : "c2548699-5a57-4a32-bd82-e48b21989bbc",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Immunisation status checked",
+        "uuid" : "6e14883f-44d8-480b-a8c4-3f9e50af1ac1",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Measles vaccine given ?",
+      "uuid" : "4178c95b-cf39-45db-8020-d9ca7fe3f5a4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Measles vaccine given",
+        "uuid" : "e7d92f85-e277-458e-9c56-7e834a8f21b7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  const getEnc = programEncounter.programEnrolment.getEncountersOfType('HBYC');\n  const allENc = getEnc.map(x => x.name);\n\n  if (allENc.length > 2) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Vitamin A given ?",
+      "uuid" : "fd9b5b1c-7348-4e6c-9b6d-b858b6851f94",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Vitamin A given",
+        "uuid" : "85f443b1-7c4e-43e6-b906-ce8df198cf7b",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  const getEnc = programEncounter.programEnrolment.getEncountersOfType('HBYC');\n  const allENc = getEnc.map(x => x.name);\n\n  if (allENc.length > 2) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "ORS at home ?",
+      "uuid" : "c81f2882-d05e-4933-8dca-4db0baf68229",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "ORS at home",
+        "uuid" : "f76c656c-83a7-41eb-8bf2-9e01518421e4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\nif ( programEncounter.name == \"HBYC 1\" ) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "IFA syrup at home ?",
+      "uuid" : "99745328-77d1-4126-b4d1-f3009b1326cb",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "IFA syrup at home",
+        "uuid" : "0b6f9fff-039d-4e1d-a737-171a18ddc3e8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 15.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\nif ( programEncounter.name == \"HBYC 1\" ) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "64fc78ce-083f-4354-94c5-fbb8e56cfd76",
+    "name" : "ASHA to provide services at age",
+    "displayOrder" : 2.0,
+    "display" : "ASHA to provide services at age",
+    "formElements" : [ {
+      "name" : "Counsel for exclusive breastfeeding ?",
+      "uuid" : "f699b8c0-3da2-45e0-b972-ae7d2b729b8b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Counsel for exclusive breastfeeding",
+        "uuid" : "3df48db6-a7cc-476f-8d54-da874fad6714",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  const getEnc = programEncounter.programEnrolment.getEncountersOfType('HBYC');\n  const allENc = getEnc.map(x => x.name);\n\n  if (allENc.length >= 2) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Counsel for complementary feeding?",
+      "uuid" : "5d7c1846-171c-4205-a696-6953f7bfb247",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Counsel for complementary feeding",
+        "uuid" : "3747f7ac-d85e-464f-b861-dd894be1c9fc",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  const getEnc = programEncounter.programEnrolment.getEncountersOfType('HBYC');\n  const allENc = getEnc.map(x => x.name);\n\n  if (allENc.length > 1) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Counsel for hand washing ?",
+      "uuid" : "a2536627-93a7-472c-9bd0-71a9f87a90c5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Counsel for hand washing",
+        "uuid" : "d79eb536-c29d-4a11-b465-d856302fb8db",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Counsel on parenting ?",
+      "uuid" : "e4b01946-53d0-4cda-bf20-c6d275b272a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Counsel on parenting",
+        "uuid" : "040ce4bc-e119-4e7f-89b7-d6304fcbd9e8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Family planning counselling ?",
+      "uuid" : "2984c809-28f4-4bb5-8b3e-fb89a26dc828",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Family planning counselling",
+        "uuid" : "4a58d7df-22fe-441f-a2a9-1d65ea316af6",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "ORS given ?",
+      "uuid" : "5d53fa87-5173-46a2-b5d6-a4a711f55adc",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "ORS given",
+        "uuid" : "f5008b91-08b7-4aeb-9ee5-1c179b87bb60",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  \n\n  if ( programEncounter.name == \"HBYC 1\" ) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "IFA syrup given ?",
+      "uuid" : "a9eac6d3-09d4-4209-a714-f9aca17fe26c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "IFA syrup given",
+        "uuid" : "cd4c9c64-2ba7-447b-b1ec-010ea0f6a5fb",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];  \n  let resArray = [];\n\n  if ( programEncounter.name == \"HBYC 1\" ) visibility = true;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "//SAMPLE RULE EXAMPLE\n\"use strict\";\n({ params, imports }) => {\n  const programEncounter = params.entity;\n  const scheduleBuilder = new imports.rulesConfig.VisitScheduleBuilder({\n    programEncounter\n  });\n  const _ = imports.lodash;\n  const moment = imports.moment;\n\n  const encounterScheduler = [\n        {\"name\": \"HBYC 2\", \"earliest\": 180, \"max\": 182},\n        {\"name\": \"HBYC 3\", \"earliest\": 270, \"max\": 272},\n        {\"name\": \"HBYC 4\", \"earliest\": 360, \"max\": 362},\n        {\"name\": \"HBYC 5\", \"earliest\": 450, \"max\": 452}\n    ];\n\n  const dateOfBirth = programEncounter.individual.dateOfBirth;\n  const visitDate = programEncounter.encounterDateTime;\n\n  let schedule = _.chain(encounterScheduler).filter(e => moment(visitDate).isSameOrBefore(moment(dateOfBirth).add(e.earliest, 'days'), 'date') === true )\n                  .filter(e => (programEncounter.programEnrolment.hasEncounter('HBYC', e.name)) === false)\n                  .first()\n                  .value();\n  \n  const getEnc = programEncounter.programEnrolment.getEncounters(true);\n  const getAllCompletedEncounters = _.chain(getEnc)\n  .map(e => e.name)\n  .value();\n  \n//    console.log('getAllCompletedEncounters---->',getAllCompletedEncounters);\n//    console.log('programEncounter.name--->',programEncounter.name);\n  \n  const comparisonFunction = () => {\n      for ( let i=0; i<(getAllCompletedEncounters.length-1) ; i++) {\n          if ( getAllCompletedEncounters[i] === programEncounter.name ) return false;\n      }\n  }\n//  console.log('!_.isEmpty(schedule)-------->',!_.isEmpty(schedule));\n//  console.log('!comparisonFunction-------->',comparisonFunction);\n  \n   if (!_.isEmpty(schedule) && comparisonFunction ) {\n\n   scheduleBuilder\n            .add({\n                name: schedule.name,\n                encounterType: \"HBYC\",\n                earliestDate:  moment(dateOfBirth).add(schedule.earliest, 'days').toDate() ,\n                maxDate: moment(dateOfBirth).add(schedule.max, 'days').toDate()\n            });\n\n   }\n\n\n\n  return scheduleBuilder.getAll();\n};",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

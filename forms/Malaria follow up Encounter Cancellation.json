@@ -1,0 +1,7 @@
+{
+  "name" : "Malaria follow up Encounter Cancellation",
+  "uuid" : "41732072-690f-456a-89b8-4c2e69d92934",
+  "formType" : "ProgramEncounterCancellation",
+  "formElementGroups" : [ ],
+  "decisionConcepts" : [ ]
+}

@@ -1,0 +1,474 @@
+{
+  "name" : "Filaria Enrolment",
+  "uuid" : "18f45ed8-f343-4731-a17d-ea529fe60443",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "af0d7ef8-1f27-4795-bc44-0dd50c81cfa4",
+    "name" : "Enrolment details",
+    "displayOrder" : 1.0,
+    "display" : "Enrolment details",
+    "formElements" : [ {
+      "name" : "Suffering from Filariasis",
+      "uuid" : "7e4a36eb-820c-41d7-b9c8-ddc8afbde592",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Suffering from Filariasis",
+        "uuid" : "eed163c7-7d3b-4b00-831b-8321da441223",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Which part of body",
+      "uuid" : "8410b416-8cdd-4af9-945e-842947fff4c4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Which part of body",
+        "uuid" : "4021c86d-d532-40e5-8ec2-c8f353794d91",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Hydrocele",
+          "uuid" : "8c638f84-4aff-4670-a55b-459770e969e0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Right hand",
+          "uuid" : "bd73c93e-a97c-4690-98a7-1d2b1d2a551a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Right leg",
+          "uuid" : "d0f52698-2b66-427c-9c2b-43bb718a5d2e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Left hand",
+          "uuid" : "6d54a5c7-5cf0-4540-8f17-aafc2305ca0e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Left side breast",
+          "uuid" : "f2487006-4646-4290-bf09-a29ee7a95629",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Left leg",
+          "uuid" : "c464fe0f-13c3-4afd-806b-b6b4fddfcdc7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Right side breast",
+          "uuid" : "de46de9e-d899-46c0-95c5-4eac4335babb",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.gender.equals(\"Male\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.gender.equals(\"Female\").matches();\n    \n  const condition13 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"eed163c7-7d3b-4b00-831b-8321da441223\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  if(condition11 ) {\n    _.forEach([\"de46de9e-d899-46c0-95c5-4eac4335babb\",\"f2487006-4646-4290-bf09-a29ee7a95629\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    if(condition12 ) {\n    _.forEach([\"8c638f84-4aff-4670-a55b-459770e969e0\"], (answer) => {\n        const answerToSkip = formElement.getAnswerWithConceptUuid(answer);\n        if (answerToSkip) answersToSkip.push(answerToSkip);\n    });\n};\n    visibility = condition13 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Right side breast", "Left side breast" ],
+            "answerUuidsToSkip" : [ "de46de9e-d899-46c0-95c5-4eac4335babb", "f2487006-4646-4290-bf09-a29ee7a95629" ]
+          },
+          "actionType" : "skipAnswers"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "details" : {
+            "answersToSkip" : [ "Hydrocele" ],
+            "answerUuidsToSkip" : [ "8c638f84-4aff-4670-a55b-459770e969e0" ]
+          },
+          "actionType" : "skipAnswers"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      }, {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Suffering from Filariasis",
+                "conceptUuid" : "eed163c7-7d3b-4b00-831b-8321da441223",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "216a9b86-3a39-49b5-88eb-93c93a265632",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other part of body",
+        "uuid" : "b439bdde-d303-431a-b8da-d18a02742d68",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"4021c86d-d532-40e5-8ec2-c8f353794d91\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Which part of body",
+                "conceptUuid" : "4021c86d-d532-40e5-8ec2-c8f353794d91",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "31019097-bb7f-4c24-82a5-e8d2ffac420b",
+    "name" : "MDA Program",
+    "displayOrder" : 2.0,
+    "display" : "MDA Program",
+    "formElements" : [ {
+      "name" : "Home visit date",
+      "uuid" : "ad37b5a4-0877-4f83-88c3-faf996245ad8",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Home visit date",
+        "uuid" : "44506d7b-78bf-4d0e-84b9-50aea1e749a8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n    value = moment().startOf('day').toDate();\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "DEC and Albendazole dose status",
+      "uuid" : "0e755576-daf3-4f82-8b75-b0e3a4f15922",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "DEC and Albendazole dose status",
+        "uuid" : "0f2dd081-c7fe-43ef-891d-918a655270e5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "L",
+          "uuid" : "9cb113ed-fa77-497e-92bd-55e5898dede5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "A",
+          "uuid" : "efd62b96-11e7-4ff3-98c4-1017da6059b3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Y",
+          "uuid" : "794111e0-1bee-484c-b661-b44dfb6a6bf7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "H",
+          "uuid" : "19510d98-3f4f-449b-a139-aec8215734a4",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "O",
+          "uuid" : "040cc015-7411-4d12-b777-45df4974912e",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "T",
+          "uuid" : "14ca08e5-cfe0-4459-b4e8-2d71faa657d8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "S",
+          "uuid" : "ba41f496-4f7a-4866-9bb9-499757ec159c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "R",
+          "uuid" : "90215ed2-0b48-44c8-a11b-777148cbe921",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "P",
+          "uuid" : "a4fa1fa7-0993-4b4c-afa2-2e85bb1163c3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "d8d20789-5dd6-4bcf-b6eb-923113681350",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other dev and albendazole dose status",
+        "uuid" : "5acb270c-cc36-46a0-94f9-82e3d3fdeb67",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"0f2dd081-c7fe-43ef-891d-918a655270e5\").containsAnswerConceptName(\"040cc015-7411-4d12-b777-45df4974912e\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "DEC and Albendazole dose status",
+                "conceptUuid" : "0f2dd081-c7fe-43ef-891d-918a655270e5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "O" ],
+                "answerConceptUuids" : [ "040cc015-7411-4d12-b777-45df4974912e" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  }, {
+    "uuid" : "e31b47ad-669b-4749-8ef5-e3e06e4350de",
+    "name" : "Side Effect Detail",
+    "displayOrder" : 3.0,
+    "display" : "Side Effect Detail",
+    "formElements" : [ {
+      "name" : "Medicine side effect",
+      "uuid" : "0e4ec1b5-ca67-485e-bf03-308c5c73cca7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Medicine side effect",
+        "uuid" : "fe16f500-3e60-49f1-8e15-da7c4af55caa",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Vomiting",
+          "uuid" : "3c0f88c0-1150-49e2-b48d-7b7a307f4cd5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Najala",
+          "uuid" : "a26c671d-8798-408a-a772-d09029b1ce4f",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Fever",
+          "uuid" : "e5b1e053-4855-44d0-bf09-e07f4e889854",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Body pain",
+          "uuid" : "d7d295ca-4b5d-49ff-9363-cb515e8256cd",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Headache",
+          "uuid" : "155db44b-5bea-4c3a-a735-90a7217c5228",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "b18be76e-54e7-4959-a0e9-df628685a7db",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other medicine side effect",
+        "uuid" : "c1c2fadf-9c31-4706-983b-d82485c40047",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"fe16f500-3e60-49f1-8e15-da7c4af55caa\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Medicine side effect",
+                "conceptUuid" : "fe16f500-3e60-49f1-8e15-da7c4af55caa",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

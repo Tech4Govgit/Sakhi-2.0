@@ -1,0 +1,86 @@
+{
+  "name" : "Malaria follow up Encounter",
+  "uuid" : "006b2993-1dc0-48a6-b415-2e0606c2977a",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "bf722ca0-5ccc-4dcf-98eb-d6e049d9f764",
+    "name" : "Basic details",
+    "displayOrder" : 1.0,
+    "display" : "Basic details",
+    "formElements" : [ {
+      "name" : "Malaria case status",
+      "uuid" : "d1ad6c13-f198-4897-adf2-a449394ef905",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Suspected" ]
+      } ],
+      "concept" : {
+        "name" : "Malaria case status",
+        "uuid" : "d925f21c-2d17-4457-8bd8-b08928895f38",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Treatment completed",
+          "uuid" : "ff6e41d0-08db-40d7-909d-8df74232bbd7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "",
+      "mandatory" : true
+    }, {
+      "name" : "Malaria case status date",
+      "uuid" : "d7c82c81-7352-4098-a508-22bed6e60174",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Malaria case status date",
+        "uuid" : "0f6bd84f-618a-44af-abd5-de156fb8fd8f",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const dateInFuture = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"0f6bd84f-618a-44af-abd5-de156fb8fd8f\").greaterThan(moment().startOf('day')).matches();\n    \n  const dateLessThanEnrolmentDate = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"0f6bd84f-618a-44af-abd5-de156fb8fd8f\").lessThan(moment(programEncounter.programEnrolment.enrolmentDateTime).startOf('day')).matches();\n  \n  if(dateInFuture ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n    if(dateLessThanEnrolmentDate ){\n    validationErrors.push(\"Date cannot be before enrolment date\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

@@ -1,0 +1,363 @@
+{
+  "name" : "Tuberculosis Enrolment",
+  "uuid" : "718b903c-2c91-452d-ae4b-0a1948e682f7",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "85b779d7-1f93-46d6-8fe0-19e05abc25e9",
+    "name" : "TB Details",
+    "displayOrder" : 1.0,
+    "display" : "TB Details",
+    "formElements" : [ {
+      "name" : "Home visit date",
+      "uuid" : "5b3be71b-ed74-4a01-aab2-ad831cdb179d",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Home visit date",
+        "uuid" : "44506d7b-78bf-4d0e-84b9-50aea1e749a8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n    value = moment().startOf('day').toDate();  \n\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "TB case status",
+      "uuid" : "458d03a4-8928-4646-be2d-03d32c243dcc",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Cured", "Treatment completed", "Treatment started", "Confirmed", "Recovering", "Not confirmed", "Recurrence of symptoms", "Regularly taking medicine", "Other", "Not regularly taking medicine", "Expired" ]
+      } ],
+      "concept" : {
+        "name" : "TB case status",
+        "uuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Treatment completed",
+          "uuid" : "ff6e41d0-08db-40d7-909d-8df74232bbd7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Regularly taking medicine",
+          "uuid" : "7e9bbce2-df44-4483-bb9b-8ef6c95804e4",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "active" : true
+        }, {
+          "name" : "Not regularly taking medicine",
+          "uuid" : "f82ff4b3-6f1e-4179-a5cc-8a46bd4c8a4c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "Expired",
+          "uuid" : "b7c5575c-96df-4c86-a8e2-d4750d2c7707",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Referred to",
+      "uuid" : "e8cde783-ae05-4f2f-9601-e60a349e6a6a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Referred to",
+        "uuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Community health centre",
+          "uuid" : "c11cc3ab-1568-4f2a-8e6f-34c91e8a86c8",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Primary health centre",
+          "uuid" : "2918ffee-807f-4701-abd1-aa3c965f4836",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "District hospital",
+          "uuid" : "1f411825-4d32-4cd0-9116-f0b2ebcdf703",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Other private hospital",
+          "uuid" : "f1df72f9-90d3-4226-aa20-d1fbf669d64d",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "None",
+          "uuid" : "73d44ad2-1538-4884-8ed2-4762245ff929",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"76107aa2-26a5-431d-a294-3e0d82911a4a\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Suspected" ],
+                "answerConceptUuids" : [ "76107aa2-26a5-431d-a294-3e0d82911a4a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Other referred to",
+      "uuid" : "a6676d72-7de1-4106-9f48-b0d9ed347d9c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other referred to",
+        "uuid" : "2615d42a-af2f-4b0e-95e4-875bec39ca98",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"772e7054-d688-4484-9092-afa9538b5b02\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "Referred to",
+                "conceptUuid" : "772e7054-d688-4484-9092-afa9538b5b02",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "TB case status date",
+      "uuid" : "e57c0e5b-21cc-4b6c-a45f-fa79cb40ae7b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "TB case status date",
+        "uuid" : "82ca7dc7-f503-4bb9-acce-1b3be0fbacf8",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Type of TB",
+      "uuid" : "a796ea0b-3354-4ec4-acf0-4c300ebe9faa",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of TB",
+        "uuid" : "d311eaba-662c-4a32-a75e-65ced2049afe",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Drug sensitive",
+          "uuid" : "4dc1ed19-a4e6-40ff-ba7b-a0f94a3045cf",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Drug resistant",
+          "uuid" : "c18f10f1-bd54-49be-a3d3-7111ace8c2be",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"c174a25f-feff-4969-90f5-7867cee74c80\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Confirmed" ],
+                "answerConceptUuids" : [ "c174a25f-feff-4969-90f5-7867cee74c80" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Treatment start date",
+      "uuid" : "57137748-c4c6-4399-8ec1-49fe233f9c19",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Treatment start date",
+        "uuid" : "a357191d-7b25-4ef9-8772-10be899738ec",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"e4af0511-023f-48af-934e-a919a98bcfea\").containsAnswerConceptName(\"48eee55b-c71e-43d6-b6fe-c5f61c62d23a\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "enrolment",
+                "conceptName" : "TB case status",
+                "conceptUuid" : "e4af0511-023f-48af-934e-a919a98bcfea",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Treatment started" ],
+                "answerConceptUuids" : [ "48eee55b-c71e-43d6-b6fe-c5f61c62d23a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

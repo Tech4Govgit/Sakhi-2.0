@@ -1,0 +1,46 @@
+[ {
+  "name" : "Household",
+  "uuid" : "a577a36e-f87a-44e9-b721-1015e889bea4",
+  "active" : true,
+  "type" : "Household",
+  "subjectSummaryRule" : "",
+  "allowEmptyLocation" : false,
+  "allowMiddleName" : false,
+  "lastNameOptional" : false,
+  "allowProfilePicture" : false,
+  "uniqueName" : true,
+  "validFirstNameFormat" : {
+    "regex" : "^[0-9]+$",
+    "descriptionKey" : "Add a valid Household number"
+  },
+  "shouldSyncByLocation" : true,
+  "nameHelpText" : "Only numeric values are allowed",
+  "household" : true,
+  "directlyAssignable" : false,
+  "group" : true,
+  "voided" : false
+}, {
+  "name" : "Individual",
+  "uuid" : "8ce8db7f-419e-485f-99ba-df7a0372f3de",
+  "active" : true,
+  "type" : "Person",
+  "subjectSummaryRule" : "",
+  "allowEmptyLocation" : false,
+  "allowMiddleName" : false,
+  "lastNameOptional" : false,
+  "allowProfilePicture" : false,
+  "uniqueName" : false,
+  "validFirstNameFormat" : {
+    "regex" : "^[a-zA-Z\\'\\ ]+$",
+    "descriptionKey" : "Cannot add any numbers"
+  },
+  "validLastNameFormat" : {
+    "regex" : "^[a-zA-Z\\'\\ ]+$",
+    "descriptionKey" : "Cannot add any numbers"
+  },
+  "shouldSyncByLocation" : true,
+  "household" : false,
+  "directlyAssignable" : false,
+  "group" : false,
+  "voided" : false
+} ]

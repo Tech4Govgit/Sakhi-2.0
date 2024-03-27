@@ -1,0 +1,10 @@
+[ {
+  "uuid" : "9572d335-cb46-4774-aa61-fbfe148ce957",
+  "id" : 425,
+  "name" : "Everyone",
+  "notEveryoneGroup" : false
+}, {
+  "uuid" : "5c6cc455-02cf-4457-817d-b4416ae95fee",
+  "id" : 689,
+  "name" : "Dev"
+} ]

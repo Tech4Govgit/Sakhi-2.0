@@ -1,0 +1,247 @@
+{
+  "name" : "Kala Azar follow up encounter",
+  "uuid" : "239ab461-468a-4e28-a461-d157c7981647",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "9cc56d6d-f980-4917-9325-57de37a86ad4",
+    "name" : "Follow-up detail",
+    "displayOrder" : 1.0,
+    "display" : "Follow-up detail",
+    "formElements" : [ {
+      "name" : "Follow up point",
+      "uuid" : "e2618b72-e77d-4d09-9c90-05efb5b038a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Follow up point",
+        "uuid" : "2e7f2b24-1071-46de-9338-30712cffb4b4",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "3",
+          "uuid" : "8e9b38ef-728c-440a-8bc6-8d12183c8bb6",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "1",
+          "uuid" : "f5bcb235-c1d8-43e2-a2bc-104e1651079a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "5",
+          "uuid" : "1c050b77-4816-457c-bbae-3fc85d9cdf00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "4",
+          "uuid" : "2edb2147-9878-4553-92ec-6ba2ca3c8af9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "2",
+          "uuid" : "2dc6668b-770a-454c-905f-bd3f47fd89d9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "6",
+          "uuid" : "5d5d96ae-1989-4d1e-8c0a-0dee24642c3c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInEntireEnrolment(\"e21479fc-9360-4dd1-8e93-5d6a97a49502\").containsAnswerConceptName(\"48eee55b-c71e-43d6-b6fe-c5f61c62d23a\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "latestInEntireEnrolment",
+                "conceptName" : "Kala azar case status",
+                "conceptUuid" : "e21479fc-9360-4dd1-8e93-5d6a97a49502",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Treatment started" ],
+                "answerConceptUuids" : [ "48eee55b-c71e-43d6-b6fe-c5f61c62d23a" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Follow up date",
+      "uuid" : "b48c3420-5aac-4416-b666-d667378765a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Follow up date",
+        "uuid" : "a05f6b5f-214c-4033-9148-82105b0fffca",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.latestValueInEntireEnrolment(\"e21479fc-9360-4dd1-8e93-5d6a97a49502\").containsAnswerConceptName(\"48eee55b-c71e-43d6-b6fe-c5f61c62d23a\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Kala azar case status",
+      "uuid" : "368b0c23-6800-415a-ae15-4310a602510e",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Suspected" ]
+      } ],
+      "concept" : {
+        "name" : "Kala azar case status",
+        "uuid" : "e21479fc-9360-4dd1-8e93-5d6a97a49502",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "a16c44b6-d4e6-4b49-9e64-5ee81d29ea1b",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other kala azar case status",
+        "uuid" : "5a7de59c-984a-41b6-a205-89c548236b2d",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"e21479fc-9360-4dd1-8e93-5d6a97a49502\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Kala azar case status",
+                "conceptUuid" : "e21479fc-9360-4dd1-8e93-5d6a97a49502",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Remarks",
+      "uuid" : "eace77fb-14e6-4844-ab0a-7697d86f98a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Remarks",
+        "uuid" : "5cf8f049-bc13-4e82-a7ee-b30074377a79",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

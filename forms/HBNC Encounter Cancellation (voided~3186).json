@@ -1,0 +1,8 @@
+{
+  "name" : "HBNC Encounter Cancellation (voided~3186)",
+  "uuid" : "fb05db85-fb57-4052-a836-86e10c873e8a",
+  "formType" : "IndividualEncounterCancellation",
+  "formElementGroups" : [ ],
+  "decisionConcepts" : [ ],
+  "voided" : true
+}

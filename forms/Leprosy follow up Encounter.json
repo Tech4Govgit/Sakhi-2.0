@@ -1,0 +1,259 @@
+{
+  "name" : "Leprosy follow up Encounter",
+  "uuid" : "f39eab66-abcc-448d-9a98-819e7799d06d",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "5a920853-fcf0-4868-8239-5e5e10747eb4",
+    "name" : "Follow up details",
+    "displayOrder" : 1.0,
+    "display" : "Follow up details",
+    "formElements" : [ {
+      "name" : "Leprosy status",
+      "uuid" : "133ae508-c640-43b0-a2e6-dfe4ef71fdf1",
+      "keyValues" : [ {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Not screened", "Screened", "Denied", "Suspected" ]
+      } ],
+      "concept" : {
+        "name" : "Leprosy status",
+        "uuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Cured",
+          "uuid" : "6944e68a-1c64-4da1-a104-2fb982edd87c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 8.0,
+          "active" : true
+        }, {
+          "name" : "Regularly taking medicines",
+          "uuid" : "c2539439-b8e0-46c2-9435-1b370b34cbdc",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 11.0,
+          "active" : true
+        }, {
+          "name" : "Not regularly taking medicines",
+          "uuid" : "f39eb9d7-b8d3-4658-b39e-ccc39c1bf0fa",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 12.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 14.0,
+          "active" : true
+        }, {
+          "name" : "Confirmed",
+          "uuid" : "c174a25f-feff-4969-90f5-7867cee74c80",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Treatment started",
+          "uuid" : "48eee55b-c71e-43d6-b6fe-c5f61c62d23a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 6.0,
+          "active" : true
+        }, {
+          "name" : "Not screened",
+          "uuid" : "40d1454c-8bd5-43e8-9d43-00db02ee1765",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Screened",
+          "uuid" : "9adfacba-26db-45d7-9ca1-16ac14a24d5c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Denied",
+          "uuid" : "a2a14749-5e1e-4fba-89a7-6defe05bdb42",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Suspected",
+          "uuid" : "76107aa2-26a5-431d-a294-3e0d82911a4a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Not confirmed",
+          "uuid" : "f884c778-ecea-4427-ac2c-c1383fd84f52",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 5.0,
+          "active" : true
+        }, {
+          "name" : "Death",
+          "uuid" : "90ba47ec-decd-46ed-ba8f-c9840105d2c1",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 9.0,
+          "active" : true
+        }, {
+          "name" : "Recurrence of symptoms",
+          "uuid" : "2a5fc0f3-15a2-40ad-a64e-a3694c61ab00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 10.0,
+          "active" : true
+        }, {
+          "name" : "Treatment completed",
+          "uuid" : "ff6e41d0-08db-40d7-909d-8df74232bbd7",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 13.0,
+          "active" : true
+        }, {
+          "name" : "Recovering",
+          "uuid" : "27eec495-6e02-4fc6-b755-1f8e730fcee9",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 7.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Type of Leprosy",
+      "uuid" : "f0c9e899-a3ca-406b-b57f-baf0bbf1ba7a",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of Leprosy",
+        "uuid" : "27729765-b104-44fd-8956-a60fe8185df3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Paucibacillary (PB)",
+          "uuid" : "833bd5c3-d175-405b-a20c-c0e820aa3e8c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Multibacillary (MB)",
+          "uuid" : "7add1a16-7ad2-4e48-8a5c-e05daaf8b175",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"eb2e069a-cefd-44b3-a5df-4237d6d7a6e7\").containsAnyAnswerConceptName(\"c174a25f-feff-4969-90f5-7867cee74c80\",\"48eee55b-c71e-43d6-b6fe-c5f61c62d23a\",\"c2539439-b8e0-46c2-9435-1b370b34cbdc\",\"ff6e41d0-08db-40d7-909d-8df74232bbd7\",\"6944e68a-1c64-4da1-a104-2fb982edd87c\",\"27eec495-6e02-4fc6-b755-1f8e730fcee9\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Leprosy status",
+                "conceptUuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Confirmed", "Treatment started", "Regularly taking medicines", "Treatment completed", "Cured", "Recovering" ],
+                "answerConceptUuids" : [ "c174a25f-feff-4969-90f5-7867cee74c80", "48eee55b-c71e-43d6-b6fe-c5f61c62d23a", "c2539439-b8e0-46c2-9435-1b370b34cbdc", "ff6e41d0-08db-40d7-909d-8df74232bbd7", "6944e68a-1c64-4da1-a104-2fb982edd87c", "27eec495-6e02-4fc6-b755-1f8e730fcee9" ]
+              },
+              "operator" : "containsAnyAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Leprosy Status date",
+      "uuid" : "b2f266e0-0de8-47d2-b034-ad84e2673bf4",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Leprosy status date",
+        "uuid" : "f78bc68c-4f68-4e32-a825-fa173e364407",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "Advice the patient to take medicine regularly for recovery",
+      "uuid" : "719dff1e-f064-4bfd-8c79-97c2c4268a6f",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Advice the patient to take medicine regularly for recovery",
+        "uuid" : "672674f9-fee2-44b8-b75b-e61418c09c51",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"eb2e069a-cefd-44b3-a5df-4237d6d7a6e7\").containsAnswerConceptName(\"f39eb9d7-b8d3-4658-b39e-ccc39c1bf0fa\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Leprosy status",
+                "conceptUuid" : "eb2e069a-cefd-44b3-a5df-4237d6d7a6e7",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Not regularly taking medicines" ],
+                "answerConceptUuids" : [ "f39eb9d7-b8d3-4658-b39e-ccc39c1bf0fa" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

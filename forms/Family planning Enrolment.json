@@ -1,0 +1,135 @@
+{
+  "name" : "Family planning Enrolment",
+  "uuid" : "e9bdd1be-8479-462e-82a0-e6ed9d5fc87d",
+  "formType" : "ProgramEnrolment",
+  "formElementGroups" : [ {
+    "uuid" : "a70d9ccc-2677-4ee2-9a69-64f6e5ae8a06",
+    "name" : "Enrolment Details",
+    "displayOrder" : 1.0,
+    "display" : "Enrolment Details",
+    "formElements" : [ {
+      "name" : "RCH Id",
+      "uuid" : "b9bd5d52-f750-4a4e-9990-b280e6d96384",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "RCH Id",
+        "uuid" : "55539716-e838-47b7-935c-a4644e6165a1",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  const ind = programEnrolment.individual;\n  \n\n  \n  \n  const progEnrol = _(ind.nonVoidedEnrolments()).sortBy([\"isActive\", \"enrolmentDateTime\"]).filter(enr => enr.program.uuid === '2e3b2ff5-6512-4931-a827-4d269ae31af8').last();\n  \n  if(progEnrol){\n      let rchValue = progEnrol.getObservationReadableValue('a3b41dea-8196-448c-96ab-3a2413544361');\n        if(rchValue ){\n            value = rchValue;  \n        }\n  }\n  \n\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "validFormat" : {
+        "regex" : "^[0-9]{12}$",
+        "descriptionKey" : "Enter a 12 digit number"
+      },
+      "mandatory" : true
+    }, {
+      "name" : "Date of marriage",
+      "uuid" : "21ee398e-be4d-4c8d-ba43-adc1cb4bb4fa",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Date of marriage",
+        "uuid" : "ad4f62a5-092d-4472-9530-c72e1c616b38",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = false;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInRegistration(\"ad4f62a5-092d-4472-9530-c72e1c616b38\").defined.matches();\n  \n  if(condition11 ){\n    value = programEnrolment.individual.getObservationValue('ad4f62a5-092d-4472-9530-c72e1c616b38') ; \n    visibility = true;\n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "Total number of children",
+      "uuid" : "5b0327c1-98c9-47f9-a769-0b306ab483c1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Total number of children",
+        "uuid" : "20df233d-9e15-43d9-9204-8067dae392de",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "mandatory" : true
+    }, {
+      "name" : "1st Child date of birth",
+      "uuid" : "752d8374-12f3-45f3-8621-89003f2fc578",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "1st Child date of birth",
+        "uuid" : "c9f0e8b3-d203-4108-93ca-03b2262bc92c",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"20df233d-9e15-43d9-9204-8067dae392de\").greaterThan(0).matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Gap between date of marriage and 1st child",
+      "uuid" : "bb95ac82-6e1d-47e5-92e1-3a042d45d119",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Gap between date of marriage and 1st child",
+        "uuid" : "d24880d6-956c-4f89-a722-4b081feaf3c2",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\").defined.matches();\n  \n  let dateOfMarriage = programEnrolment.getObservationReadableValueInEntireEnrolment(\"ad4f62a5-092d-4472-9530-c72e1c616b38\");\n  let dobOfFirstChild = programEnrolment.getObservationReadableValueInEntireEnrolment(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\");\n  \n  let numberOfMonths = moment(dobOfFirstChild).diff(moment(dateOfMarriage), 'months');\n  \n  value = numberOfMonths + ' months';\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    }, {
+      "name" : "2nd Child date of birth",
+      "uuid" : "81f4191c-2e6f-475f-be2b-30c57ae40ccd",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "2nd Child date of birth",
+        "uuid" : "ca9e063b-9017-4f33-87d9-d69b6a849b1b",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"20df233d-9e15-43d9-9204-8067dae392de\").greaterThan(1).matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\").greaterThan(moment().startOf('day').toDate()).matches();\n  \n  const condition13 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\").defined.matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n\n//const firstChildDob = programEnrolment.getObservationValue(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\");\n//const secondChildDob = programEnrolment.getObservationValue(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\");\n//const ninthdate_from_firstChildDob = moment(firstChildDob).add(9,'months');\n/*\nif (secondChildDob < firstChildDob) {\n    validationErrors.push(\"Enter a valid date\");\n}\n*/\n//const condition21 =  moment(secondChildDob).isSame(moment(firstChildDob)) ;\n//const condition22=  moment(secondChildDob).isSame(moment(ninthdate_from_firstChildDob)) ;\n//const condition2 = condition21 || condition21;\n\n\nif(condition13){\n  const firstChildDob = programEnrolment.getObservationValue(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\");\n  const secondChildDob = programEnrolment.getObservationValue(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\");\n\n  const condition21 =  moment(secondChildDob).isSame(moment(firstChildDob)) ;\n  const condition22=  moment(secondChildDob).diff(moment(firstChildDob),'months') >= 9 ;\n  const condition2 = condition21 || condition22;\n   \n  //console.log(\"=====================================================>\",  moment(secondChildDob).diff(moment(firstChildDob),'months'),condition21,condition22,condition2); \n     \n  if(!condition2){\n   validationErrors.push(\"2nd Child Date of birth can be either same as 1st child date of birth or after 9 months\");\n   }\n}\n\n\n\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Gap between 1st child and 2nd child",
+      "uuid" : "bc57c5f4-47b1-4660-b564-59c9dd951a7b",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      } ],
+      "concept" : {
+        "name" : "Gap between 1st child and 2nd child",
+        "uuid" : "014880d2-b8db-4aa0-b913-d852d9d9d2fa",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEnrolment = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEnrolment, formElement}).when.valueInEnrolment(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\").defined.matches();\n  \n  let dobOfFirstChild = programEnrolment.getObservationReadableValueInEntireEnrolment(\"c9f0e8b3-d203-4108-93ca-03b2262bc92c\");\n  let dobOfSecondChild = programEnrolment.getObservationReadableValueInEntireEnrolment(\"ca9e063b-9017-4f33-87d9-d69b6a849b1b\");\n  \n  let numberOfMonths = moment(dobOfSecondChild).diff(moment(dobOfFirstChild), 'months');\n  \n  value = numberOfMonths + ' months';\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : false
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}

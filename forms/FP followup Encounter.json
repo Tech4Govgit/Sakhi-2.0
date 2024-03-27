@@ -1,0 +1,1174 @@
+{
+  "name" : "FP followup Encounter",
+  "uuid" : "ef569318-e0f7-47a7-ae82-30e2d16226e6",
+  "formType" : "ProgramEncounter",
+  "formElementGroups" : [ {
+    "uuid" : "38cfee2e-455a-4583-a726-77b54a0dae19",
+    "name" : "Details",
+    "displayOrder" : 1.0,
+    "display" : "Details",
+    "formElements" : [ {
+      "name" : "Has permanent family planning method been used ?",
+      "uuid" : "9ae6cfae-43ee-45a2-947e-0fb582d1ebfa",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Has permanent family planning method been used",
+        "uuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 1.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.gender.equals(\"Male\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Male"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Are you in a menopause stage?",
+      "uuid" : "f66b5965-e07f-4058-9733-a3118e407532",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you in a menopause stage",
+        "uuid" : "05a74f44-27e6-4584-a620-280e1c6f4173",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 2.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.gender.equals(\"Female\").and.when.ageInYears.greaterThanOrEqualTo(35).and.when.ageInYears.lessThanOrEqualTo(55).matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 35
+              },
+              "operator" : "greaterThanOrEqualTo"
+            }, {
+              "lhs" : {
+                "type" : "ageInYears"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : 55
+              },
+              "operator" : "lessThanOrEqualTo"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true,
+      "voided" : true
+    }, {
+      "name" : "Suggest beneficiary for counselling with FP counsellor",
+      "uuid" : "7acfcc34-e008-4371-b601-594b0e00b93f",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Suggest beneficiary for counselling with FP counsellor",
+        "uuid" : "844f98ed-9d75-42d6-9e3b-49a0a89b8b6f",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 3.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Counsel about using condom",
+      "uuid" : "11796d52-8629-4c0d-bbdc-57b77325e5bd",
+      "keyValues" : [ {
+        "key" : "editable",
+        "value" : false
+      }, {
+        "key" : "ExcludedAnswers",
+        "value" : [ "Yes" ]
+      } ],
+      "concept" : {
+        "name" : "Counsel about using condom",
+        "uuid" : "151f9eb8-2a41-488f-839d-5373579069c3",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 4.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").containsAnswerConceptName(\"df6c5df0-f3ce-4d9a-be43-240b137b2934\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "No" ],
+                "answerConceptUuids" : [ "df6c5df0-f3ce-4d9a-be43-240b137b2934" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : false
+    }, {
+      "name" : "Are you using family planning method ?",
+      "uuid" : "742188ab-df60-4480-8f3a-de8c7729bdd1",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Are you using family planning method",
+        "uuid" : "8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 5.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.gender.equals(\"Female\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Method type",
+      "uuid" : "7146324b-a6bf-41d0-a21d-1a7f146986a5",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Method type",
+        "uuid" : "81ebe228-f2ba-4275-97fd-1c9c69a62fd5",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Permanent",
+          "uuid" : "9c70d8ad-1dcf-4c17-9f1b-6a9e71899a8a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Temporary",
+          "uuid" : "61b8ae8d-9f1f-4d2a-ae52-b36539ad45de",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 6.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you using family planning method",
+                "conceptUuid" : "8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Method name",
+      "uuid" : "06dee651-5c81-4da4-b129-68d34b023ff2",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Method name",
+        "uuid" : "192fc61a-3dd0-40e9-99cf-fb709281d477",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Nirodh",
+          "uuid" : "b8158b63-8d2b-4e76-80b0-55bfc5fb9b7a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "ANTRA injection",
+          "uuid" : "99fec29d-97b5-4b48-a064-0e8545eeae75",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Mala-N/Chaya",
+          "uuid" : "25ef8eff-09b8-404d-a6dc-79d974f2ebd5",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "Copper T",
+          "uuid" : "681e41b1-6073-4bd5-b871-27ac936f096c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 7.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").and.when.valueInEncounter(\"81ebe228-f2ba-4275-97fd-1c9c69a62fd5\").containsAnswerConceptName(\"61b8ae8d-9f1f-4d2a-ae52-b36539ad45de\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you using family planning method",
+                "conceptUuid" : "8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Method type",
+                "conceptUuid" : "81ebe228-f2ba-4275-97fd-1c9c69a62fd5",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Temporary" ],
+                "answerConceptUuids" : [ "61b8ae8d-9f1f-4d2a-ae52-b36539ad45de" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Is Copper T removed ?",
+      "uuid" : "e3549b45-1b15-4394-9452-c77321776aec",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is Copper T removed",
+        "uuid" : "52a8feaf-b1a0-4f89-a7b1-7bb63634f51e",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 8.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"192fc61a-3dd0-40e9-99cf-fb709281d477\").containsAnswerConceptName(\"681e41b1-6073-4bd5-b871-27ac936f096c\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Method name",
+                "conceptUuid" : "192fc61a-3dd0-40e9-99cf-fb709281d477",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Copper T" ],
+                "answerConceptUuids" : [ "681e41b1-6073-4bd5-b871-27ac936f096c" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Copper T removal date",
+      "uuid" : "4a8963c4-c2bb-4ba2-8026-2cc32bd66698",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Copper T removal date",
+        "uuid" : "53e3ee30-d403-4800-9a20-83e1eb28e12e",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 9.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"52a8feaf-b1a0-4f89-a7b1-7bb63634f51e\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"53e3ee30-d403-4800-9a20-83e1eb28e12e\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Reason for removal",
+      "uuid" : "8622157f-9b90-41c5-8884-86e238eb3345",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Reason for removal",
+        "uuid" : "8a9238e4-e404-43e5-956e-1c4e166e0dfe",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 10.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"52a8feaf-b1a0-4f89-a7b1-7bb63634f51e\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Is Copper T removed",
+                "conceptUuid" : "52a8feaf-b1a0-4f89-a7b1-7bb63634f51e",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of ANTRA injection",
+      "uuid" : "44999c79-81e5-4a6a-ae49-f176bc479572",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of ANTRA injection",
+        "uuid" : "44fd7e3f-af84-41f7-a8e9-25b9b0d9fa17",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 11.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"192fc61a-3dd0-40e9-99cf-fb709281d477\").containsAnswerConceptName(\"99fec29d-97b5-4b48-a064-0e8545eeae75\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"44fd7e3f-af84-41f7-a8e9-25b9b0d9fa17\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Date of Sterilization",
+      "uuid" : "db11361a-b6eb-4a8e-802b-e9d41d5efff3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of birth control method",
+        "uuid" : "bb5eabe0-5e02-4c2a-b7fd-227555da0c09",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 12.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = !(condition11 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Do you want to adopt any family planning method ?",
+      "uuid" : "79462869-e196-48eb-805e-e95a6a5ce4ad",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Do you want to adopt any family planning method",
+        "uuid" : "c99147c6-ca97-465b-8743-87c27ecad066",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        }, {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 13.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.gender.equals(\"Female\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition31 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = !(condition11 && condition21 || condition31 );\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "hideFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "and",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "gender"
+              },
+              "rhs" : {
+                "type" : "value",
+                "value" : "Female"
+              },
+              "operator" : "equals"
+            } ],
+            "conjunction" : "and"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you using family planning method",
+                "conceptUuid" : "8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Select family planning method",
+      "uuid" : "ecd2a0dc-b419-4da0-b1ba-9a2debb669b7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Select family planning method",
+        "uuid" : "0948deb5-deaa-4f46-a835-25a1582a5552",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Temporary",
+          "uuid" : "61b8ae8d-9f1f-4d2a-ae52-b36539ad45de",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Permanent",
+          "uuid" : "9c70d8ad-1dcf-4c17-9f1b-6a9e71899a8a",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 14.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"c99147c6-ca97-465b-8743-87c27ecad066\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you want to adopt any family planning method",
+                "conceptUuid" : "c99147c6-ca97-465b-8743-87c27ecad066",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of sterilisation",
+      "uuid" : "0db35158-89b4-4dc9-b118-c233f9ea68ed",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of sterilisation for family planning method",
+        "uuid" : "030244be-5922-45b8-a28e-d7cec7852a2f",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 15.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"0948deb5-deaa-4f46-a835-25a1582a5552\").containsAnswerConceptName(\"9c70d8ad-1dcf-4c17-9f1b-6a9e71899a8a\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"030244be-5922-45b8-a28e-d7cec7852a2f\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Select family planning method type",
+      "uuid" : "8ce6c89a-304e-48ba-aad9-b393f34183e3",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Select family planning method type",
+        "uuid" : "f79e2a7f-3f56-419d-8764-8c3f262352df",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Commodities",
+          "uuid" : "ac50f9f6-ac43-42c8-a338-3737cceb48c0",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "Copper T",
+          "uuid" : "681e41b1-6073-4bd5-b871-27ac936f096c",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "ANTRA injection",
+          "uuid" : "99fec29d-97b5-4b48-a064-0e8545eeae75",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 16.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"0948deb5-deaa-4f46-a835-25a1582a5552\").containsAnswerConceptName(\"61b8ae8d-9f1f-4d2a-ae52-b36539ad45de\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select family planning method",
+                "conceptUuid" : "0948deb5-deaa-4f46-a835-25a1582a5552",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Temporary" ],
+                "answerConceptUuids" : [ "61b8ae8d-9f1f-4d2a-ae52-b36539ad45de" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Select commodities type",
+      "uuid" : "b3cdf497-b17f-408d-8b3c-aab66bf88d1c",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Select commodities type",
+        "uuid" : "67f3bcd7-0208-43a8-9de9-c338fa81e763",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "Chaya",
+          "uuid" : "cb810d33-f283-47bc-a604-b7e5c7689661",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Other",
+          "uuid" : "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 4.0,
+          "active" : true
+        }, {
+          "name" : "Condom",
+          "uuid" : "0a4ff73f-8437-497b-acc0-670aa1337e92",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 2.0,
+          "active" : true
+        }, {
+          "name" : "ECP",
+          "uuid" : "5b9fcd7f-4588-445b-bcb9-ff4c56240e45",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 3.0,
+          "active" : true
+        }, {
+          "name" : "Mala N",
+          "uuid" : "4f3b3768-7209-4178-bf28-cf2a40c64c00",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 17.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"ac50f9f6-ac43-42c8-a338-3737cceb48c0\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select family planning method type",
+                "conceptUuid" : "f79e2a7f-3f56-419d-8764-8c3f262352df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Commodities" ],
+                "answerConceptUuids" : [ "ac50f9f6-ac43-42c8-a338-3737cceb48c0" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Specify other",
+      "uuid" : "4dc36fec-b40c-48ca-93fb-5c0edf56a0a7",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Other type of commodities",
+        "uuid" : "c0f796d6-5923-4fc1-858b-6818ee8f6161",
+        "dataType" : "Text",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 18.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"67f3bcd7-0208-43a8-9de9-c338fa81e763\").containsAnswerConceptName(\"5518f5b2-05b7-4442-b40a-d4cd1f44f2f3\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select commodities type",
+                "conceptUuid" : "67f3bcd7-0208-43a8-9de9-c338fa81e763",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Other" ],
+                "answerConceptUuids" : [ "5518f5b2-05b7-4442-b40a-d4cd1f44f2f3" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date",
+      "uuid" : "37271a55-6005-4e35-9047-5ca01162842d",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date for commodity type",
+        "uuid" : "98eb16c0-531d-4a51-a2fd-103114a7fb4c",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 19.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"ac50f9f6-ac43-42c8-a338-3737cceb48c0\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select family planning method type",
+                "conceptUuid" : "f79e2a7f-3f56-419d-8764-8c3f262352df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Commodities" ],
+                "answerConceptUuids" : [ "ac50f9f6-ac43-42c8-a338-3737cceb48c0" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Quantity",
+      "uuid" : "a853ee32-c4d8-432c-b441-8397b92d3a17",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Quantity",
+        "uuid" : "11d7f2e2-8d59-4853-a0ec-e9c5fac7baa5",
+        "dataType" : "Numeric",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 20.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"ac50f9f6-ac43-42c8-a338-3737cceb48c0\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select family planning method type",
+                "conceptUuid" : "f79e2a7f-3f56-419d-8764-8c3f262352df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Commodities" ],
+                "answerConceptUuids" : [ "ac50f9f6-ac43-42c8-a338-3737cceb48c0" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Type of Copper T",
+      "uuid" : "77b22cdc-f5f9-4053-9afe-86b0b3b86537",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Type of Copper T",
+        "uuid" : "1313438c-6864-403b-8a80-5392dee2c93c",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "IUCD CU 380A - 10 years",
+          "uuid" : "4bd159bb-900d-4436-a980-6f9549de9674",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "IUCD CU 375 - 5 years",
+          "uuid" : "6d762ffc-cb58-44f1-9fa9-d5df863e3c72",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 21.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"681e41b1-6073-4bd5-b871-27ac936f096c\").matches();\n  \n  visibility = condition11 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        } ],
+        "conditions" : [ {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Select family planning method type",
+                "conceptUuid" : "f79e2a7f-3f56-419d-8764-8c3f262352df",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Copper T" ],
+                "answerConceptUuids" : [ "681e41b1-6073-4bd5-b871-27ac936f096c" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    }, {
+      "name" : "Date of Copper T",
+      "uuid" : "4cdba07b-8a2e-49e4-8c51-8f6f6a2fd7d6",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of Copper T",
+        "uuid" : "6bb322a7-9e26-4843-a887-b4d118281072",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 22.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"681e41b1-6073-4bd5-b871-27ac936f096c\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"6bb322a7-9e26-4843-a887-b4d118281072\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Date of ANTRA injection",
+      "uuid" : "a779a612-619c-4f11-a901-fadf5a06f4a2",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Date of ANTRA injection for family planning method",
+        "uuid" : "9233ad07-057b-4f50-b2a0-5af0aa0d1460",
+        "dataType" : "Date",
+        "answers" : [ ],
+        "active" : true
+      },
+      "displayOrder" : 23.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"f79e2a7f-3f56-419d-8764-8c3f262352df\").containsAnswerConceptName(\"99fec29d-97b5-4b48-a064-0e8545eeae75\").matches();\n    \n  const condition12 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"9233ad07-057b-4f50-b2a0-5af0aa0d1460\").greaterThan(moment(programEncounter.encounterDateTime).startOf('day').toDate()).matches();\n  \n  visibility = condition11 ;\n    if(condition12 ){\n    validationErrors.push(\"Date cannot be in the future\");  \n}\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "mandatory" : true
+    }, {
+      "name" : "Is self verified ?",
+      "uuid" : "bd15fc50-b68d-46c5-b193-b4b858502054",
+      "keyValues" : [ ],
+      "concept" : {
+        "name" : "Is self verified",
+        "uuid" : "13e0f1e1-fc63-410c-8f08-8f49241d89c8",
+        "dataType" : "Coded",
+        "answers" : [ {
+          "name" : "No",
+          "uuid" : "df6c5df0-f3ce-4d9a-be43-240b137b2934",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 1.0,
+          "active" : true
+        }, {
+          "name" : "Yes",
+          "uuid" : "a0b7b027-7fe4-4b82-b830-4e2c5673a173",
+          "dataType" : "NA",
+          "answers" : [ ],
+          "order" : 0.0,
+          "active" : true
+        } ],
+        "active" : true
+      },
+      "displayOrder" : 24.0,
+      "type" : "SingleSelect",
+      "rule" : "'use strict';\n({params, imports}) => {\n  const programEncounter = params.entity;\n  const moment = imports.moment;\n  const formElement = params.formElement;\n  const _ = imports.lodash;\n  let visibility = true;\n  let value = null;\n  let answersToSkip = [];\n  let validationErrors = [];\n  \n  const condition11 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").defined.and.when.valueInEncounter(\"8fbd2b37-afa8-4678-8ced-654650ee18fc\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition21 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  const condition31 = new imports.rulesConfig.RuleCondition({programEncounter, formElement}).when.valueInEncounter(\"c99147c6-ca97-465b-8743-87c27ecad066\").containsAnswerConceptName(\"a0b7b027-7fe4-4b82-b830-4e2c5673a173\").matches();\n  \n  visibility = condition11 || condition21 || condition31 ;\n  \n  return new imports.rulesConfig.FormElementStatus(formElement.uuid, visibility, value, answersToSkip, validationErrors);\n};",
+      "declarativeRule" : [ {
+        "actions" : [ {
+          "actionType" : "showFormElement"
+        }, { } ],
+        "conditions" : [ {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : { },
+              "operator" : "defined"
+            }, {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Has permanent family planning method been used",
+                "conceptUuid" : "8fbd2b37-afa8-4678-8ced-654650ee18fc",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ],
+            "conjunction" : "and"
+          }
+        }, {
+          "conjunction" : "or",
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Are you using family planning method",
+                "conceptUuid" : "8719d1b4-7d8e-4eb5-bd8f-9eebaf28b215",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        }, {
+          "compoundRule" : {
+            "rules" : [ {
+              "lhs" : {
+                "type" : "concept",
+                "scope" : "encounter",
+                "conceptName" : "Do you want to adopt any family planning method",
+                "conceptUuid" : "c99147c6-ca97-465b-8743-87c27ecad066",
+                "conceptDataType" : "Coded"
+              },
+              "rhs" : {
+                "type" : "answerConcept",
+                "answerConceptNames" : [ "Yes" ],
+                "answerConceptUuids" : [ "a0b7b027-7fe4-4b82-b830-4e2c5673a173" ]
+              },
+              "operator" : "containsAnswerConceptName"
+            } ]
+          }
+        } ]
+      } ],
+      "mandatory" : true
+    } ],
+    "timed" : false
+  } ],
+  "decisionRule" : "",
+  "visitScheduleRule" : "",
+  "validationRule" : "",
+  "checklistsRule" : "",
+  "decisionConcepts" : [ ]
+}
