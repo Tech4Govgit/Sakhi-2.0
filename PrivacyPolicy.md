@@ -49,6 +49,6 @@ This application is a work application provided by organisations to their staff.
 If there are any questions regarding this privacy policy, you may contact us using the information below.
 
 Sakhi 2.0project.org
-hello@samanvayfoundation.org
+tech4gov@piramalswasthya.org
 
 Last Edited on 2020-05-06
