@@ -51,4 +51,4 @@ If there are any questions regarding this privacy policy, you may contact us usi
 Sakhi 2.0
 tech4gov@piramalswasthya.org
 
-Last Edited on 2020-05-06
+Last Edited on 2024-05-25
